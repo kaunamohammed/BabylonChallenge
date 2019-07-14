@@ -1,0 +1,30 @@
+PODS:
+  - CoordinatorLibrary (1.0.6)
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
+
+DEPENDENCIES:
+  - CoordinatorLibrary (= 1.0.6)
+  - RxCocoa (~> 5.0.0)
+  - RxSwift (~> 5.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CoordinatorLibrary
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+
+SPEC CHECKSUMS:
+  CoordinatorLibrary: 63055a0a87b8bc615f00fd621db087f58a0fd724
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+
+PODFILE CHECKSUM: 93a4c0a3665860629c135f8d717eff466eb41e1f
+
+COCOAPODS: 1.7.1
