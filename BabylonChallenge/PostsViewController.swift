@@ -12,7 +12,7 @@ import RxCocoa
 
 class PostsViewController: UIViewController {
     
-    private lazy var tableView: UITableView = {
+    private lazy var postsTableView: UITableView = {
         let table = UITableView()
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 44
@@ -20,11 +20,13 @@ class PostsViewController: UIViewController {
         return table
     }()
     
-    private lazy var refreshControl = RefreshControl(holder: tableView)
+    // MARK: - Child
+    private lazy var loadingViewController: LoadingViewController = .init()
     
     private var disposeBag: DisposeBag?
-    
+    private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
+    
     init(viewModel: PostsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -37,18 +39,20 @@ class PostsViewController: UIViewController {
     deinit {
         disposeBag = nil
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Posts"
         view.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        view.addSubview(tableView)
-        tableView.pin(to: view)
-        tableView.register(PostTableViewCell.self)
-        
-        viewModel.requestPosts()
+        setUpTableView()
         disposeBag = DisposeBag()
         bindToRx()
+    }
+    
+    private func setUpTableView() {
+        view.addSubview(postsTableView)
+        postsTableView.pin(to: view)
+        postsTableView.register(PostTableViewCell.self)
     }
     
 }
@@ -61,21 +65,31 @@ private extension PostsViewController {
                 
         disposeBag?.insert (
             
-            refreshControl.isRefreshing
-                .filter { $0 == true }
-                .subscribe(onNext: { [weak self] _ in
-                    self?.viewModel.requestPosts()
-                }),
-            
             output.posts
                 .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })
-                .drive(tableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
+                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
             },
             
-            output.errorMessage.subscribe(onNext: { [weak self] message in
-                self?.refreshControl.endRefreshing()
-                print(message)
+            output.loadingState.subscribe(onNext: { [weak self] state in
+                guard let `self` = self else { return }
+                switch state {
+                case .none:
+                    print("Nothing")
+                case .loading:
+                    self.add(self.loadingViewController)
+                case .loaded:
+                    self.remove(self.loadingViewController)
+                case .failed(title: _, message: let message):
+                    self.remove(self.loadingViewController)
+                    self.refreshControl.endRefreshing()
+                    print(message)
+                }
+            }),
+
+            output.isInitialLoad.debug("Initial load", trimOutput: true).subscribe(onNext: { [weak self] isInitialLoad in
+                guard let `self` = self else { return }
+                isInitialLoad ? self.add(self.loadingViewController) : self.remove(self.loadingViewController)
             })
             
         )

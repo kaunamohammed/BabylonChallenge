@@ -15,28 +15,23 @@ final class Router: NetworkRouter, ReactiveCompatible {
     
     public init() {}
     
-    func request<T>(type: T.Type, from endPoint: EndPoint, completion: @escaping ((Result<[T], Error>) -> Void)) where T : Decodable {
+    func request(endPoint: EndPoint, completion: @escaping ((Result<Data, NetworkError>) -> Void)) {
         let session = URLSession.shared
         guard let request = buildRequest(from: endPoint) else { return }
         
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
-                guard error == nil else { completion(.failure(error!)); return }
+                guard error == nil else { completion(.failure(.unknown)); return }
                 if let responseData = data {
-                    do {
-                        let decoded: [T] = try responseData.decoded()
-                        completion(.success(decoded))
-                    } catch let error {
-                        completion(.failure(error))
-                    }
+                    completion(.success(responseData))
                 } else {
-                    completion(.failure(NoDataError.underlying))
+                    completion(.failure(.unknown))
                 }
             }
-            
         })
         task?.resume()
     }
+
     
     func cancel() {
         task?.cancel()

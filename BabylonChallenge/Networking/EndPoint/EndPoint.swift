@@ -19,15 +19,41 @@ class EndPoint: RESTComponent, URLProducer {
         components.scheme = scheme
         components.host = host
         components.path = path
+        components.queryItems = queryItems
         return components.url
     }
     
+    var queryItems: [URLQueryItem]
+    
+    init(queryItems: [URLQueryItem] = []) {
+        self.queryItems = queryItems
+    }
+    
+}
+
+extension EndPoint {
+    static func query(withID id: Int) -> EndPoint {
+        return EndPoint(queryItems: [
+            URLQueryItem(name: "id", value: id.asString)
+            ])
+    }
 }
 
 class PostsEndPoint: EndPoint {
     
     override var path: String {
         return  "/posts"
+    }
+    
+    static func post(by id: Int) -> PostsEndPoint {
+        
+        return PostsEndPoint(queryItems: [
+            
+            URLQueryItem(name: "id", value: id.asString)
+            
+            
+            ])
+        
     }
     
 }

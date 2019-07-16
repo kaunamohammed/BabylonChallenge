@@ -12,7 +12,7 @@ final class PostsViewCoordinator: NavigationCoordinator<PostsViewController> {
     
     override func start() {
         
-        viewController = .init(viewModel: .init(networkRouter: .init()))
+        viewController = .init(viewModel: .init(modelLoader: .init(networkRouter: Router())))
         navigate(to: viewController, with: .set, animated: false)
         
     }

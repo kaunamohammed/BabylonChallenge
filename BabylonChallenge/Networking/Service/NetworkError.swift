@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum NetworkError: LocalizedError {
+    case unknown
+}
+
 enum NoDataError {
   case underlying
 }
