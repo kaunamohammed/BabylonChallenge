@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 import CoordinatorLibrary
 
 @UIApplicationMain
@@ -28,6 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // start the navigation
         appCoordinator.start()
+        
+        let realm = try! Realm()
+        
+        try! realm.write {
+            realm.deleteAll()
+        }
         
         return true
     }

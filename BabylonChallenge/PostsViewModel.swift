@@ -8,6 +8,8 @@
 
 import RxSwift
 import RxCocoa
+import RxRealm
+import RealmSwift
 
 class PostsViewModel: ViewModelType {
     
@@ -17,7 +19,7 @@ class PostsViewModel: ViewModelType {
     }
     
     struct Output {
-        let posts: Driver<[Post]>
+        let posts: Driver<Results<RMPost>>
         let noPostsToDisplay: Driver<Bool>
         let postsLoadedForFirstTime: Observable<Bool>
         let loadingState: Observable<LoadingState>
@@ -35,6 +37,7 @@ class PostsViewModel: ViewModelType {
     private let loadingStateSubject = BehaviorRelay<LoadingState>(value: .loading)
     
     private let disposeBag = DisposeBag()
+    private let realm = try! Realm()
 
     private let domainModelGetter: DomainModelGettable
     init(domainModelGetter: DomainModelGettable) {
@@ -49,9 +52,36 @@ class PostsViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] _ in self?.requestPosts(forced: true) })
             .disposed(by: disposeBag)
 
-        let posts = postsSubject.asDriver(onErrorJustReturn: [])
+        //let posts = postsSubject.asDriver(onErrorJustReturn: [])
+        
+        let persistedPosts = realm.objects(RMPost.self)
+        
+//        let rmposts = input.query.map { query -> NSPredicate in
+//            let predicate = NSPredicate(format: "title BEGINSWITH [c]%@", query)
+//            return predicate
+//            }.flatMapLatest { predicate in
+//                Observable
+//                    .collection(from: persistedPosts)
+//                    .map { $0.filter(predicate) }
+//        }
+//            .asDriver(onErrorJustReturn: RMPost())
+//            .map { $0 as! RMPost }
+//            .map(Post.init)
+        
+        //print(realm.configuration.fileURL?.absoluteString ?? "")
+        
+        
+        
+        let posts = Observable
+            .collection(from: persistedPosts)
+            .map { $0.sorted(byKeyPath: "id") }
+            .asDriver(onErrorJustReturn: RMPost())
+            .map { $0 as! Results<RMPost> }
+
         let noPostsToDisplay = posts.map { $0.isEmpty }
-                
+        
+        
+        
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
                       postsLoadedForFirstTime: forcedReloadSubject.asObservable(),
@@ -66,9 +96,12 @@ private extension PostsViewModel {
         forcedReloadSubject.accept(!forced)
         
         domainModelGetter.rx_getModels(from: EndPointFactory.endPoint(for: .posts), convertTo: Post.self)
-            .subscribe(onSuccess: { [postsSubject, loadingStateSubject] in
-                postsSubject.accept($0)
+            .subscribe(onSuccess: { [realm, loadingStateSubject] posts in
                 loadingStateSubject.accept(.loaded)
+                let rmObjects = posts.map { $0.convertToRMPost() }
+                try! realm.write {
+                    realm.add(rmObjects)
+                }
                 },
                        onError: { [loadingStateSubject] in
                         loadingStateSubject.accept(.failed(title: "", message: $0.localizedDescription))
@@ -76,3 +109,4 @@ private extension PostsViewModel {
             .disposed(by: disposeBag)
     }
 }
+

@@ -82,10 +82,17 @@ private extension PostsViewController {
             
             output.posts
                 .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
-                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
+                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, rmPost, cell in
+                    let post = Post(rmPost: rmPost)
                     cell.configure(with: post)
             },
             
+//            output.posts
+//                .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
+//                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
+//                    cell.configure(with: post)
+//            },
+//
             output.loadingState
                 .subscribe(onNext: { [add, remove, loadingViewController, refreshControl] state in
                     switch state {
@@ -105,7 +112,7 @@ private extension PostsViewController {
                     isFirstTime ? add(loadingViewController) : remove(loadingViewController)
                 }),
             
-            postsTableView.rx.modelSelected(Post.self).subscribe(onNext: { post in
+            postsTableView.rx.modelSelected(RMPost.self).subscribe(onNext: { post in
                 
             })
         )

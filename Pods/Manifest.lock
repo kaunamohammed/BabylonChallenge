@@ -1,8 +1,16 @@
 PODS:
   - CoordinatorLibrary (1.0.6)
+  - Realm (3.16.2):
+    - Realm/Headers (= 3.16.2)
+  - Realm/Headers (3.16.2)
+  - RealmSwift (3.16.2):
+    - Realm (= 3.16.2)
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
+  - RxRealm (1.0.0):
+    - RealmSwift (~> 3.14)
+    - RxSwift (~> 5.0)
   - RxRelay (5.0.0):
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
@@ -10,21 +18,28 @@ PODS:
 DEPENDENCIES:
   - CoordinatorLibrary (= 1.0.6)
   - RxCocoa (~> 5.0.0)
+  - RxRealm (= 1.0.0)
   - RxSwift (~> 5.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CoordinatorLibrary
+    - Realm
+    - RealmSwift
     - RxCocoa
+    - RxRealm
     - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
   CoordinatorLibrary: 63055a0a87b8bc615f00fd621db087f58a0fd724
+  Realm: 0e73b4edeb5b6a90da3d83206883b2e34e00eb38
+  RealmSwift: a81e650171ef0a5f999df1ed8d39ba8d6fce88a4
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxRealm: 1e81dcfca1fb50c3e9b3e1f8102bc875c5156a2e
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
 
-PODFILE CHECKSUM: 93a4c0a3665860629c135f8d717eff466eb41e1f
+PODFILE CHECKSUM: e399ce20ff739a4c4e62d2de501be9cb51d7b268
 
 COCOAPODS: 1.7.1
