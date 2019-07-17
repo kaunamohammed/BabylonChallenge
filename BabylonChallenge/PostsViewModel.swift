@@ -55,7 +55,7 @@ class PostsViewModel: ViewModelType {
         
         input.isRefreshing
             .filter { $0 == true }
-            .subscribe(onNext: { [weak self] _ in self?.requestPosts(forced: true) })
+            .subscribe(onNext: { [requestPosts] _ in requestPosts(true) })
             .disposed(by: disposeBag)
         
         let posts = Observable
@@ -65,7 +65,7 @@ class PostsViewModel: ViewModelType {
             .map { $0 as! Results<RMPost> }
 
         let noPostsToDisplay = posts.map { $0.isEmpty }
-                
+        
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
                       postsLoadedForFirstTime: forcedReloadSubject.asObservable(),
