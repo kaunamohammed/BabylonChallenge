@@ -8,17 +8,27 @@
 
 import UIKit
 
-extension UINavigationController {
-  func defaultBarPreference(shouldApply: Bool) {
-    if shouldApply {
-      navigationBar.shadowImage = nil
-      navigationBar.setBackgroundImage(nil, for: .default)
-      view.backgroundColor = .clear
-      navigationBar.barTintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
-    } else {
-      navigationBar.shadowImage = UIImage()
-      navigationBar.setBackgroundImage(UIImage(), for: .default)
-      view.backgroundColor = .clear
+extension UINavigationBar {
+    
+    func addTitleTextAttributes(attributes: [NSAttributedString.Key: Any]) {
+        if #available(iOS 11.0, *) {
+            largeTitleTextAttributes = attributes
+        } else {
+            titleTextAttributes = attributes
+        }
+        titleTextAttributes = attributes
     }
-  }
+    
+}
+
+extension UINavigationItem {
+    
+    func add(_ searchController: UISearchController) {
+        if #available(iOS 11.0, *) {
+            self.searchController = searchController
+        } else {
+            titleView = searchController.searchBar
+        }
+    }
+    
 }

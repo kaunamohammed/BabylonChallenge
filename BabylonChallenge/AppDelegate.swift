@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Although I have initialized it from here, it is still possible to just keep a reference and then inherit from `AppCoordinator`
     // and start different flows based oon business logic i.e a notification or deeplink
     private lazy var appCoordinator: AppCoordinator = {
-        let coordinator = MainAppCoordinator(presenter: UINavigationController(), window: window!)
+        let coordinator = MainAppCoordinator(presenter: AppNavigationController(), window: window!)
         return coordinator
     }()
 

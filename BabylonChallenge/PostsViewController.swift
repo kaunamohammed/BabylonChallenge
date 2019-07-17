@@ -14,16 +14,24 @@ class PostsViewController: UIViewController {
     
     private lazy var postsTableView: UITableView = {
         let table = UITableView()
+        table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 44
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
+    private lazy var searchController: AppSearchController = {
+        let controller = AppSearchController(searchResultsController: nil)
+        controller.searchBar.placeholder = NSLocalizedString("posts", comment: "title")
+        return controller
+    }()
+    
     // MARK: - Child
     private lazy var loadingViewController: LoadingViewController = .init()
     
     private var disposeBag: DisposeBag?
+    var goToPostDetail: (() -> ())?
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
     
@@ -42,8 +50,13 @@ class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Posts"
-        view.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        title = NSLocalizedString("Posts", comment: "title")
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        definesPresentationContext = true
+        
+        navigationItem.add(searchController)
+        
         setUpTableView()
         disposeBag = DisposeBag()
         bindToRx()
@@ -60,40 +73,44 @@ class PostsViewController: UIViewController {
 private extension PostsViewController {
     
     func bindToRx() {
-        let input = PostsViewModel.Input(isRefreshing: refreshControl.isRefreshing.asObservable())
+        
+        let input = PostsViewModel.Input(query: searchController.searchBar.rx.text.orEmpty.asObservable(),
+                                         isRefreshing: refreshControl.isRefreshing.asObservable())
         let output = viewModel.transform(input)
                 
         disposeBag?.insert (
             
             output.posts
-                .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })
+                .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
                 .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
             },
             
-            output.loadingState.subscribe(onNext: { [weak self] state in
-                guard let `self` = self else { return }
-                switch state {
-                case .none:
-                    print("Nothing")
-                case .loading:
-                    self.add(self.loadingViewController)
-                case .loaded:
-                    self.remove(self.loadingViewController)
-                case .failed(title: _, message: let message):
-                    self.remove(self.loadingViewController)
-                    self.refreshControl.endRefreshing()
-                    print(message)
-                }
-            }),
-
-            output.isInitialLoad.debug("Initial load", trimOutput: true).subscribe(onNext: { [weak self] isInitialLoad in
-                guard let `self` = self else { return }
-                isInitialLoad ? self.add(self.loadingViewController) : self.remove(self.loadingViewController)
-            })
+            output.loadingState
+                .subscribe(onNext: { [add, remove, loadingViewController, refreshControl] state in
+                    switch state {
+                    case .loading:
+                        add(loadingViewController)
+                    case .loaded:
+                        remove(loadingViewController)
+                    case .failed(title: _, message: let message):
+                        remove(loadingViewController)
+                        refreshControl.endRefreshing()
+                        print(message)
+                    }
+                }),
             
+            output.postsLoadedForFirstTime
+                .subscribe(onNext: { [add, remove, loadingViewController] isFirstTime in
+                    isFirstTime ? add(loadingViewController) : remove(loadingViewController)
+                }),
+            
+            postsTableView.rx.modelSelected(Post.self).subscribe(onNext: { post in
+                
+            })
         )
         
     }
     
 }
+

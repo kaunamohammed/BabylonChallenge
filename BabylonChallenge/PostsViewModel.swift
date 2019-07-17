@@ -12,18 +12,18 @@ import RxCocoa
 class PostsViewModel: ViewModelType {
     
     struct Input {
+        let query: Observable<String>
         let isRefreshing: Observable<Bool>
     }
     
     struct Output {
         let posts: Driver<[Post]>
         let noPostsToDisplay: Driver<Bool>
-        let isInitialLoad: Observable<Bool>
+        let postsLoadedForFirstTime: Observable<Bool>
         let loadingState: Observable<LoadingState>
     }
     
     enum LoadingState {
-        case none
         case loading
         case loaded
         case failed(title: String, message: String)
@@ -32,21 +32,20 @@ class PostsViewModel: ViewModelType {
     // MARK: - Subjects
     private let postsSubject = BehaviorRelay<[Post]>(value: [])
     private let forcedReloadSubject = BehaviorRelay<Bool>(value: false)
-    private let loadingStateSubject = BehaviorRelay<LoadingState>(value: .none)
+    private let loadingStateSubject = BehaviorRelay<LoadingState>(value: .loading)
     
     private let disposeBag = DisposeBag()
 
-    private let modelLoader: PostsLoader
-    init(modelLoader: PostsLoader) {
-        self.modelLoader = modelLoader
+    private let domainModelGetter: DomainModelGettable
+    init(domainModelGetter: DomainModelGettable) {
+        self.domainModelGetter = domainModelGetter
         requestPosts()
     } 
     
     func transform(_ input: Input) -> Output {
         
         input.isRefreshing
-            .filter { $0 == true } 
-            .debug("Refreshing TableView", trimOutput: true)
+            .filter { $0 == true }
             .subscribe(onNext: { [weak self] _ in self?.requestPosts(forced: true) })
             .disposed(by: disposeBag)
 
@@ -55,7 +54,7 @@ class PostsViewModel: ViewModelType {
                 
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
-                      isInitialLoad: forcedReloadSubject.asObservable(),
+                      postsLoadedForFirstTime: forcedReloadSubject.asObservable(),
                       loadingState: loadingStateSubject.asObservable())
     }
     
@@ -64,15 +63,15 @@ class PostsViewModel: ViewModelType {
 private extension PostsViewModel {
     func requestPosts(forced: Bool = false) {
         loadingStateSubject.accept(.loading)
-        forcedReloadSubject.accept(forced)
+        forcedReloadSubject.accept(!forced)
         
-        modelLoader.getModels(from: EndPointFactory.endPoint(for: .posts))
-            .subscribe(onSuccess: { [weak self] in
-                self?.postsSubject.accept($0)
-                self?.loadingStateSubject.accept(.loaded)
+        domainModelGetter.rx_getModels(from: EndPointFactory.endPoint(for: .posts), convertTo: Post.self)
+            .subscribe(onSuccess: { [postsSubject, loadingStateSubject] in
+                postsSubject.accept($0)
+                loadingStateSubject.accept(.loaded)
                 },
-                       onError: { [weak self] in
-                        self?.loadingStateSubject.accept(.failed(title: "", message: $0.localizedDescription))
+                       onError: { [loadingStateSubject] in
+                        loadingStateSubject.accept(.failed(title: "", message: $0.localizedDescription))
             })
             .disposed(by: disposeBag)
     }

@@ -6,10 +6,9 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import RxSwift
 import Foundation
 
-final class Router: NetworkRouter, ReactiveCompatible {
+final class Router: NetworkRouter {
     
     private var task: URLSessionTask?
     
