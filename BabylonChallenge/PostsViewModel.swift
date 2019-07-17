@@ -32,16 +32,22 @@ class PostsViewModel: ViewModelType {
     }
     
     // MARK: - Subjects
-    private let postsSubject = BehaviorRelay<[Post]>(value: [])
     private let forcedReloadSubject = BehaviorRelay<Bool>(value: false)
     private let loadingStateSubject = BehaviorRelay<LoadingState>(value: .loading)
     
     private let disposeBag = DisposeBag()
     private let realm = try! Realm()
+    private lazy var persistedPosts = realm.objects(RMPost.self)
 
     private let domainModelGetter: DomainModelGettable
     init(domainModelGetter: DomainModelGettable) {
         self.domainModelGetter = domainModelGetter
+        #if DEBUG
+        print(realm.configuration.fileURL?.absoluteString ?? "")
+        try! realm.write {
+            realm.delete(persistedPosts)
+        }
+        #endif
         requestPosts()
     } 
     
@@ -51,26 +57,6 @@ class PostsViewModel: ViewModelType {
             .filter { $0 == true }
             .subscribe(onNext: { [weak self] _ in self?.requestPosts(forced: true) })
             .disposed(by: disposeBag)
-
-        //let posts = postsSubject.asDriver(onErrorJustReturn: [])
-        
-        let persistedPosts = realm.objects(RMPost.self)
-        
-//        let rmposts = input.query.map { query -> NSPredicate in
-//            let predicate = NSPredicate(format: "title BEGINSWITH [c]%@", query)
-//            return predicate
-//            }.flatMapLatest { predicate in
-//                Observable
-//                    .collection(from: persistedPosts)
-//                    .map { $0.filter(predicate) }
-//        }
-//            .asDriver(onErrorJustReturn: RMPost())
-//            .map { $0 as! RMPost }
-//            .map(Post.init)
-        
-        //print(realm.configuration.fileURL?.absoluteString ?? "")
-        
-        
         
         let posts = Observable
             .collection(from: persistedPosts)
@@ -79,9 +65,7 @@ class PostsViewModel: ViewModelType {
             .map { $0 as! Results<RMPost> }
 
         let noPostsToDisplay = posts.map { $0.isEmpty }
-        
-        
-        
+                
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
                       postsLoadedForFirstTime: forcedReloadSubject.asObservable(),
