@@ -20,7 +20,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var label: UILabel = {
         let l = UILabel()
         l.textAlignment = .left
-        l.numberOfLines = 4
+        l.numberOfLines = 0//4
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
@@ -48,9 +48,11 @@ class PostTableViewCell: UITableViewCell {
     func configure(with post: Post) {
         
         label.attributedText = AttributedStringBuilder()
-            .append(post.title, attributes: [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
+            .append(post.title.capitalizeOnlyFirstCharacters(),
+                    attributes: [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
             .append("\n", attributes: [:])
-            .append(post.body, attributes: [.foregroundColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
+            .append(post.body.truncate(by: 60),
+                    attributes: [.foregroundColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
             .build()
         
     }

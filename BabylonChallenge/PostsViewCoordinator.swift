@@ -10,17 +10,17 @@ import CoordinatorLibrary
 
 final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
     
+    private var fullPostViewCoordinator: FullPostCoordinator? = nil
     private var postDetailViewCoordinator: PostDetailViewCoordinator? = nil
     
     override func start() {
-        
-        if #available(iOS 11.0, *) {
-            presenter.navigationBar.prefersLargeTitles = true
-        } else {
-        }
-        
+
         viewController = .init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router())))
         navigate(to: viewController, with: .set, animated: false)
+        
+        viewController.goToPostDetail = { [startFullPostCoordinator] post in
+            startFullPostCoordinator(post)
+        }
         
     }
     
@@ -28,10 +28,19 @@ final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
 
 extension PostsViewCoordinator {
     
-    func startPostDetail() {
+    func startFullPostCoordinator(with post: RMPost) {
+        fullPostViewCoordinator = FullPostCoordinator(presenter: presenter,
+                                                      removeCoordinator: remove)
+        fullPostViewCoordinator!.post = post
+        add(child: fullPostViewCoordinator!)
+        fullPostViewCoordinator!.start()
+    }
+    
+    func startPostDetail(with post: RMPost) {
         postDetailViewCoordinator = PostDetailViewCoordinator(presenter: presenter,
                                                               removeCoordinator: remove)
-        add(child: postDetailViewCoordinator!) 
+        postDetailViewCoordinator!.post = post
+        add(child: postDetailViewCoordinator!)
         postDetailViewCoordinator!.start()
     }
     

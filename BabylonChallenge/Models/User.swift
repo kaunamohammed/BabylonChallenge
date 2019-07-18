@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Author.swift
 //  BabylonChallenge
 //
 //  Created by Kauna Mohammed on 16/07/2019.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-// MARK: - User
-struct User: Decodable {
+// MARK: - Author
+struct Author: Decodable {
     let id: Int
     let name, username, email: String
     let address: Address

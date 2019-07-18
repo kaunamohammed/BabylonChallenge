@@ -31,14 +31,6 @@ class EndPoint: RESTComponent, URLProducer {
     
 }
 
-extension EndPoint {
-    static func query(withID id: Int) -> EndPoint {
-        return EndPoint(queryItems: [
-            URLQueryItem(name: "id", value: id.asString)
-            ])
-    }
-}
-
 class PostsEndPoint: EndPoint {
     
     override var path: String {
@@ -46,25 +38,27 @@ class PostsEndPoint: EndPoint {
     }
     
     static func post(by id: Int) -> PostsEndPoint {
-        
         return PostsEndPoint(queryItems: [
-            
             URLQueryItem(name: "id", value: id.asString)
-            
-            
             ])
-        
     }
     
 }
 
 class UsersEndPoint: EndPoint {
-
+    
     override var path: String {
         return "/users"
     }
-
+    
+    static func user(by id: Int) -> UsersEndPoint {
+        return UsersEndPoint(queryItems: [
+            URLQueryItem(name: "id", value: id.asString)
+            ])
+    }
+    
 }
+
 
 class CommentsEndPoint: EndPoint {
 
@@ -72,6 +66,12 @@ class CommentsEndPoint: EndPoint {
         return "/comments"
     }
 
+    static func comments(by id: Int) -> CommentsEndPoint {
+        return CommentsEndPoint(queryItems: [
+            URLQueryItem(name: "postId", value: id.asString)
+            ])
+    }
+    
 }
 
 class EndPointFactory {

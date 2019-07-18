@@ -12,6 +12,6 @@ import Foundation
 struct Comment: Decodable {
     let id: Int
     let name, email: String
-    let postID: Int
+    let postId: Int
     let body: String
 }

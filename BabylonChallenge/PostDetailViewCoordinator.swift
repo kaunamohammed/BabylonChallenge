@@ -10,11 +10,18 @@ import CoordinatorLibrary
 
 final class PostDetailViewCoordinator: NavigationCoordinator<PostDetailViewController> {
     
+    var post: RMPost!
+    
     override func start() {
         
         // TODO: - Possibly reuse router
-        viewController = .init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router())))
-        navigate(to: viewController, with: .set, animated: false)
+        
+        let viewModel = PostDetailViewModel(domainModelGetter: ModelLoader(networkRouter: Router()))
+        viewModel.userId.accept(post.userId)
+        viewModel.postId.accept(post.id)
+        
+        viewController = .init(viewModel: viewModel)
+        navigate(to: viewController, with: .push, animated: true)
         
     }
     

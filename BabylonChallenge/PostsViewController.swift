@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class PostsViewController: UIViewController {
+class PostsViewController: UIViewController, AlertDisplayable {
     
     private lazy var postsTableView: UITableView = {
         let table = UITableView()
@@ -20,18 +20,12 @@ class PostsViewController: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
-    
-    private lazy var searchController: AppSearchController = {
-        let controller = AppSearchController(searchResultsController: nil)
-        controller.searchBar.placeholder = NSLocalizedString("posts", comment: "title")
-        return controller
-    }()
-    
+
     // MARK: - Child
     private lazy var loadingViewController: LoadingViewController = .init()
     
     private var disposeBag: DisposeBag?
-    var goToPostDetail: (() -> ())?
+    var goToPostDetail: ((RMPost) -> ())?
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
     
@@ -54,9 +48,7 @@ class PostsViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         definesPresentationContext = true
-        
-        navigationItem.add(searchController)
-        
+            
         setUpTableView()
         disposeBag = DisposeBag()
         bindToRx()
@@ -64,7 +56,8 @@ class PostsViewController: UIViewController {
     
     private func setUpTableView() {
         view.addSubview(postsTableView)
-        postsTableView.pin(to: view)
+        postsTableView.pin(to: self)
+        postsTableView.removeEmptyCells()
         postsTableView.register(PostTableViewCell.self)
     }
     
@@ -74,8 +67,7 @@ private extension PostsViewController {
     
     func bindToRx() {
         
-        let input = PostsViewModel.Input(query: searchController.searchBar.rx.text.orEmpty.asObservable(),
-                                         isRefreshing: refreshControl.isRefreshing.asObservable())
+        let input = PostsViewModel.Input(isRefreshing: refreshControl.isRefreshing.asObservable())
         let output = viewModel.transform(input)
                 
         disposeBag?.insert (
@@ -87,23 +79,17 @@ private extension PostsViewController {
                     cell.configure(with: post)
             },
             
-//            output.posts
-//                .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
-//                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
-//                    cell.configure(with: post)
-//            },
-//
             output.loadingState
-                .subscribe(onNext: { [add, remove, loadingViewController, refreshControl] state in
+                .subscribe(onNext: { [add, remove, loadingViewController, refreshControl, displayAlert] state in
                     switch state {
                     case .loading:
                         add(loadingViewController)
                     case .loaded:
                         remove(loadingViewController)
-                    case .failed(title: _, message: let message):
+                    case .failed(title: let title, message: let message):
                         remove(loadingViewController)
                         refreshControl.endRefreshing()
-                        print(message)
+                        displayAlert(title, message)
                     }
                 }),
             
@@ -112,8 +98,14 @@ private extension PostsViewController {
                     isFirstTime ? add(loadingViewController) : remove(loadingViewController)
                 }),
             
-            postsTableView.rx.modelSelected(RMPost.self).subscribe(onNext: { post in
-                
+            postsTableView.rx
+                .itemSelected
+                .asDriver()
+                .throttle(.seconds(1))
+                .drive(postsTableView.rx.unHighlightAtIndexPathAfterSelection),
+            
+            postsTableView.rx.modelSelected(RMPost.self).subscribe(onNext: { [goToPostDetail] post in
+                goToPostDetail?(post)
             })
         )
         

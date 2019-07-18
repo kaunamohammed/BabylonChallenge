@@ -10,47 +10,42 @@ import Foundation
 
 /// small helper for testing purposes
 func delay(seconds: Double, _ block: @escaping (() -> Void)) {
-  DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-    block()
-  }
-}
-
-public extension Optional where Wrapped == String {
-  var orEmpty: String {
-    switch self {
-    case .some(let value):
-      return value
-    case .none:
-      return ""
+    DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+        block()
     }
-  }
 }
 
 extension String {
-  
-  var asInt: Int {
-    return Int(self) ?? 0
-  }
-  
-  var asDouble: Double {
-    return Double(self) ?? 0.0
-  }
-  
-  func truncate(by length: Int, trailing: String = "...") -> String {
-    return count > length ? String(prefix(length)) + trailing : self
-  }
-  
+    
+    var asInt: Int {
+        return Int(self) ?? 0
+    }
+    
+    func truncate(by length: Int, trailing: String = "...") -> String {
+        return count > length ? String(prefix(length)) + trailing : self
+    }
+    
+    func capitalizeOnlyFirstCharacters() -> String {
+        
+        let componentsSeparatedBySpace = self.components(separatedBy: " ")
+        
+        var newNewStr = String()
+        
+        componentsSeparatedBySpace.forEach { string in
+            let stringWithFirstCharacterCap = string.prefix(1).capitalized + string.dropFirst()
+            newNewStr.append(stringWithFirstCharacterCap + " ")
+        }
+        
+        return newNewStr.trimmingCharacters(in: .whitespaces)
+    }
+    
 }
 
 extension Int {
-  
-  var asString: String {
-    return String(self)
-  }
-  
-  var asDouble: Double {
-    return Double(self)
-  }
-  
+    
+    var asString: String {
+        return String(self)
+    }
+    
 }
 

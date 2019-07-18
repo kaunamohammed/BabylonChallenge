@@ -14,7 +14,6 @@
 		FC16F1BF22DDE583001B1602 /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16F1BE22DDE583001B1602 /* PostDetailViewModel.swift */; };
 		FC4E68E122DBED0300583C0F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E022DBED0300583C0F /* LoadingViewController.swift */; };
 		FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E222DC083600583C0F /* ModelLoader.swift */; };
-		FC75E3DD22DA3F8B003C4B46 /* materialized+elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75E3DC22DA3F8B003C4B46 /* materialized+elements.swift */; };
 		FC8199D122DDBEBE004EB431 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D022DDBEBE004EB431 /* User.swift */; };
 		FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D222DDBFA6004EB431 /* Comment.swift */; };
 		FC81CF1022DEF0F3007534EF /* AppSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81CF0F22DEF0F3007534EF /* AppSearchController.swift */; };
@@ -23,6 +22,13 @@
 		FC836A4522D8CE4500363018 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4422D8CE4500363018 /* PostTableViewCell.swift */; };
 		FC836A4822D9360200363018 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4622D9360100363018 /* RefreshControl.swift */; };
 		FC836A4922D9360200363018 /* RefreshControlHoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4722D9360200363018 /* RefreshControlHoldable.swift */; };
+		FCA74FBA22DF703500A98CB2 /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */; };
+		FCA74FBC22DF738A00A98CB2 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */; };
+		FCA74FBE22DF8E2900A98CB2 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FBD22DF8E2900A98CB2 /* CommentTableViewCell.swift */; };
+		FCA74FC022E079B700A98CB2 /* PostDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FBF22E079B700A98CB2 /* PostDetailHeaderView.swift */; };
+		FCA74FC222E0B9D700A98CB2 /* FullPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FC122E0B9D700A98CB2 /* FullPostViewController.swift */; };
+		FCA74FC622E0BDA400A98CB2 /* FullPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FC522E0BDA400A98CB2 /* FullPostViewModel.swift */; };
+		FCA74FC822E0C16A00A98CB2 /* FullPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FC722E0C16A00A98CB2 /* FullPost.swift */; };
 		FCAD936222D896A200D1573D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD936122D896A200D1573D /* AppDelegate.swift */; };
 		FCAD936922D896B000D1573D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCAD936822D896B000D1573D /* Assets.xcassets */; };
 		FCAD936C22D896B000D1573D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCAD936A22D896B000D1573D /* LaunchScreen.storyboard */; };
@@ -34,7 +40,6 @@
 		FCAD939322D8979600D1573D /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD938C22D8979600D1573D /* NetworkRouter.swift */; };
 		FCAD939422D8979600D1573D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD938D22D8979600D1573D /* Router.swift */; };
 		FCAD939522D8979600D1573D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD938E22D8979600D1573D /* NetworkError.swift */; };
-		FCAD93A822D89D1A00D1573D /* URLQueryItem+RemoveNilValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939722D89D1A00D1573D /* URLQueryItem+RemoveNilValues.swift */; };
 		FCAD93AA22D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */; };
 		FCAD93AB22D89D1A00D1573D /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939A22D89D1A00D1573D /* Reusable.swift */; };
 		FCAD93AC22D89D1A00D1573D /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939B22D89D1A00D1573D /* UITableView+Ext.swift */; };
@@ -42,7 +47,6 @@
 		FCAD93AF22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */; };
 		FCAD93B022D89D1A00D1573D /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */; };
 		FCAD93B222D89D1A00D1573D /* AttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */; };
-		FCAD93B522D89D1A00D1573D /* AppNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93A422D89D1A00D1573D /* AppNavController.swift */; };
 		FCAD93B722D89D1A00D1573D /* NavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */; };
 		FCAD93BB22D89D6900D1573D /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93B922D89D6900D1573D /* extensions.swift */; };
 		FCAD93BC22D89D6900D1573D /* AddableAndRemovable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93BA22D89D6900D1573D /* AddableAndRemovable.swift */; };
@@ -75,15 +79,21 @@
 		FC16F1BE22DDE583001B1602 /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
 		FC4E68E022DBED0300583C0F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		FC4E68E222DC083600583C0F /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
-		FC75E3DC22DA3F8B003C4B46 /* materialized+elements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "materialized+elements.swift"; sourceTree = "<group>"; };
 		FC8199D022DDBEBE004EB431 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC8199D222DDBFA6004EB431 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FC81CF0F22DEF0F3007534EF /* AppSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppSearchController.swift; path = "../../../OutNow-iOS/Common/Common/AppSearchController.swift"; sourceTree = "<group>"; };
 		FC81CF1122DEF23D007534EF /* AppNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
-		FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModelGettable.swift; sourceTree = "<group>"; };
+		FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DomainModelGettable.swift; path = ../../Utilities/DomainModelGettable.swift; sourceTree = "<group>"; };
 		FC836A4422D8CE4500363018 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		FC836A4622D9360100363018 /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		FC836A4722D9360200363018 /* RefreshControlHoldable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlHoldable.swift; sourceTree = "<group>"; };
+		FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
+		FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Rx.swift"; sourceTree = "<group>"; };
+		FCA74FBD22DF8E2900A98CB2 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		FCA74FBF22E079B700A98CB2 /* PostDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailHeaderView.swift; sourceTree = "<group>"; };
+		FCA74FC122E0B9D700A98CB2 /* FullPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPostViewController.swift; sourceTree = "<group>"; };
+		FCA74FC522E0BDA400A98CB2 /* FullPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPostViewModel.swift; sourceTree = "<group>"; };
+		FCA74FC722E0C16A00A98CB2 /* FullPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPost.swift; sourceTree = "<group>"; };
 		FCAD935E22D896A200D1573D /* BabylonChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabylonChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAD936122D896A200D1573D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCAD936822D896B000D1573D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,7 +109,6 @@
 		FCAD938C22D8979600D1573D /* NetworkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		FCAD938D22D8979600D1573D /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FCAD938E22D8979600D1573D /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		FCAD939722D89D1A00D1573D /* URLQueryItem+RemoveNilValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLQueryItem+RemoveNilValues.swift"; sourceTree = "<group>"; };
 		FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SafeAreaConstraints.swift"; sourceTree = "<group>"; };
 		FCAD939A22D89D1A00D1573D /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		FCAD939B22D89D1A00D1573D /* UITableView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
@@ -107,7 +116,6 @@
 		FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecodableModel+JSONDecoder.swift"; sourceTree = "<group>"; };
 		FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilder.swift; sourceTree = "<group>"; };
-		FCAD93A422D89D1A00D1573D /* AppNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavController.swift; sourceTree = "<group>"; };
 		FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NavigationController+Ext.swift"; sourceTree = "<group>"; };
 		FCAD93B922D89D6900D1573D /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		FCAD93BA22D89D6900D1573D /* AddableAndRemovable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddableAndRemovable.swift; sourceTree = "<group>"; };
@@ -161,9 +169,11 @@
 		FC16F1B722DDE03B001B1602 /* PostDetail */ = {
 			isa = PBXGroup;
 			children = (
+				FC16F1BE22DDE583001B1602 /* PostDetailViewModel.swift */,
 				FC16F1BC22DDE547001B1602 /* PostDetailViewController.swift */,
 				FC16F1BA22DDE518001B1602 /* PostDetailViewCoordinator.swift */,
-				FC16F1BE22DDE583001B1602 /* PostDetailViewModel.swift */,
+				FCA74FBD22DF8E2900A98CB2 /* CommentTableViewCell.swift */,
+				FCA74FBF22E079B700A98CB2 /* PostDetailHeaderView.swift */,
 			);
 			name = PostDetail;
 			sourceTree = "<group>";
@@ -176,6 +186,16 @@
 				FC8199D222DDBFA6004EB431 /* Comment.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FCA74FC922E0C2B800A98CB2 /* FullPost */ = {
+			isa = PBXGroup;
+			children = (
+				FCA74FC522E0BDA400A98CB2 /* FullPostViewModel.swift */,
+				FCA74FC122E0B9D700A98CB2 /* FullPostViewController.swift */,
+				FCA74FC722E0C16A00A98CB2 /* FullPost.swift */,
+			);
+			name = FullPost;
 			sourceTree = "<group>";
 		};
 		FCAD935522D896A200D1573D = {
@@ -250,6 +270,7 @@
 				FCAD938C22D8979600D1573D /* NetworkRouter.swift */,
 				FCAD938D22D8979600D1573D /* Router.swift */,
 				FCAD938E22D8979600D1573D /* NetworkError.swift */,
+				FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -261,7 +282,6 @@
 				FC81CF0F22DEF0F3007534EF /* AppSearchController.swift */,
 				FC836A4622D9360100363018 /* RefreshControl.swift */,
 				FC836A4722D9360200363018 /* RefreshControlHoldable.swift */,
-				FCAD939722D89D1A00D1573D /* URLQueryItem+RemoveNilValues.swift */,
 				FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */,
 				FCAD939A22D89D1A00D1573D /* Reusable.swift */,
 				FCAD93BA22D89D6900D1573D /* AddableAndRemovable.swift */,
@@ -271,11 +291,10 @@
 				FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */,
 				FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */,
 				FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */,
-				FCAD93A422D89D1A00D1573D /* AppNavController.swift */,
 				FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */,
 				FCAD93C622D8A11800D1573D /* ViewModelType.swift */,
-				FC75E3DC22DA3F8B003C4B46 /* materialized+elements.swift */,
-				FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */,
+				FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */,
+				FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -283,6 +302,7 @@
 		FCAD93BD22D89E0F00D1573D /* Posts */ = {
 			isa = PBXGroup;
 			children = (
+				FCA74FC922E0C2B800A98CB2 /* FullPost */,
 				FC16F1B722DDE03B001B1602 /* PostDetail */,
 				FCAD93C422D8A0D300D1573D /* PostsViewModel.swift */,
 				FC836A4422D8CE4500363018 /* PostTableViewCell.swift */,
@@ -464,11 +484,13 @@
 				FCAD939422D8979600D1573D /* Router.swift in Sources */,
 				FCAD938422D8976E00D1573D /* PostsViewController.swift in Sources */,
 				FCAD93AD22D89D1A00D1573D /* UIView+Constraints.swift in Sources */,
+				FCA74FC622E0BDA400A98CB2 /* FullPostViewModel.swift in Sources */,
 				FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */,
 				FCAD93B022D89D1A00D1573D /* GlobalConstants.swift in Sources */,
 				FC81CF1022DEF0F3007534EF /* AppSearchController.swift in Sources */,
 				FCAD93AF22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift in Sources */,
 				FCAD93B222D89D1A00D1573D /* AttributedStringBuilder.swift in Sources */,
+				FCA74FC022E079B700A98CB2 /* PostDetailHeaderView.swift in Sources */,
 				FCAD938F22D8979600D1573D /* RESTComponent.swift in Sources */,
 				FCAD93BB22D89D6900D1573D /* extensions.swift in Sources */,
 				FCAD93BC22D89D6900D1573D /* AddableAndRemovable.swift in Sources */,
@@ -478,11 +500,11 @@
 				FC16F1BD22DDE547001B1602 /* PostDetailViewController.swift in Sources */,
 				FCAD93C322D89FC400D1573D /* MainAppCoordinator.swift in Sources */,
 				FCAD93AC22D89D1A00D1573D /* UITableView+Ext.swift in Sources */,
-				FCAD93A822D89D1A00D1573D /* URLQueryItem+RemoveNilValues.swift in Sources */,
-				FC75E3DD22DA3F8B003C4B46 /* materialized+elements.swift in Sources */,
-				FCAD93B522D89D1A00D1573D /* AppNavController.swift in Sources */,
+				FCA74FBE22DF8E2900A98CB2 /* CommentTableViewCell.swift in Sources */,
+				FCA74FBC22DF738A00A98CB2 /* UITableView+Rx.swift in Sources */,
 				FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */,
 				FC81CF1222DEF23D007534EF /* AppNavigationController.swift in Sources */,
+				FCA74FC822E0C16A00A98CB2 /* FullPost.swift in Sources */,
 				FC16F1BB22DDE518001B1602 /* PostDetailViewCoordinator.swift in Sources */,
 				FCAD936222D896A200D1573D /* AppDelegate.swift in Sources */,
 				FCAD93AA22D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift in Sources */,
@@ -491,9 +513,11 @@
 				FC836A4822D9360200363018 /* RefreshControl.swift in Sources */,
 				FC4E68E122DBED0300583C0F /* LoadingViewController.swift in Sources */,
 				FC836A4922D9360200363018 /* RefreshControlHoldable.swift in Sources */,
+				FCA74FC222E0B9D700A98CB2 /* FullPostViewController.swift in Sources */,
 				FCAD93C122D89F3C00D1573D /* PostsViewCoordinator.swift in Sources */,
 				FC16F1BF22DDE583001B1602 /* PostDetailViewModel.swift in Sources */,
 				FCAD939022D8979600D1573D /* URLProducer.swift in Sources */,
+				FCA74FBA22DF703500A98CB2 /* AlertDisplayable.swift in Sources */,
 				FCAD939322D8979600D1573D /* NetworkRouter.swift in Sources */,
 				FC81CF1422DEFF76007534EF /* DomainModelGettable.swift in Sources */,
 				FC836A4522D8CE4500363018 /* PostTableViewCell.swift in Sources */,

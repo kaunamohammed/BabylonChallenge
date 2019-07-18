@@ -15,10 +15,16 @@ class BabylonChallengeTests: XCTestCase {
         
         let expectedEndpoint = URL(string: "https://jsonplaceholder.typicode.com/posts?id=1")
         
-        //let endpoint = PostsEndPoint.post(by: 1).url
-        //XCTAssertTrue(endpoint == expectedEndpoint)
+        let endpoint = PostsEndPoint.post(by: 1).url
+        XCTAssertTrue(endpoint == expectedEndpoint)
         
     }
     
+    func test_only_capitalizing_first_characters() {
+        
+        let str = "what is dead may never die".capitalizeOnlyFirstCharacters()
+        XCTAssertTrue(str == "What Is Dead May Never Die")
+        
+    }
 
 }
