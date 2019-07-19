@@ -10,16 +10,14 @@ import CoordinatorLibrary
 
 final class CommentsViewCoordinator: NavigationCoordinator<CommentsViewController> {
     
-    var post: PostObject!
+    var postId: Int!
     
     override func start() {
         
         // TODO: - Possibly reuse router
         
         let viewModel = CommentsViewModel(domainModelGetter: ModelLoader(networkRouter: Router()))
-        viewModel.userId.accept(post.userId)
-        viewModel.postId.accept(post.id)
-        
+        viewModel.postId.accept(postId)
         viewController = .init(viewModel: viewModel)
         navigate(to: viewController, with: .push, animated: true)
         

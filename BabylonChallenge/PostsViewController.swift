@@ -74,8 +74,7 @@ private extension PostsViewController {
             
             output.posts
                 .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
-                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, rmPost, cell in
-                    let post = Post(rmPost: rmPost)
+                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
             },
             

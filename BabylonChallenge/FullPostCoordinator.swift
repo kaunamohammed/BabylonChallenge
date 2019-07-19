@@ -8,9 +8,11 @@
 
 import CoordinatorLibrary
 
-final class FullPostCoordinator: NavigationCoordinator<FullPostViewController> {
+final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
     
     var post: PostObject!
+    
+    private var commentsViewCoordinator: CommentsViewCoordinator? = nil
     
     override func start() {
         
@@ -18,7 +20,19 @@ final class FullPostCoordinator: NavigationCoordinator<FullPostViewController> {
         viewModel.post.accept(post)
         viewController = .init(viewModel: viewModel)
         navigate(to: viewController, with: .push, animated: true)
+     
+        viewController.didTapViewComments = { [startCommentsViewCoordinator] id in
+            startCommentsViewCoordinator(id)
+        }
         
+    }
+    
+    func startCommentsViewCoordinator(with postId: Int) {
+        commentsViewCoordinator = CommentsViewCoordinator(presenter: presenter,
+                                                          removeCoordinator: remove)
+        commentsViewCoordinator!.postId = postId
+        add(child: commentsViewCoordinator!) 
+        commentsViewCoordinator!.start()
     }
     
 }

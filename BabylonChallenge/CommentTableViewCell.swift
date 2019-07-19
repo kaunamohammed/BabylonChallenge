@@ -30,7 +30,7 @@ class CommentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with comment: Comment) {
+    func configure(with comment: CommentObject) {
         
         nameLabel.attributedText = AttributedStringBuilder()
             .append(comment.name, attributes: [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])

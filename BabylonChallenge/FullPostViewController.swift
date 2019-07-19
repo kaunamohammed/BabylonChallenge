@@ -68,6 +68,8 @@ class FullPostViewController: UIViewController {
         return stackView
     }()
     
+    public var didTapViewComments: ((Int) -> ())?
+    
     private var disposeBag: DisposeBag?
     private let viewModel: FullPostViewModel
     init(viewModel: FullPostViewModel) {
@@ -118,7 +120,11 @@ class FullPostViewController: UIViewController {
                 .drive(viewCommentsButton.rx.title()),
             
             output.postBody
-                .drive(bodyLabel.rx.text)
+                .drive(bodyLabel.rx.text),
+            
+            viewCommentsButton.rx.tap.subscribe(onNext: { [viewModel, didTapViewComments] in
+                didTapViewComments?(viewModel.post.value.id)
+            })
         
         )
         

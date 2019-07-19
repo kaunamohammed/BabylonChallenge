@@ -79,12 +79,11 @@ private extension PostsViewModel {
         loadingStateSubject.accept(.loading)
         forcedReloadSubject.accept(!forced)
         
-        domainModelGetter.rx_getModels(from: EndPointFactory.endPoint(for: .posts), convertTo: Post.self)
+        domainModelGetter.rx_getModels(from: EndPointFactory.endPoint(for: .posts), convertTo: PostObject.self)
             .subscribe(onSuccess: { [realm, loadingStateSubject] posts in
                 loadingStateSubject.accept(.loaded)
-                let rmObjects = posts.map { $0.convertToRMPost() }
                 try! realm.write {
-                    realm.add(rmObjects, update: .modified)
+                    realm.add(posts, update: .modified)
                 }
                 },
                        onError: { [loadingStateSubject] in

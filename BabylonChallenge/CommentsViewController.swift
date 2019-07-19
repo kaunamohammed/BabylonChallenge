@@ -15,6 +15,7 @@ class CommentsViewController: UIViewController {
     private lazy var commentsTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        table.allowsSelection = false
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 44
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +39,7 @@ class CommentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Detail", comment: "title")
+        title = NSLocalizedString("Comments", comment: "title")
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         setUpTableView()
         disposeBag = DisposeBag()
@@ -59,7 +60,7 @@ class CommentsViewController: UIViewController {
         
         disposeBag?.insert (
             output.comments
-                .drive(commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { row, comment, cell in
+                .bind(to: commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { row, comment, cell in 
                     cell.configure(with: comment)
             }
             

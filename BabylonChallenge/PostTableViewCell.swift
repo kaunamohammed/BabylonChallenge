@@ -45,7 +45,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with post: Post) {
+    func configure(with post: PostObject) {
         
         label.attributedText = AttributedStringBuilder()
             .append(post.title.capitalizeOnlyFirstCharacters(),

@@ -6,16 +6,7 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
-
-// MARK: - Comment
-struct Comment: Decodable {
-    let id: Int
-    let name, email: String
-    let postId: Int
-    let body: String
-}
 
 // MARK: - CommentObject
 class CommentObject: Object, Decodable {

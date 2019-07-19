@@ -8,6 +8,8 @@
 
 import RxSwift
 import RxCocoa
+import RxRealm
+import RealmSwift
 
 struct CommentsViewModel: ViewModelType {
     
@@ -16,41 +18,25 @@ struct CommentsViewModel: ViewModelType {
     }
     
     struct Output {
-        let user: Driver<Author>
-        let comments: Driver<[Comment]>
+        let comments: Observable<Results<CommentObject>>
     }
     
     // MARK: - Subjects
-    public let userId = BehaviorRelay<Int>(value: 0)
     public let postId = BehaviorRelay<Int>(value: 0)
     
+    private let realm = try! Realm()
     private let domainModelGetter: DomainModelGettable
     init(domainModelGetter: DomainModelGettable) {
         self.domainModelGetter = domainModelGetter
     }
-    
-    
-    
+        
     func transform(_ input: Input) -> Output {
+        
+        let commentsFilter = realm.objects(CommentObject.self).filter("postId == %@", postId.value)
 
-        let userRequest = domainModelGetter
-            .rx_getModels(from: UsersEndPoint.user(by: userId.value), convertTo: Author.self)
-            .retry(3)
-            .asDriver(onErrorJustReturn: [])
-            .map { $0.first! }
+        let comments = Observable.collection(from: commentsFilter)
         
-        let commentsRequest = domainModelGetter
-            .rx_getModels(from: CommentsEndPoint.comments(by: postId.value), convertTo: Comment.self)
-            .retry(3)
-            .asDriver(onErrorJustReturn: [])
-        
-        let syncronizedRequest = Driver.zip(userRequest, commentsRequest) { (user: $0, comments: $1) }
-        
-        let user = syncronizedRequest.map { $0.user }
-        let comments = syncronizedRequest.map { $0.comments }
-
-        return Output(user: user,
-                      comments: comments)
+        return Output(comments: comments)
     }
     
 }

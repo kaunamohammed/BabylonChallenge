@@ -35,13 +35,5 @@ extension PostsViewCoordinator {
         add(child: fullPostViewCoordinator!)
         fullPostViewCoordinator!.start()
     }
-    
-    func startPostDetail(with post: PostObject) {
-        postDetailViewCoordinator = CommentsViewCoordinator(presenter: presenter,
-                                                              removeCoordinator: remove)
-        postDetailViewCoordinator!.post = post
-        add(child: postDetailViewCoordinator!)
-        postDetailViewCoordinator!.start()
-    }
-    
+        
 }
