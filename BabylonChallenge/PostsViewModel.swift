@@ -19,7 +19,7 @@ class PostsViewModel: ViewModelType {
     }
     
     struct Output {
-        let posts: Driver<Results<RMPost>>
+        let posts: Driver<Results<PostObject>>
         let noPostsToDisplay: Driver<Bool>
         let postsLoadedForFirstTime: Observable<Bool>
         let loadingState: Observable<LoadingState>
@@ -37,7 +37,7 @@ class PostsViewModel: ViewModelType {
     
     private let disposeBag = DisposeBag()
     private let realm = try! Realm()
-    private lazy var persistedPosts = realm.objects(RMPost.self)
+    private lazy var persistedPosts = realm.objects(PostObject.self)
 
     private let domainModelGetter: DomainModelGettable
     init(domainModelGetter: DomainModelGettable) {
@@ -61,8 +61,8 @@ class PostsViewModel: ViewModelType {
         let posts = Observable
             .collection(from: persistedPosts)
             .map { $0.sorted(byKeyPath: "id") }
-            .asDriver(onErrorJustReturn: RMPost())
-            .map { $0 as! Results<RMPost> }
+            .asDriver(onErrorJustReturn: PostObject())
+            .map { $0 as! Results<PostObject> }
 
         let noPostsToDisplay = posts.map { $0.isEmpty }
         
@@ -84,7 +84,7 @@ private extension PostsViewModel {
                 loadingStateSubject.accept(.loaded)
                 let rmObjects = posts.map { $0.convertToRMPost() }
                 try! realm.write {
-                    realm.add(rmObjects)
+                    realm.add(rmObjects, update: .modified)
                 }
                 },
                        onError: { [loadingStateSubject] in

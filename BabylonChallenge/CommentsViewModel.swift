@@ -1,5 +1,5 @@
 //
-//  PostDetailViewModel.swift
+//  CommentsViewModel.swift
 //  BabylonChallenge
 //
 //  Created by Kauna Mohammed on 16/07/2019.
@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-struct PostDetailViewModel: ViewModelType {
+struct CommentsViewModel: ViewModelType {
     
     struct Input {
         

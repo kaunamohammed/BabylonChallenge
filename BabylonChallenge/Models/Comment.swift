@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - Comment
 struct Comment: Decodable {
@@ -14,4 +15,18 @@ struct Comment: Decodable {
     let name, email: String
     let postId: Int
     let body: String
+}
+
+// MARK: - CommentObject
+class CommentObject: Object, Decodable {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var email: String = ""
+    @objc dynamic var postId: Int = 0
+    @objc dynamic var body: String = ""
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
 }

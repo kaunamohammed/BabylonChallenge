@@ -11,7 +11,7 @@ import CoordinatorLibrary
 final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
     
     private var fullPostViewCoordinator: FullPostCoordinator? = nil
-    private var postDetailViewCoordinator: PostDetailViewCoordinator? = nil
+    private var postDetailViewCoordinator: CommentsViewCoordinator? = nil
     
     override func start() {
 
@@ -28,7 +28,7 @@ final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
 
 extension PostsViewCoordinator {
     
-    func startFullPostCoordinator(with post: RMPost) {
+    func startFullPostCoordinator(with post: PostObject) {
         fullPostViewCoordinator = FullPostCoordinator(presenter: presenter,
                                                       removeCoordinator: remove)
         fullPostViewCoordinator!.post = post
@@ -36,8 +36,8 @@ extension PostsViewCoordinator {
         fullPostViewCoordinator!.start()
     }
     
-    func startPostDetail(with post: RMPost) {
-        postDetailViewCoordinator = PostDetailViewCoordinator(presenter: presenter,
+    func startPostDetail(with post: PostObject) {
+        postDetailViewCoordinator = CommentsViewCoordinator(presenter: presenter,
                                                               removeCoordinator: remove)
         postDetailViewCoordinator!.post = post
         add(child: postDetailViewCoordinator!)

@@ -8,20 +8,26 @@
 
 import RxSwift
 import RxCocoa
+import RxRealm
+import RealmSwift
 
-struct FullPostViewModel: ViewModelType {
+class FullPostViewModel: ViewModelType {
     
     struct Input {
         
     }
     
     struct Output {
-        let authorName, postTitle, postBody, viewCommentsString: Driver<String>        
+        let authorName: Observable<String>
+        let postTitle, postBody, viewCommentsString: Driver<String>
     }
     
     // MARK: - Subjects
-    public let post = BehaviorRelay<RMPost>(value: RMPost())
+    public let post = BehaviorRelay<PostObject>(value: PostObject())
     
+    private let realm = try! Realm()
+    private let disposeBag = DisposeBag()
+        
     private let domainModelGetter: DomainModelGettable
     init(domainModelGetter: DomainModelGettable) {
         self.domainModelGetter = domainModelGetter
@@ -29,32 +35,58 @@ struct FullPostViewModel: ViewModelType {
     
     func transform(_ input: Input) -> Output {
         
-        let authorRequest = domainModelGetter
-            .rx_getModels(from: UsersEndPoint.user(by: post.value.userId), convertTo: Author.self)
-            .retry(3)
-            .asDriver(onErrorJustReturn: [])
-            .map { $0.first! }
+        addToRealm()
         
-        let commentsRequest = domainModelGetter
-            .rx_getModels(from: CommentsEndPoint.comments(by: post.value.id), convertTo: Comment.self)
-            .retry(3)
-            .asDriver(onErrorJustReturn: [])
+        // FIXME: - convert to driver, problem with decodable
+        let persistedAuthor = realm.object(ofType: AuthorObject.self, forPrimaryKey: post.value.id)
+        if persistedAuthor != nil {
+            
+        }
+        //let author = Observable.from(object: persistedAuthor!)
+        //let authorName = author.map { $0.name }
         
-        let syncronizedRequest = Driver.zip(authorRequest, commentsRequest) { (author: $0, comments: $1) }
-        
-        let author = syncronizedRequest.map { $0.author }
-        let comments = syncronizedRequest.map { $0.comments }
-        
-        let authorName = author.map { "by \($0.name)" }
-        let postTitle = post.map { $0.title }.asDriver(onErrorJustReturn: "")
+        let postTitle = post.map { $0.title.capitalizeOnlyFirstCharacters() }.asDriver(onErrorJustReturn: "")
         let postBody = post.map { $0.body }.asDriver(onErrorJustReturn: "")
-
-        let viewCommentsString = comments.map { "view \($0.count) comments" }
         
-        return Output(authorName: authorName,
+        let viewCommentsString = getComments().map { "view \($0.count) comments" }
+        
+        return Output(authorName: Observable.of(""),
                       postTitle: postTitle,
                       postBody: postBody,
                       viewCommentsString: viewCommentsString)
+    }
+    
+    
+    private func getComments() -> Driver<Results<CommentObject>> {
+        return Observable
+            .collection(from: realm.objects(CommentObject.self))
+            .map { [post] in $0.filter("postId == %@", post.value.id) }
+            .asDriver(onErrorJustReturn: CommentObject())
+            .map { $0 as! Results<CommentObject> }
+    }
+    
+    private func addToRealm() {
+        
+        let authorRequest = domainModelGetter
+            .rx_getModels(from: UsersEndPoint.user(by: post.value.userId), convertTo: AuthorObject.self)
+            .retry(3)
+            .map { $0.first! }
+            .asObservable()
+        
+        let commentsRequest = domainModelGetter
+            .rx_getModels(from: CommentsEndPoint.comments(by: post.value.id), convertTo: CommentObject.self)
+            .retry(3)
+            .asObservable()
+        
+        Observable
+            .zip(authorRequest, commentsRequest) { (author: $0, comments: $1) }
+            .subscribe(onNext: { [realm ] author, comments in
+                    try! realm.write {
+                        realm.add(author, update: .modified)
+                        realm.add(comments, update: .modified)
+                    }
+            }).disposed(by: disposeBag)
+        
     }
     
     

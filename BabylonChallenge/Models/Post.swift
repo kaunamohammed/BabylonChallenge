@@ -17,15 +17,15 @@ struct Post: Decodable {
 
 extension Post {
     
-    init(rmPost: RMPost) {
+    init(rmPost: PostObject) {
         self.userId = rmPost.userId
         self.id = rmPost.id
         self.title = rmPost.title
         self.body = rmPost.body
     }
     
-    func convertToRMPost() -> RMPost {
-        let rmPost = RMPost()
+    func convertToRMPost() -> PostObject {
+        let rmPost = PostObject()
         rmPost.id = id
         rmPost.userId = userId
         rmPost.title = title
@@ -36,11 +36,16 @@ extension Post {
 }
 
 
-// MARK: - RMPost
-class RMPost: Object {
+// MARK: - PostObject
+class PostObject: Object {
     @objc dynamic var userId = 0
     @objc dynamic var id: Int = 0
     @objc dynamic var title: String = ""
     @objc dynamic var body: String = ""
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
 }
 

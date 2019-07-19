@@ -25,7 +25,7 @@ class PostsViewController: UIViewController, AlertDisplayable {
     private lazy var loadingViewController: LoadingViewController = .init()
     
     private var disposeBag: DisposeBag?
-    var goToPostDetail: ((RMPost) -> ())?
+    var goToPostDetail: ((PostObject) -> ())?
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
     
@@ -86,6 +86,7 @@ private extension PostsViewController {
                         add(loadingViewController)
                     case .loaded:
                         remove(loadingViewController)
+                        refreshControl.endRefreshing()
                     case .failed(title: let title, message: let message):
                         remove(loadingViewController)
                         refreshControl.endRefreshing()
@@ -104,7 +105,7 @@ private extension PostsViewController {
                 .throttle(.seconds(1))
                 .drive(postsTableView.rx.unHighlightAtIndexPathAfterSelection),
             
-            postsTableView.rx.modelSelected(RMPost.self).subscribe(onNext: { [goToPostDetail] post in
+            postsTableView.rx.modelSelected(PostObject.self).subscribe(onNext: { [goToPostDetail] post in
                 goToPostDetail?(post)
             })
         )

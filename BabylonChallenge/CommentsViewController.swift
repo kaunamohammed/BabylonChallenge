@@ -1,5 +1,5 @@
 //
-//  PostDetailViewController.swift
+//  CommentsViewController.swift
 //  BabylonChallenge
 //
 //  Created by Kauna Mohammed on 16/07/2019.
@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class PostDetailViewController: UIViewController {
+class CommentsViewController: UIViewController {
     
     private lazy var commentsTableView: UITableView = {
         let table = UITableView()
@@ -22,8 +22,8 @@ class PostDetailViewController: UIViewController {
     }()
     
     private var disposeBag: DisposeBag?
-    private let viewModel: PostDetailViewModel
-    init(viewModel: PostDetailViewModel) {
+    private let viewModel: CommentsViewModel
+    init(viewModel: CommentsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,7 +54,7 @@ class PostDetailViewController: UIViewController {
     
     private func bindToRx() {
         
-        let input = PostDetailViewModel.Input()
+        let input = CommentsViewModel.Input()
         let output = viewModel.transform(input)
         
         disposeBag?.insert (

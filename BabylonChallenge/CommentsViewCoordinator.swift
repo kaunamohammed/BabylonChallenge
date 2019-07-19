@@ -1,5 +1,5 @@
 //
-//  PostDetailViewCoordinator.swift
+//  CommentsViewCoordinator.swift
 //  BabylonChallenge
 //
 //  Created by Kauna Mohammed on 16/07/2019.
@@ -8,15 +8,15 @@
 
 import CoordinatorLibrary
 
-final class PostDetailViewCoordinator: NavigationCoordinator<PostDetailViewController> {
+final class CommentsViewCoordinator: NavigationCoordinator<CommentsViewController> {
     
-    var post: RMPost!
+    var post: PostObject!
     
     override func start() {
         
         // TODO: - Possibly reuse router
         
-        let viewModel = PostDetailViewModel(domainModelGetter: ModelLoader(networkRouter: Router()))
+        let viewModel = CommentsViewModel(domainModelGetter: ModelLoader(networkRouter: Router()))
         viewModel.userId.accept(post.userId)
         viewModel.postId.accept(post.id)
         

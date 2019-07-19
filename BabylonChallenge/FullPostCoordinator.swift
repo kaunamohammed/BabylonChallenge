@@ -10,7 +10,7 @@ import CoordinatorLibrary
 
 final class FullPostCoordinator: NavigationCoordinator<FullPostViewController> {
     
-    var post: RMPost!
+    var post: PostObject!
     
     override func start() {
         

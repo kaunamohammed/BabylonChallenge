@@ -21,10 +21,10 @@ class FullPostViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let l = UILabel()
-        l.numberOfLines = 2
+        l.numberOfLines = 0
         l.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         l.textAlignment = .left
-        l.font = .boldSystemFont(ofSize: 15)
+        l.font = .boldSystemFont(ofSize: 20)
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
@@ -32,7 +32,7 @@ class FullPostViewController: UIViewController {
     private lazy var viewAuthorButton: UIButton = {
         let b = UIButton()
         b.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-        b.titleLabel?.font = .boldSystemFont(ofSize: 10)
+        b.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
@@ -54,7 +54,7 @@ class FullPostViewController: UIViewController {
     }()
     
     private lazy var containerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, viewAuthorButton, viewCommentsButton, bodyLabel])
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, viewAuthorButton, bodyLabel, viewCommentsButton])
         stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -94,7 +94,7 @@ class FullPostViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         view.add(scrollView)
-        scrollView.pin(to: view)
+        scrollView.pin(to: self)
         scrollView.add(containerStackView)
         
         disposeBag = DisposeBag()
@@ -108,11 +108,11 @@ class FullPostViewController: UIViewController {
         
         disposeBag?.insert(
             
-            output.postTitle.debug()
+            output.postTitle
                 .drive(titleLabel.rx.text),
         
             output.authorName
-                .drive(viewAuthorButton.rx.title()),
+                .bind(to: viewAuthorButton.rx.title()), 
             
             output.viewCommentsString
                 .drive(viewCommentsButton.rx.title()),
