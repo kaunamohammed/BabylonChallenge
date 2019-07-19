@@ -16,7 +16,7 @@ final class CommentsViewCoordinator: NavigationCoordinator<CommentsViewControlle
         
         // TODO: - Possibly reuse router
         
-        let viewModel = CommentsViewModel(domainModelGetter: ModelLoader(networkRouter: Router()))
+        let viewModel = CommentsViewModel()
         viewModel.postId.accept(postId)
         viewController = .init(viewModel: viewModel)
         navigate(to: viewController, with: .push, animated: true)

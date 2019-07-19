@@ -69,6 +69,7 @@ class FullPostViewController: UIViewController {
     }()
     
     public var didTapViewComments: ((Int) -> ())?
+    public var didTapViewAuthor: ((Int) -> ())?
     
     private var disposeBag: DisposeBag?
     private let viewModel: FullPostViewModel
@@ -107,14 +108,14 @@ class FullPostViewController: UIViewController {
 
         let input = FullPostViewModel.Input()
         let output = viewModel.transform(input)
-        
+                
         disposeBag?.insert(
+            
+            output.authorName
+                .bind(to: viewAuthorButton.rx.title()),
             
             output.postTitle
                 .drive(titleLabel.rx.text),
-        
-            output.authorName
-                .bind(to: viewAuthorButton.rx.title()), 
             
             output.viewCommentsString
                 .drive(viewCommentsButton.rx.title()),
@@ -124,6 +125,10 @@ class FullPostViewController: UIViewController {
             
             viewCommentsButton.rx.tap.subscribe(onNext: { [viewModel, didTapViewComments] in
                 didTapViewComments?(viewModel.post.value.id)
+            }),
+            
+            viewAuthorButton.rx.tap.subscribe(onNext: { [viewModel, didTapViewAuthor] in
+                didTapViewAuthor?(viewModel.post.value.userId)
             })
         
         )

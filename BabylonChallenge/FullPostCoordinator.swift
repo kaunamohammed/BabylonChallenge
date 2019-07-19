@@ -13,6 +13,7 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
     var post: PostObject!
     
     private var commentsViewCoordinator: CommentsViewCoordinator? = nil
+    private var authorViewCoordinator: AuthorViewCoordinator? = nil
     
     override func start() {
         
@@ -20,9 +21,13 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
         viewModel.post.accept(post)
         viewController = .init(viewModel: viewModel)
         navigate(to: viewController, with: .push, animated: true)
-     
+        
         viewController.didTapViewComments = { [startCommentsViewCoordinator] id in
             startCommentsViewCoordinator(id)
+        }
+        
+        viewController.didTapViewAuthor = { [startAuthorViewCoordinator] id in
+            startAuthorViewCoordinator(id)
         }
         
     }
@@ -33,6 +38,14 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
         commentsViewCoordinator!.postId = postId
         add(child: commentsViewCoordinator!) 
         commentsViewCoordinator!.start()
+    }
+    
+    func startAuthorViewCoordinator(with userId: Int) {
+        authorViewCoordinator = AuthorViewCoordinator(presenter: presenter,
+                                                      removeCoordinator: remove)
+        authorViewCoordinator!.userId = userId
+        add(child: authorViewCoordinator!)
+        authorViewCoordinator!.start()
     }
     
 }

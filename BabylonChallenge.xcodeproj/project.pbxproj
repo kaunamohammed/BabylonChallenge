@@ -22,6 +22,10 @@
 		FC836A4522D8CE4500363018 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4422D8CE4500363018 /* PostTableViewCell.swift */; };
 		FC836A4822D9360200363018 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4622D9360100363018 /* RefreshControl.swift */; };
 		FC836A4922D9360200363018 /* RefreshControlHoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4722D9360200363018 /* RefreshControlHoldable.swift */; };
+		FC9EA4A922E1BA3500A1AF48 /* AuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EA4A822E1BA3500A1AF48 /* AuthorViewController.swift */; };
+		FC9EA4AB22E1BA5000A1AF48 /* AuthorViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EA4AA22E1BA5000A1AF48 /* AuthorViewCoordinator.swift */; };
+		FCA01BBF22E1BB2E00EF2004 /* AuthorDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA01BBE22E1BB2E00EF2004 /* AuthorDetailTableViewCell.swift */; };
+		FCA01BC122E1C1F200EF2004 /* AuthorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA01BC022E1C1F200EF2004 /* AuthorViewModel.swift */; };
 		FCA74FBA22DF703500A98CB2 /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */; };
 		FCA74FBC22DF738A00A98CB2 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */; };
 		FCA74FBE22DF8E2900A98CB2 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FBD22DF8E2900A98CB2 /* CommentTableViewCell.swift */; };
@@ -86,6 +90,10 @@
 		FC836A4422D8CE4500363018 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		FC836A4622D9360100363018 /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		FC836A4722D9360200363018 /* RefreshControlHoldable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlHoldable.swift; sourceTree = "<group>"; };
+		FC9EA4A822E1BA3500A1AF48 /* AuthorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorViewController.swift; sourceTree = "<group>"; };
+		FC9EA4AA22E1BA5000A1AF48 /* AuthorViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorViewCoordinator.swift; sourceTree = "<group>"; };
+		FCA01BBE22E1BB2E00EF2004 /* AuthorDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailTableViewCell.swift; sourceTree = "<group>"; };
+		FCA01BC022E1C1F200EF2004 /* AuthorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorViewModel.swift; sourceTree = "<group>"; };
 		FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Rx.swift"; sourceTree = "<group>"; };
 		FCA74FBD22DF8E2900A98CB2 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -169,8 +177,8 @@
 			children = (
 				FC16F1BE22DDE583001B1602 /* CommentsViewModel.swift */,
 				FC16F1BC22DDE547001B1602 /* CommentsViewController.swift */,
-				FC16F1BA22DDE518001B1602 /* CommentsViewCoordinator.swift */,
 				FCA74FBD22DF8E2900A98CB2 /* CommentTableViewCell.swift */,
+				FC16F1BA22DDE518001B1602 /* CommentsViewCoordinator.swift */,
 			);
 			name = Comments;
 			path = ..;
@@ -180,8 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				FCAD93BE22D89E3400D1573D /* Post.swift */,
-				FC8199D022DDBEBE004EB431 /* User.swift */,
 				FC8199D222DDBFA6004EB431 /* Comment.swift */,
+				FC8199D022DDBEBE004EB431 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,11 +197,24 @@
 		FC9EA4A622E1ABB500A1AF48 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				FC9EA4A722E1BA1100A1AF48 /* New Group */,
 				FCA74FC922E0C2B800A98CB2 /* FullPost */,
 				FC16F1B722DDE03B001B1602 /* Comments */,
 				FCAD93BD22D89E0F00D1573D /* Posts */,
 			);
 			path = Feature;
+			sourceTree = "<group>";
+		};
+		FC9EA4A722E1BA1100A1AF48 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				FC9EA4A822E1BA3500A1AF48 /* AuthorViewController.swift */,
+				FCA01BBE22E1BB2E00EF2004 /* AuthorDetailTableViewCell.swift */,
+				FCA01BC022E1C1F200EF2004 /* AuthorViewModel.swift */,
+				FC9EA4AA22E1BA5000A1AF48 /* AuthorViewCoordinator.swift */,
+			);
+			name = "New Group";
+			path = "../New Group";
 			sourceTree = "<group>";
 		};
 		FCA74FC922E0C2B800A98CB2 /* FullPost */ = {
@@ -490,6 +511,7 @@
 				FCAD93AB22D89D1A00D1573D /* Reusable.swift in Sources */,
 				FCAD93B722D89D1A00D1573D /* NavigationController+Ext.swift in Sources */,
 				FCAD939422D8979600D1573D /* Router.swift in Sources */,
+				FCA01BC122E1C1F200EF2004 /* AuthorViewModel.swift in Sources */,
 				FCAD938422D8976E00D1573D /* PostsViewController.swift in Sources */,
 				FCAD93AD22D89D1A00D1573D /* UIView+Constraints.swift in Sources */,
 				FCA74FC622E0BDA400A98CB2 /* FullPostViewModel.swift in Sources */,
@@ -505,6 +527,7 @@
 				FCAD93C722D8A11800D1573D /* ViewModelType.swift in Sources */,
 				FCAD93BF22D89E3400D1573D /* Post.swift in Sources */,
 				FC16F1BD22DDE547001B1602 /* CommentsViewController.swift in Sources */,
+				FC9EA4AB22E1BA5000A1AF48 /* AuthorViewCoordinator.swift in Sources */,
 				FCAD93C322D89FC400D1573D /* MainAppCoordinator.swift in Sources */,
 				FCAD93AC22D89D1A00D1573D /* UITableView+Ext.swift in Sources */,
 				FCA74FBE22DF8E2900A98CB2 /* CommentTableViewCell.swift in Sources */,
@@ -521,7 +544,9 @@
 				FC4E68E122DBED0300583C0F /* LoadingViewController.swift in Sources */,
 				FC836A4922D9360200363018 /* RefreshControlHoldable.swift in Sources */,
 				FCA74FC222E0B9D700A98CB2 /* FullPostViewController.swift in Sources */,
+				FCA01BBF22E1BB2E00EF2004 /* AuthorDetailTableViewCell.swift in Sources */,
 				FCAD93C122D89F3C00D1573D /* PostsViewCoordinator.swift in Sources */,
+				FC9EA4A922E1BA3500A1AF48 /* AuthorViewController.swift in Sources */,
 				FC16F1BF22DDE583001B1602 /* CommentsViewModel.swift in Sources */,
 				FCAD939022D8979600D1573D /* URLProducer.swift in Sources */,
 				FCA74FBA22DF703500A98CB2 /* AlertDisplayable.swift in Sources */,

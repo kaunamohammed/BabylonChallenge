@@ -25,10 +25,6 @@ struct CommentsViewModel: ViewModelType {
     public let postId = BehaviorRelay<Int>(value: 0)
     
     private let realm = try! Realm()
-    private let domainModelGetter: DomainModelGettable
-    init(domainModelGetter: DomainModelGettable) {
-        self.domainModelGetter = domainModelGetter
-    }
         
     func transform(_ input: Input) -> Output {
         

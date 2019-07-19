@@ -38,23 +38,15 @@ class FullPostViewModel: ViewModelType {
         addToRealm()
         
         // FIXME: - convert to driver, problem with decodable
-        //let persistedAuthor = realm.object(ofType: AuthorObject.self, forPrimaryKey: post.value.id) ?? AuthorObject()
         
-        //var authorName = Observable.just("")
-        //if persistedAuthor != nil {
-            //let author = Observable.from(object: persistedAuthor)
-            //let authorName = author.map { $0.name }
-        //}
-        
-        //let author = Observable.from(object: persistedAuthor!)
-        //let authorName = author.map { $0.name }
+        let authorName = Observable.of(realm.object(ofType: AuthorObject.self, forPrimaryKey: post.value.userId).map { $0.name } ?? "")
         
         let postTitle = post.map { $0.title.capitalizeOnlyFirstCharacters() }.asDriver(onErrorJustReturn: "")
         let postBody = post.map { $0.body }.asDriver(onErrorJustReturn: "")
         
         let viewCommentsString = getComments().map { "view \($0.count) comments" }
         
-        return Output(authorName: Observable.just(""),
+        return Output(authorName: authorName,
                       postTitle: postTitle,
                       postBody: postBody,
                       viewCommentsString: viewCommentsString)
