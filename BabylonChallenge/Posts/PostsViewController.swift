@@ -14,7 +14,7 @@ class PostsViewController: UIViewController, AlertDisplayable {
     
     private lazy var postsTableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        table.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 44
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,7 @@ class PostsViewController: UIViewController, AlertDisplayable {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Posts", comment: "title")
-        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         definesPresentationContext = true
             
@@ -74,7 +74,7 @@ private extension PostsViewController {
             
             output.posts
                 .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
-                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
+                .bind(to: postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
             },
             

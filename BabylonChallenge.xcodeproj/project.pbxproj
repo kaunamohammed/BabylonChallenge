@@ -32,7 +32,6 @@
 		FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E222DC083600583C0F /* ModelLoader.swift */; };
 		FC8199D122DDBEBE004EB431 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D022DDBEBE004EB431 /* User.swift */; };
 		FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D222DDBFA6004EB431 /* Comment.swift */; };
-		FC81CF1022DEF0F3007534EF /* AppSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81CF0F22DEF0F3007534EF /* AppSearchController.swift */; };
 		FC81CF1222DEF23D007534EF /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81CF1122DEF23D007534EF /* AppNavigationController.swift */; };
 		FC81CF1422DEFF76007534EF /* DomainModelGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */; };
 		FC836A4822D9360200363018 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4622D9360100363018 /* RefreshControl.swift */; };
@@ -102,7 +101,6 @@
 		FC4E68E222DC083600583C0F /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 		FC8199D022DDBEBE004EB431 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC8199D222DDBFA6004EB431 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		FC81CF0F22DEF0F3007534EF /* AppSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppSearchController.swift; path = "../../../OutNow-iOS/Common/Common/AppSearchController.swift"; sourceTree = "<group>"; };
 		FC81CF1122DEF23D007534EF /* AppNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DomainModelGettable.swift; path = ../../Utilities/DomainModelGettable.swift; sourceTree = "<group>"; };
 		FC836A4622D9360100363018 /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
@@ -317,7 +315,6 @@
 			isa = PBXGroup;
 			children = (
 				FC81CF1122DEF23D007534EF /* AppNavigationController.swift */,
-				FC81CF0F22DEF0F3007534EF /* AppSearchController.swift */,
 				FC836A4622D9360100363018 /* RefreshControl.swift */,
 				FC836A4722D9360200363018 /* RefreshControlHoldable.swift */,
 				FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */,
@@ -516,7 +513,6 @@
 				FCAD93AD22D89D1A00D1573D /* UIView+Constraints.swift in Sources */,
 				FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */,
 				FCAD93B022D89D1A00D1573D /* GlobalConstants.swift in Sources */,
-				FC81CF1022DEF0F3007534EF /* AppSearchController.swift in Sources */,
 				FC20C2A722E3269F00A1C540 /* CommentsViewController.swift in Sources */,
 				FCAD93AF22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift in Sources */,
 				FC20C2A322E3269F00A1C540 /* PostsViewCoordinator.swift in Sources */,

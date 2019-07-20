@@ -13,7 +13,7 @@ public class AppNavigationController: UINavigationController {
   override public func viewDidLoad() {
     super.viewDidLoad()
 
-    navigationBar.barTintColor = #colorLiteral(red: 0.06274509804, green: 0.05882352941, blue: 0.05882352941, alpha: 1)
+    navigationBar.barTintColor = #colorLiteral(red: 0.5647058824, green: 0.07058823529, blue: 0.9960784314, alpha: 1)
     navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     navigationBar.isTranslucent = false
     navigationBar.shadowImage = .init()

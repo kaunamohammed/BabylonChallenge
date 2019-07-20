@@ -28,11 +28,11 @@ class PostTableViewCell: UITableViewCell {
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.add(label)
-        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         accessoryType = .disclosureIndicator
         
         let backgroundView = UIView()
-        backgroundView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        backgroundView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         selectedBackgroundView = backgroundView
         
         label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
@@ -47,13 +47,25 @@ class PostTableViewCell: UITableViewCell {
     
     func configure(with post: PostObject) {
         
-        label.attributedText = AttributedStringBuilder()
-            .append(post.title.capitalizeOnlyFirstCharacters(),
-                    attributes: [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .headline)])
-            .append("\n", attributes: [:])
-            .append(post.body.truncate(by: 60),
-                    attributes: [.foregroundColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), .font: UIFont.preferredFont(forTextStyle: .subheadline)])
-            .build()
+        let headlineFont = UIFont(name: "OpenSans", size: 20)!
+        let subheadlineFont = UIFont(name: "OpenSans", size: 15)!
+        
+        if #available(iOS 11.0, *) {
+            let headlineFontMetrics = UIFontMetrics(forTextStyle: .headline)
+            let subheadlineFontMetrics = UIFontMetrics(forTextStyle: .subheadline)
+            label.attributedText = AttributedStringBuilder()
+                        .append(post.title.capitalizeOnlyFirstCharacters(),
+                                attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: headlineFontMetrics.scaledFont(for: headlineFont)])
+                        .append("\n", attributes: [:])
+                        .append(post.body.truncate(by: 60),
+                                attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: subheadlineFontMetrics.scaledFont(for: subheadlineFont)])
+                        .build()
+            
+        } else {
+            // Fallback on earlier versions
+        }
+
+        
         
     }
 

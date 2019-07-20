@@ -19,8 +19,8 @@ class PostsViewModel: ViewModelType {
     }
     
     struct Output {
-        let posts: Driver<Results<PostObject>>
-        let noPostsToDisplay: Driver<Bool>
+        let posts: Observable<Results<PostObject>>
+        let noPostsToDisplay: Observable<Bool>
         let postsLoadedForFirstTime: Observable<Bool>
         let loadingState: Observable<LoadingState>
     }
@@ -61,8 +61,8 @@ class PostsViewModel: ViewModelType {
         let posts = Observable
             .collection(from: persistedPosts)
             .map { $0.sorted(byKeyPath: "id") }
-            .asDriver(onErrorJustReturn: PostObject())
-            .map { $0 as! Results<PostObject> }
+            //.asDriver(onErrorJustReturn: PostObject())
+            //.map { $0 as! Results<PostObject> }
 
         let noPostsToDisplay = posts.map { $0.isEmpty }
         
