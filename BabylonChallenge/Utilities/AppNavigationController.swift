@@ -17,7 +17,7 @@ public class AppNavigationController: UINavigationController {
     navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     navigationBar.isTranslucent = false
     navigationBar.shadowImage = .init()
-    navigationBar.addTitleTextAttributes(attributes: [.foregroundColor: UIColor.white])
+    navigationBar.addTitleTextAttributes(attributes: [.foregroundColor: UIColor.white, .font: UIFont.font(size: 20, textStyle: .title1)])
     
   }
   

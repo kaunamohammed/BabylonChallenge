@@ -13,7 +13,6 @@ class CommentTableViewCell: UITableViewCell {
     private let commentLabel: UILabel = {
         let l = UILabel()
         l.numberOfLines = 0
-        l.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         l.textAlignment = .left
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
@@ -33,7 +32,7 @@ class CommentTableViewCell: UITableViewCell {
     func configure(with comment: CommentObject) {
         commentLabel.attributedText = AttributedStringBuilder()
             .append(comment.body, attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.font(size: 15, textStyle: .body)])
-            .append("\n", attributes: [:])
+            .append("\n\n", attributes: [:])
             .append(comment.name, attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.font(size: 15, textStyle: .caption1)])
             .build()
     }

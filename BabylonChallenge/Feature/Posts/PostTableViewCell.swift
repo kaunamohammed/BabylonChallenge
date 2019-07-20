@@ -57,12 +57,3 @@ class PostTableViewCell: UITableViewCell {
     
 }
 
-extension UIFont {
-    
-    static func font(name: String = "OpenSans", size: CGFloat, textStyle: UIFont.TextStyle) -> UIFont {
-        let font = UIFont(name: name, size: size)!
-        let metrics = UIFontMetrics(forTextStyle: textStyle)
-        return metrics.scaledFont(for: font)
-    }
-    
-}

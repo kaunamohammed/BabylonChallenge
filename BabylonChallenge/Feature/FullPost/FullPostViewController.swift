@@ -31,7 +31,7 @@ class FullPostViewController: UIViewController {
     
     private lazy var viewAuthorButton: UIButton = {
         let b = UIButton()
-        b.setTitleColor(#colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1), for: .normal)
+        b.setTitleColor(#colorLiteral(red: 0.5647058824, green: 0.07058823529, blue: 0.9960784314, alpha: 1), for: .normal)
         b.titleLabel?.font = .font(size: 15, textStyle: .subheadline)
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
@@ -39,7 +39,7 @@ class FullPostViewController: UIViewController {
     
     private lazy var viewCommentsButton: UIButton = {
         let b = UIButton()
-        b.setTitleColor(#colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1), for: .normal)
+        b.setTitleColor(#colorLiteral(red: 0.5647058824, green: 0.07058823529, blue: 0.9960784314, alpha: 1), for: .normal)
         b.titleLabel?.font = .font(size: 15, textStyle: .subheadline)
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
@@ -48,7 +48,7 @@ class FullPostViewController: UIViewController {
     private let bodyLabel: UILabel = {
         let l = UILabel()
         l.numberOfLines = 0
-        l.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        l.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         l.textAlignment = .left
         l.font = .font(size: 15, textStyle: .body)
         l.translatesAutoresizingMaskIntoConstraints = false

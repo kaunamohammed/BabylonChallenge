@@ -47,7 +47,6 @@ class AuthorViewController: UIViewController {
         
         setUpTableView()
         disposeBag = DisposeBag()
-        
         configureCells()
         
     }
@@ -78,12 +77,12 @@ class AuthorViewController: UIViewController {
                 authorWebsiteCell.configure(topText: NSLocalizedString("website", comment: "website"), bottomText: author.website)
                 
                 authorCompanyCell.configure(topText: NSLocalizedString("company", comment: "company"), bottomText: author.company?.bs)
+            
             })
             
         )
         
     }
-    
     
 }
 

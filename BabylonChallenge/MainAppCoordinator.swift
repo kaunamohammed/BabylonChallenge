@@ -33,7 +33,7 @@ private extension MainAppCoordinator {
     
     func startPostsViewCoordinator() {
         postsViewCoordinator = .init(presenter: presenter,
-                                      removeCoordinator: remove)
+                                     removeCoordinator: remove)
         add(child: postsViewCoordinator!)
         postsViewCoordinator?.start()
     }

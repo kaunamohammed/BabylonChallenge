@@ -6,9 +6,8 @@
 //  Copyright © 2019 Kauna Mohammed. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-/// small helper for testing purposes
 func delay(seconds: Double, _ block: @escaping (() -> Void)) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
         block()
@@ -49,3 +48,12 @@ extension Int {
     
 }
 
+extension UIFont {
+    
+    static func font(name: String = "OpenSans", size: CGFloat, textStyle: UIFont.TextStyle) -> UIFont {
+        let font = UIFont(name: name, size: size)!
+        let metrics = UIFontMetrics(forTextStyle: textStyle)
+        return metrics.scaledFont(for: font)
+    }
+    
+}

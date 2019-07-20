@@ -254,18 +254,12 @@
 			children = (
 				FCAD936122D896A200D1573D /* AppDelegate.swift */,
 				FCAD93C222D89FC400D1573D /* MainAppCoordinator.swift */,
-				FC20C29922E3269E00A1C540 /* Comments */,
-				FC20C29022E3269E00A1C540 /* FullPost */,
-				FC20C29422E3269E00A1C540 /* Posts */,
-				FC20C28722E3268F00A1C540 /* Author */,
+				FCCB226D22E37492007C8F4F /* Feature */,
 				FCAD938522D8979600D1573D /* Networking */,
 				FC8199CF22DDBE9E004EB431 /* Models */,
-				FCAD936822D896B000D1573D /* Assets.xcassets */,
-				FCAD936A22D896B000D1573D /* LaunchScreen.storyboard */,
-				FCAD936D22D896B000D1573D /* Info.plist */,
-				FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */,
-				FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */,
-				FC4E68E022DBED0300583C0F /* LoadingViewController.swift */,
+				FCCB226A22E373CE007C8F4F /* Resource */,
+				FCCB226B22E3740F007C8F4F /* Extensions */,
+				FCCB226C22E37435007C8F4F /* Protocols */,
 				FCAD939622D89D1A00D1573D /* Utilities */,
 			);
 			path = BabylonChallenge;
@@ -314,24 +308,62 @@
 		FCAD939622D89D1A00D1573D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				FC81CF1122DEF23D007534EF /* AppNavigationController.swift */,
 				FC836A4622D9360100363018 /* RefreshControl.swift */,
-				FC836A4722D9360200363018 /* RefreshControlHoldable.swift */,
-				FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */,
-				FCAD939A22D89D1A00D1573D /* Reusable.swift */,
-				FCAD93BA22D89D6900D1573D /* AddableAndRemovable.swift */,
-				FCAD93B922D89D6900D1573D /* extensions.swift */,
-				FCAD939B22D89D1A00D1573D /* UITableView+Ext.swift */,
-				FCAD939C22D89D1A00D1573D /* UIView+Constraints.swift */,
+				FC4E68E022DBED0300583C0F /* LoadingViewController.swift */,
+				FC81CF1122DEF23D007534EF /* AppNavigationController.swift */,
 				FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */,
 				FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */,
 				FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */,
-				FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */,
-				FCAD93C622D8A11800D1573D /* ViewModelType.swift */,
-				FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */,
-				FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FCCB226A22E373CE007C8F4F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FCAD936822D896B000D1573D /* Assets.xcassets */,
+				FCAD936A22D896B000D1573D /* LaunchScreen.storyboard */,
+				FCAD936D22D896B000D1573D /* Info.plist */,
+				FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */,
+				FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		FCCB226B22E3740F007C8F4F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */,
+				FCAD93B922D89D6900D1573D /* extensions.swift */,
+				FCAD939B22D89D1A00D1573D /* UITableView+Ext.swift */,
+				FCAD939C22D89D1A00D1573D /* UIView+Constraints.swift */,
+				FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */,
+				FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FCCB226C22E37435007C8F4F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC836A4722D9360200363018 /* RefreshControlHoldable.swift */,
+				FCAD939A22D89D1A00D1573D /* Reusable.swift */,
+				FCAD93BA22D89D6900D1573D /* AddableAndRemovable.swift */,
+				FCAD93C622D8A11800D1573D /* ViewModelType.swift */,
+				FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FCCB226D22E37492007C8F4F /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				FC20C29422E3269E00A1C540 /* Posts */,
+				FC20C29022E3269E00A1C540 /* FullPost */,
+				FC20C29922E3269E00A1C540 /* Comments */,
+				FC20C28722E3268F00A1C540 /* Author */,
+			);
+			path = Feature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
