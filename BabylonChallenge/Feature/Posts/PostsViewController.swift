@@ -48,6 +48,8 @@ class PostsViewController: UIViewController, AlertDisplayable {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         definesPresentationContext = true
+        
+        refreshControl.startRefreshing()
             
         setUpTableView()
         disposeBag = DisposeBag()
@@ -85,7 +87,7 @@ private extension PostsViewController {
                         add(loadingViewController)
                     case .loaded:
                         remove(loadingViewController)
-                        refreshControl.endRefreshing()
+                        //refreshControl.endRefreshing()
                     case .failed(title: let title, message: let message):
                         remove(loadingViewController)
                         refreshControl.endRefreshing()

@@ -18,8 +18,8 @@ class FullPostViewModel: ViewModelType {
     }
     
     struct Output {
-        let authorName: Driver<String>
-        let postTitle, postBody, viewCommentsString: Driver<String>
+        let authorName, postTitle, postBody, numberOfComments: Driver<String>
+        let relatedComments: Observable<[PostObject]>
     }
     
     private var authorName: Driver<String> {
@@ -30,12 +30,24 @@ class FullPostViewModel: ViewModelType {
             .asDriver(onErrorJustReturn: "")
     }
     
-    private var totalComments: Driver<String> {
-        Observable
+    private var commentsSource: Observable<Results<CommentObject>> {
+        return Observable
             .collection(from: realm.objects(CommentObject.self))
+            .share()
+    }
+    
+    private var totalComments: Driver<String> {
+        return commentsSource
             .map { [post] in $0.filter("postId == %@", post.value.id).count }
             .map { "view \($0) comments" }
             .asDriver(onErrorJustReturn: "")
+    }
+    
+    private var relatedPosts: Observable<[PostObject]> {
+        return Observable
+            .collection(from: realm.objects(PostObject.self))
+            .map { Array($0.shuffled().prefix(5)) }
+            .share()
     }
     
     // MARK: - Subjects
@@ -59,7 +71,8 @@ class FullPostViewModel: ViewModelType {
         return Output(authorName: authorName,
                       postTitle: postTitle,
                       postBody: postBody,
-                      viewCommentsString: totalComments)
+                      numberOfComments: totalComments,
+                      relatedComments: relatedPosts)
     }
             
     private func addToRealm() {
