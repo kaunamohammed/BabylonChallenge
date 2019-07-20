@@ -20,7 +20,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var label: UILabel = {
         let l = UILabel()
         l.textAlignment = .left
-        l.numberOfLines = 0//4
+        l.numberOfLines = 0
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
@@ -47,27 +47,38 @@ class PostTableViewCell: UITableViewCell {
     
     func configure(with post: PostObject) {
         
-        let headlineFont = UIFont(name: "OpenSans", size: 20)!
-        let subheadlineFont = UIFont(name: "OpenSans", size: 15)!
-        
-        if #available(iOS 11.0, *) {
-            let headlineFontMetrics = UIFontMetrics(forTextStyle: .headline)
-            let subheadlineFontMetrics = UIFontMetrics(forTextStyle: .subheadline)
-            label.attributedText = AttributedStringBuilder()
-                        .append(post.title.capitalizeOnlyFirstCharacters(),
-                                attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: headlineFontMetrics.scaledFont(for: headlineFont)])
-                        .append("\n", attributes: [:])
-                        .append(post.body.truncate(by: 60),
-                                attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: subheadlineFontMetrics.scaledFont(for: subheadlineFont)])
-                        .build()
-            
-        } else {
-            // Fallback on earlier versions
-        }
-
-        
+        setUpAttributes(for: label, post: post)
         
     }
 
 }
 
+
+extension PostTableViewCell {
+    
+    func setUpAttributes(for label: UILabel, post: PostObject) {
+        let headlineFont = UIFont(name: "OpenSans", size: 20)!
+        let subheadlineFont = UIFont(name: "OpenSans", size: 15)!
+        if #available(iOS 11.0, *) {
+            let headlineFontMetrics = UIFontMetrics(forTextStyle: .headline)
+            let subheadlineFontMetrics = UIFontMetrics(forTextStyle: .subheadline)
+            label.attributedText = AttributedStringBuilder()
+                .append(post.title.capitalizeOnlyFirstCharacters(),
+                        attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: headlineFontMetrics.scaledFont(for: headlineFont)])
+                .append("\n", attributes: [:])
+                .append(post.body.truncate(by: 60),
+                        attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: subheadlineFontMetrics.scaledFont(for: subheadlineFont)])
+                .build()
+            
+        } else {
+            label.attributedText = AttributedStringBuilder()
+                .append(post.title.capitalizeOnlyFirstCharacters(),
+                        attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: headlineFont])
+                .append("\n", attributes: [:])
+                .append(post.body.truncate(by: 60),
+                        attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: subheadlineFont])
+                .build()
+        }
+    }
+    
+}

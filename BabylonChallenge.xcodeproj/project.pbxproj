@@ -180,8 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				FC20C28822E3268F00A1C540 /* AuthorViewModel.swift */,
-				FC20C28922E3268F00A1C540 /* AuthorViewController.swift */,
 				FC20C28A22E3268F00A1C540 /* AuthorDetailTableViewCell.swift */,
+				FC20C28922E3268F00A1C540 /* AuthorViewController.swift */,
 				FC20C28B22E3268F00A1C540 /* AuthorViewCoordinator.swift */,
 			);
 			path = Author;
@@ -190,9 +190,9 @@
 		FC20C29022E3269E00A1C540 /* FullPost */ = {
 			isa = PBXGroup;
 			children = (
-				FC20C29122E3269E00A1C540 /* FullPostCoordinator.swift */,
-				FC20C29222E3269E00A1C540 /* FullPostViewController.swift */,
 				FC20C29322E3269E00A1C540 /* FullPostViewModel.swift */,
+				FC20C29222E3269E00A1C540 /* FullPostViewController.swift */,
+				FC20C29122E3269E00A1C540 /* FullPostCoordinator.swift */,
 			);
 			path = FullPost;
 			sourceTree = "<group>";
@@ -200,10 +200,10 @@
 		FC20C29422E3269E00A1C540 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				FC20C29522E3269E00A1C540 /* PostsViewController.swift */,
 				FC20C29622E3269E00A1C540 /* PostsViewModel.swift */,
-				FC20C29722E3269E00A1C540 /* PostsViewCoordinator.swift */,
 				FC20C29822E3269E00A1C540 /* PostTableViewCell.swift */,
+				FC20C29522E3269E00A1C540 /* PostsViewController.swift */,
+				FC20C29722E3269E00A1C540 /* PostsViewCoordinator.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -212,9 +212,9 @@
 			isa = PBXGroup;
 			children = (
 				FC20C29A22E3269E00A1C540 /* CommentsViewModel.swift */,
-				FC20C29B22E3269E00A1C540 /* CommentsViewCoordinator.swift */,
-				FC20C29C22E3269E00A1C540 /* CommentsViewController.swift */,
 				FC20C29D22E3269E00A1C540 /* CommentTableViewCell.swift */,
+				FC20C29C22E3269E00A1C540 /* CommentsViewController.swift */,
+				FC20C29B22E3269E00A1C540 /* CommentsViewCoordinator.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
