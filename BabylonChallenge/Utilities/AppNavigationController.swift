@@ -18,6 +18,7 @@ public class AppNavigationController: UINavigationController {
     navigationBar.isTranslucent = false
     navigationBar.shadowImage = .init()
     navigationBar.addTitleTextAttributes(attributes: [.foregroundColor: UIColor.white])
+    
   }
   
   override public var preferredStatusBarStyle: UIStatusBarStyle {
