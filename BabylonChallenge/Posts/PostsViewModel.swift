@@ -14,7 +14,6 @@ import RealmSwift
 class PostsViewModel: ViewModelType {
     
     struct Input {
-//        let query: Observable<String>
         let isRefreshing: Observable<Bool>
     }
     

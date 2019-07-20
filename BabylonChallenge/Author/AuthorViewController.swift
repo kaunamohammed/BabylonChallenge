@@ -17,7 +17,6 @@ class AuthorViewController: UIViewController {
         table.dataSource = self
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 44
-        table.backgroundColor = .clear
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -28,7 +27,7 @@ class AuthorViewController: UIViewController {
     private let authorPhoneNumberCell: AuthorDetailTableViewCell = .init(style: .default, reuseIdentifier: nil)
     private let authorWebsiteCell: AuthorDetailTableViewCell = .init(style: .default, reuseIdentifier: nil)
     private let authorCompanyCell: AuthorDetailTableViewCell = .init(style: .default, reuseIdentifier: nil)
-
+    
     private var disposeBag:  DisposeBag?
     
     private let viewModel: AuthorViewModel
@@ -40,18 +39,17 @@ class AuthorViewController: UIViewController {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
-        title = NSLocalizedString("Author", comment: "title")
         setUpTableView()
         disposeBag = DisposeBag()
         
         configureCells()
-
+        
     }
     
     private func setUpTableView() {
@@ -67,21 +65,26 @@ class AuthorViewController: UIViewController {
         let output = viewModel.transform(input)
         
         disposeBag?.insert(
-        
+            
             output.author.subscribe(onNext: { [authorNameCell, authorUsernameCell, authorEmailCell, authorPhoneNumberCell, authorWebsiteCell, authorCompanyCell] author in
                 authorNameCell.configure(topText: NSLocalizedString("name", comment: "title"), bottomText: author.name)
+                
                 authorUsernameCell.configure(topText: NSLocalizedString("username", comment: "username"), bottomText: author.username)
+                
                 authorEmailCell.configure(topText: NSLocalizedString("email", comment: "email"), bottomText: author.email)
+                
                 authorPhoneNumberCell.configure(topText: NSLocalizedString("phone number", comment: "phone number"), bottomText: author.phone)
+                
                 authorWebsiteCell.configure(topText: NSLocalizedString("website", comment: "website"), bottomText: author.website)
+                
                 authorCompanyCell.configure(topText: NSLocalizedString("company", comment: "company"), bottomText: author.company?.bs)
             })
-        
+            
         )
-    
+        
     }
-
-
+    
+    
 }
 
 // MARK: - UITableViewDataSource

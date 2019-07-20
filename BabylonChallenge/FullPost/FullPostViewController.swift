@@ -22,17 +22,17 @@ class FullPostViewController: UIViewController {
     private let titleLabel: UILabel = {
         let l = UILabel()
         l.numberOfLines = 0
-        l.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        l.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         l.textAlignment = .left
-        l.font = .boldSystemFont(ofSize: 20)
+        l.font = .font(size: 20, textStyle: .title1)
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
     
     private lazy var viewAuthorButton: UIButton = {
         let b = UIButton()
-        b.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-        b.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
+        b.setTitleColor(#colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1), for: .normal)
+        b.titleLabel?.font = .font(size: 15, textStyle: .subheadline)
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
@@ -40,6 +40,7 @@ class FullPostViewController: UIViewController {
     private lazy var viewCommentsButton: UIButton = {
         let b = UIButton()
         b.setTitleColor(#colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1), for: .normal)
+        b.titleLabel?.font = .font(size: 15, textStyle: .subheadline)
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
@@ -49,6 +50,7 @@ class FullPostViewController: UIViewController {
         l.numberOfLines = 0
         l.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         l.textAlignment = .left
+        l.font = .font(size: 15, textStyle: .body)
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
@@ -59,11 +61,7 @@ class FullPostViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.distribution = .fill
-        if #available(iOS 11.0, *) {
-            stackView.setCustomSpacing(10, after: viewAuthorButton)
-        } else {
-            // Fallback on earlier versions
-        }
+        stackView.setCustomSpacing(10, after: viewAuthorButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -95,7 +93,7 @@ class FullPostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         view.add(scrollView)
         scrollView.pin(to: self)
         scrollView.add(containerStackView)
@@ -112,7 +110,7 @@ class FullPostViewController: UIViewController {
         disposeBag?.insert(
             
             output.authorName
-                .bind(to: viewAuthorButton.rx.title()),
+                .drive(viewAuthorButton.rx.title()),
             
             output.postTitle
                 .drive(titleLabel.rx.text),

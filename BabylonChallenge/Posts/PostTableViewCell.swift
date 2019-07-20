@@ -32,7 +32,7 @@ class PostTableViewCell: UITableViewCell {
         accessoryType = .disclosureIndicator
         
         let backgroundView = UIView()
-        backgroundView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        backgroundView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         selectedBackgroundView = backgroundView
         
         label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
@@ -46,39 +46,23 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func configure(with post: PostObject) {
-        
-        setUpAttributes(for: label, post: post)
-        
+        label.attributedText = AttributedStringBuilder()
+            .append(post.title.capitalizeOnlyFirstCharacters(),
+                    attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: UIFont.font(size: 20, textStyle: .headline)])
+            .append("\n", attributes: [:])
+            .append(post.body.truncate(by: 60),
+                    attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: UIFont.font(size: 15, textStyle: .subheadline)])
+            .build()
     }
-
+    
 }
 
-
-extension PostTableViewCell {
+extension UIFont {
     
-    func setUpAttributes(for label: UILabel, post: PostObject) {
-        let headlineFont = UIFont(name: "OpenSans", size: 20)!
-        let subheadlineFont = UIFont(name: "OpenSans", size: 15)!
-        if #available(iOS 11.0, *) {
-            let headlineFontMetrics = UIFontMetrics(forTextStyle: .headline)
-            let subheadlineFontMetrics = UIFontMetrics(forTextStyle: .subheadline)
-            label.attributedText = AttributedStringBuilder()
-                .append(post.title.capitalizeOnlyFirstCharacters(),
-                        attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: headlineFontMetrics.scaledFont(for: headlineFont)])
-                .append("\n", attributes: [:])
-                .append(post.body.truncate(by: 60),
-                        attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: subheadlineFontMetrics.scaledFont(for: subheadlineFont)])
-                .build()
-            
-        } else {
-            label.attributedText = AttributedStringBuilder()
-                .append(post.title.capitalizeOnlyFirstCharacters(),
-                        attributes: [.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), .font: headlineFont])
-                .append("\n", attributes: [:])
-                .append(post.body.truncate(by: 60),
-                        attributes: [.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), .font: subheadlineFont])
-                .build()
-        }
+    static func font(name: String = "OpenSans", size: CGFloat, textStyle: UIFont.TextStyle) -> UIFont {
+        let font = UIFont(name: name, size: size)!
+        let metrics = UIFontMetrics(forTextStyle: textStyle)
+        return metrics.scaledFont(for: font)
     }
     
 }

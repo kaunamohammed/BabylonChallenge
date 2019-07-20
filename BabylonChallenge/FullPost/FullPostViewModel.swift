@@ -18,8 +18,24 @@ class FullPostViewModel: ViewModelType {
     }
     
     struct Output {
-        let authorName: Observable<String>
+        let authorName: Driver<String>
         let postTitle, postBody, viewCommentsString: Driver<String>
+    }
+    
+    private var authorName: Driver<String> {
+        return Observable
+            .collection(from: realm.objects(AuthorObject.self))
+            .map { [post] in $0.first(where: { $0.id == post.value.userId})?.name }
+            .map { $0.orEmpty }
+            .asDriver(onErrorJustReturn: "")
+    }
+    
+    private var totalComments: Driver<String> {
+        Observable
+            .collection(from: realm.objects(CommentObject.self))
+            .map { [post] in $0.filter("postId == %@", post.value.id).count }
+            .map { "view \($0) comments" }
+            .asDriver(onErrorJustReturn: "")
     }
     
     // MARK: - Subjects
@@ -36,37 +52,22 @@ class FullPostViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         
         addToRealm()
-        
-        // FIXME: - convert to driver, problem with decodable
-        
-        let authorName = Observable.of(realm.object(ofType: AuthorObject.self, forPrimaryKey: post.value.userId).map { $0.name } ?? "")
-        
+                
         let postTitle = post.map { $0.title.capitalizeOnlyFirstCharacters() }.asDriver(onErrorJustReturn: "")
         let postBody = post.map { $0.body }.asDriver(onErrorJustReturn: "")
-        
-        let viewCommentsString = getComments().map { "view \($0.count) comments" }
-        
+                
         return Output(authorName: authorName,
                       postTitle: postTitle,
                       postBody: postBody,
-                      viewCommentsString: viewCommentsString)
+                      viewCommentsString: totalComments)
     }
-    
-    
-    private func getComments() -> Driver<Results<CommentObject>> {
-        return Observable
-            .collection(from: realm.objects(CommentObject.self))
-            .map { [post] in $0.filter("postId == %@", post.value.id) }
-            .asDriver(onErrorJustReturn: CommentObject())
-            .map { $0 as! Results<CommentObject> }
-    }
-    
+            
     private func addToRealm() {
         
         let authorRequest = domainModelGetter
             .rx_getModels(from: UsersEndPoint.user(by: post.value.userId), convertTo: AuthorObject.self)
             .retry(3)
-            .map { $0.first! }
+            .map { $0.first ?? .init() }
             .asObservable()
         
         let commentsRequest = domainModelGetter
@@ -84,6 +85,5 @@ class FullPostViewModel: ViewModelType {
             }).disposed(by: disposeBag)
         
     }
-    
     
 }
