@@ -24,7 +24,7 @@ class CommentsViewController: UIViewController {
     }()
 
     // MARK: - Properties (Private)
-    private var disposeBag: DisposeBag?
+    private lazy var disposeBag = DisposeBag()
     private let viewModel: CommentsViewModel
 
     // MARK: - Init
@@ -35,10 +35,6 @@ class CommentsViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        disposeBag = nil
     }
 
     // MARK: - View Lifecycle
@@ -67,7 +63,7 @@ private extension CommentsViewController {
         let input = CommentsViewModel.Input()
         let output = viewModel.transform(input)
 
-        disposeBag?.insert (
+        disposeBag.insert (
             output.comments
                 .drive(commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { _, comment, cell in
                     cell.configure(with: comment)

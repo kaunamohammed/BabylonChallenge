@@ -25,7 +25,7 @@ class PostsViewController: UIViewController, AlertDisplayable {
     var goToFullPost: ((PostObject) -> Void)?
 
     // MARK: - Properties (Private)
-    private var disposeBag: DisposeBag?
+    private lazy var disposeBag = DisposeBag()
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
 
@@ -37,10 +37,6 @@ class PostsViewController: UIViewController, AlertDisplayable {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        disposeBag = nil
     }
 
     // MARK: - View Lifecycle
@@ -76,7 +72,7 @@ private extension PostsViewController {
         let input = PostsViewModel.Input(isRefreshing: refreshControl.isRefreshing.asObservable())
         let output = viewModel.transform(input)
 
-        disposeBag?.insert (
+        disposeBag.insert (
 
             output.posts
                 .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in

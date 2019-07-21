@@ -25,7 +25,7 @@ class FullPostViewModel: ViewModelType {
 
     // MARK: - Properties (Private)
     private let realm = try! Realm()
-    private let disposeBag = DisposeBag()
+    private lazy var disposeBag = DisposeBag()
     private let domainModelGetter: DomainModelGettable
 
     // MARK: - Init
@@ -75,16 +75,10 @@ private extension FullPostViewModel {
             .asDriver(onErrorJustReturn: "")
     }
 
-    var commentsSource: Driver<[CommentObject]> {
+    var totalComments: Driver<String> {
         return Observable
             .collection(from: realm.objects(CommentObject.self))
-            .map { Array($0) }
-            .asDriver(onErrorJustReturn: [])
-    }
-
-    var totalComments: Driver<String> {
-        return commentsSource
-            .map { [post] in $0.filter { $0.id == post.value.id } }
+            .map { [post] in Array($0).filter { $0.postId == post.value.id }.count }
             .map { "view \($0) comments" }
             .asDriver(onErrorJustReturn: "")
     }

@@ -27,8 +27,6 @@
 		FC20C2A822E3269F00A1C540 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C29D22E3269E00A1C540 /* CommentTableViewCell.swift */; };
 		FC20C2AB22E326C400A1C540 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */; };
 		FC20C2AC22E326C400A1C540 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */; };
-		FC20C2AD22E3271B00A1C540 /* OpenSans-Bold.ttf in Sources */ = {isa = PBXBuildFile; fileRef = FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */; };
-		FC20C2AE22E3271B00A1C540 /* OpenSans-Regular.ttf in Sources */ = {isa = PBXBuildFile; fileRef = FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */; };
 		FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E222DC083600583C0F /* ModelLoader.swift */; };
 		FC7D639F22E48BC300051365 /* DomainModelGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D639E22E48BC300051365 /* DomainModelGettable.swift */; };
 		FC8199D122DDBEBE004EB431 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D022DDBEBE004EB431 /* User.swift */; };
@@ -242,13 +240,13 @@
 		FCAD935522D896A200D1573D = {
 			isa = PBXGroup;
 			children = (
-				FCC8D10822E5036100B6D816 /* .gitignore */,
-				F8138FF722E4A83B00AA0B88 /* .swiftlint.yml */,
 				FCAD936022D896A200D1573D /* BabylonChallenge */,
 				FCAD937522D896B000D1573D /* BabylonChallengeTests */,
 				FCAD935F22D896A200D1573D /* Products */,
 				8BF149DF8344C818A2B61954 /* Pods */,
 				3B18490AAC053742EA0FD845 /* Frameworks */,
+				F8138FF722E4A83B00AA0B88 /* .swiftlint.yml */,
+				FCC8D10822E5036100B6D816 /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -567,8 +565,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCCB227322E37D91007C8F4F /* FullPostHeaderView.swift in Sources */,
-				FC20C2AD22E3271B00A1C540 /* OpenSans-Bold.ttf in Sources */,
-				FC20C2AE22E3271B00A1C540 /* OpenSans-Regular.ttf in Sources */,
 				FCAD93AB22D89D1A00D1573D /* Reusable.swift in Sources */,
 				FCAD93B722D89D1A00D1573D /* NavigationController+Ext.swift in Sources */,
 				FCAD939422D8979600D1573D /* Router.swift in Sources */,

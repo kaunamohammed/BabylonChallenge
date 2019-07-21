@@ -33,7 +33,7 @@ class PostsViewModel: ViewModelType {
     private let loadingState = BehaviorRelay<LoadingState>(value: .loading)
 
     // MARK: - Properties (Private)
-    private let disposeBag = DisposeBag()
+    private lazy var disposeBag = DisposeBag()
     private let realm = try! Realm()
     private lazy var persistedPosts = realm.objects(PostObject.self)
 
@@ -56,12 +56,10 @@ class PostsViewModel: ViewModelType {
             .filter { $0 == true }
             .subscribe(onNext: { [requestPosts] _ in requestPosts() })
             .disposed(by: disposeBag)
-
         let posts = Observable
             .collection(from: persistedPosts)
             .map { Array($0) }
             .asDriver(onErrorJustReturn: [])
-        
         let noPostsToDisplay = posts.map { $0.isEmpty }
 
         return Output(posts: posts,
