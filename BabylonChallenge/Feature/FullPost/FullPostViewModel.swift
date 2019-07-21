@@ -70,7 +70,7 @@ private extension FullPostViewModel {
     var authorName: Driver<String> {
         return Observable
             .collection(from: realm.objects(AuthorObject.self))
-            .map { [post] in $0.first(where: { $0.id == post.value.userId})?.name }
+            .map { [post] in $0.first(where: { $0.id == post.value.userId })?.name }
             .map { "by \($0.orEmpty)" }
             .asDriver(onErrorJustReturn: "")
     }
@@ -78,7 +78,7 @@ private extension FullPostViewModel {
     var totalComments: Driver<String> {
         return Observable
             .collection(from: realm.objects(CommentObject.self))
-            .map { [post] in $0.filter(NSPredicate(format: "postId == %@", post.value.id)).count }
+            .map { [post] in Array($0).filter { $0.postId == post.value.id }.count }
             .map { "view \($0) comments" }
             .asDriver(onErrorJustReturn: "")
     }
