@@ -42,8 +42,8 @@ class CommentsViewController: UIViewController {
         super.viewDidLoad()
         title = NSLocalizedString("Comments", comment: "title")
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+
         setUpTableView()
-        disposeBag = DisposeBag()
         bindToRx()
     }
 

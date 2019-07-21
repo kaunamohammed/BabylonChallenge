@@ -71,7 +71,7 @@ private extension FullPostViewModel {
         return Observable
             .collection(from: realm.objects(AuthorObject.self))
             .map { [post] in $0.first(where: { $0.id == post.value.userId })?.name }
-            .map { "by \($0.orEmpty)" }
+            .map { $0.orEmpty }
             .asDriver(onErrorJustReturn: "")
     }
 

@@ -51,7 +51,6 @@ class PostsViewController: UIViewController, AlertDisplayable {
         viewModel.requestPosts()
 
         setUpTableView()
-        disposeBag = DisposeBag()
         bindToRx()
     }
 
