@@ -18,9 +18,9 @@ class PostsViewModel: ViewModelType {
     }
 
     struct Output {
-        let posts: Observable<Results<PostObject>>
-        let noPostsToDisplay: Observable<Bool>
-        let loadingState: Observable<LoadingState>
+        let posts: Driver<[PostObject]>
+        let noPostsToDisplay: Driver<Bool>
+        let loadingState: Driver<LoadingState>
     }
 
     enum LoadingState {
@@ -59,15 +59,14 @@ class PostsViewModel: ViewModelType {
 
         let posts = Observable
             .collection(from: persistedPosts)
-            .map { $0.sorted(byKeyPath: "id") }
-            //.asDriver(onErrorJustReturn: PostObject())
-            //.map { $0 as! Results<PostObject> }
-
+            .map { Array($0) }
+            .asDriver(onErrorJustReturn: [])
+        
         let noPostsToDisplay = posts.map { $0.isEmpty }
 
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
-                      loadingState: loadingState.asObservable())
+                      loadingState: loadingState.asDriver(onErrorJustReturn: .failed(title: "", message: "could not load posts")))
     }
 
 }

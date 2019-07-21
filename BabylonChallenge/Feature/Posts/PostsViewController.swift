@@ -79,12 +79,12 @@ private extension PostsViewController {
         disposeBag?.insert (
 
             output.posts
-                .bind(to: postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
+                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
                     cell.configure(with: post)
             },
 
             output.loadingState
-                .subscribe(onNext: { [refreshControl, displayAlert] state in
+                .drive(onNext: { [refreshControl, displayAlert] state in
                     switch state {
                     case .loading:
                         print("Loading")

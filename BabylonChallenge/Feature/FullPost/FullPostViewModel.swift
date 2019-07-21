@@ -17,7 +17,7 @@ class FullPostViewModel: ViewModelType {
 
     struct Output {
         let authorName, postTitle, postBody, numberOfComments: Driver<String>
-        let relatedPosts: Observable<[PostObject]>
+        let relatedPosts: Driver<[PostObject]>
     }
 
     // MARK: - Subjects
@@ -75,24 +75,25 @@ private extension FullPostViewModel {
             .asDriver(onErrorJustReturn: "")
     }
 
-    var commentsSource: Observable<Results<CommentObject>> {
+    var commentsSource: Driver<[CommentObject]> {
         return Observable
             .collection(from: realm.objects(CommentObject.self))
-            .share()
+            .map { Array($0) }
+            .asDriver(onErrorJustReturn: [])
     }
 
     var totalComments: Driver<String> {
         return commentsSource
-            .map { [post] in $0.filter("postId == %@", post.value.id).count }
+            .map { [post] in $0.filter { $0.id == post.value.id } }
             .map { "view \($0) comments" }
             .asDriver(onErrorJustReturn: "")
     }
 
-    var relatedPosts: Observable<[PostObject]> {
+    var relatedPosts: Driver<[PostObject]> {
         return Observable
             .collection(from: realm.objects(PostObject.self))
             .map { Array($0.shuffled().prefix(5)) }
-            .share()
+            .asDriver(onErrorJustReturn: [])
     }
 
     var author: Observable<AuthorObject> {

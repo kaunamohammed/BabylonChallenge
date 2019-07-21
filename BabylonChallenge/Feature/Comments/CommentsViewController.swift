@@ -69,7 +69,7 @@ private extension CommentsViewController {
 
         disposeBag?.insert (
             output.comments
-                .bind(to: commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { _, comment, cell in
+                .drive(commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { _, comment, cell in
                     cell.configure(with: comment)
             }
 

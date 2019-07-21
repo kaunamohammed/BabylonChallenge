@@ -70,7 +70,7 @@ extension AuthorViewController: UITableViewDataSource {
         return sec.numberOfRowsInSections
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let section = AuthorDetailSection(rawValue: indexPath.section) else { return .init() }
 
@@ -142,7 +142,7 @@ private extension AuthorViewController {
 
         disposeBag?.insert(
 
-            output.author.subscribe(onNext: { [nameCell, usernameCell, emailCell, phoneNumberCell, websiteCell, companyCell] author in
+            output.author.drive(onNext: { [nameCell, usernameCell, emailCell, phoneNumberCell, websiteCell, companyCell] author in
                 nameCell.configure(topText: NSLocalizedString("name", comment: "title"), bottomText: author.name)
 
                 usernameCell.configure(topText: NSLocalizedString("username", comment: "username"), bottomText: author.username)
