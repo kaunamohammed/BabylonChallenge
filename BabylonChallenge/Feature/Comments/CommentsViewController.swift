@@ -12,6 +12,7 @@ import RxCocoa
 
 class CommentsViewController: UIViewController {
     
+    // MARK: UI
     private lazy var commentsTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -22,8 +23,11 @@ class CommentsViewController: UIViewController {
         return table
     }()
     
+    // MARK: - Properties (Private)
     private var disposeBag: DisposeBag?
     private let viewModel: CommentsViewModel
+    
+    // MARK: - Init
     init(viewModel: CommentsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -37,6 +41,7 @@ class CommentsViewController: UIViewController {
         disposeBag = nil
     }
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Comments", comment: "title")
@@ -46,21 +51,25 @@ class CommentsViewController: UIViewController {
         bindToRx()
     }
     
-    private func setUpTableView() {
+}
+
+private extension CommentsViewController {
+    
+    func setUpTableView() {
         view.add(commentsTableView)
         commentsTableView.pin(to: self)
         commentsTableView.removeEmptyCells()
         commentsTableView.register(CommentTableViewCell.self)
     }
     
-    private func bindToRx() {
+    func bindToRx() {
         
         let input = CommentsViewModel.Input()
         let output = viewModel.transform(input)
         
         disposeBag?.insert (
             output.comments
-                .bind(to: commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { row, comment, cell in 
+                .bind(to: commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { row, comment, cell in
                     cell.configure(with: comment)
             }
             

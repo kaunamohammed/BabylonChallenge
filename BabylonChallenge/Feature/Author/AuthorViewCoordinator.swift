@@ -13,6 +13,7 @@ final class AuthorViewCoordinator: NavigationCoordinator<AuthorViewController> {
     var userId: Int!
     
     override func start() {
+        
         let viewModel = AuthorViewModel()
         viewModel.userId.accept(userId)
         viewController = .init(viewModel: viewModel)

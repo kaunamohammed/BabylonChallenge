@@ -12,6 +12,7 @@ import RxCocoa
 
 class PostsViewController: UIViewController, AlertDisplayable {
     
+    // MARK: - UI
     private lazy var postsTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -21,11 +22,14 @@ class PostsViewController: UIViewController, AlertDisplayable {
         return table
     }()
 
-    private var disposeBag: DisposeBag?
     var goToFullPost: ((PostObject) -> ())?
+    
+    // MARK: - Properties (Private)
+    private var disposeBag: DisposeBag?
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
     
+    // MARK: - Init
     init(viewModel: PostsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -39,6 +43,7 @@ class PostsViewController: UIViewController, AlertDisplayable {
         disposeBag = nil
     }
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Posts", comment: "title")
@@ -53,16 +58,17 @@ class PostsViewController: UIViewController, AlertDisplayable {
         bindToRx()
     }
     
-    private func setUpTableView() {
+}
+
+// MARK: - Methods
+private extension PostsViewController {
+    
+    func setUpTableView() {
         view.addSubview(postsTableView)
         postsTableView.pin(to: self)
         postsTableView.removeEmptyCells()
         postsTableView.register(PostTableViewCell.self)
     }
-    
-}
-
-private extension PostsViewController {
     
     func bindToRx() {
         

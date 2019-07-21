@@ -10,8 +10,8 @@ import CoordinatorLibrary
 
 final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
     
+    // MARK: - Child Coordinators
     private var fullPostViewCoordinator: FullPostCoordinator? = nil
-    private var postDetailViewCoordinator: CommentsViewCoordinator? = nil
     
     override func start() {
 

@@ -18,6 +18,7 @@ import CoordinatorLibrary
  */
 public class MainAppCoordinator: AppCoordinator {
     
+    // MARK: - Child Coordinators
     private var postsViewCoordinator: PostsViewCoordinator? = nil
     
     override public func start() {
@@ -28,7 +29,6 @@ public class MainAppCoordinator: AppCoordinator {
     
 }
 
-// MARK: - Child Coordinators
 private extension MainAppCoordinator {
     
     func startPostsViewCoordinator() {

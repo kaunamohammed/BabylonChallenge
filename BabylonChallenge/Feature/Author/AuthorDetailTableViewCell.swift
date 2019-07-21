@@ -10,13 +10,8 @@ import UIKit
 
 public class AuthorDetailTableViewCell: UITableViewCell {
     
-    private struct Constants {
-        static let topPadding: CGFloat = 10
-        static let bottomPadding: CGFloat = -5
-        static let leadingPadding: CGFloat = 20
-        static let trailingPadding: CGFloat = -20
-    }
     
+    // MARK: - UI
     private let detailLabel: UILabel = {
         let l = UILabel()
         l.numberOfLines = 0
@@ -26,15 +21,13 @@ public class AuthorDetailTableViewCell: UITableViewCell {
         return l
     }()
     
+    // MARK: - Init
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         contentView.add(detailLabel)
-
-        detailLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
-        detailLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingPadding).isActive = true
-        detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
-        detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomPadding).isActive = true
-        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        setUpConstraints()
         
     }
     
@@ -53,15 +46,24 @@ public class AuthorDetailTableViewCell: UITableViewCell {
     
 }
 
-extension Optional where Wrapped == String {
+// MARK: - Constraints
+extension AuthorDetailTableViewCell {
     
-    var orEmpty: String {
-        switch self {
-        case .none:
-            return ""
-        case .some(let value):
-            return value
-        }
+    private struct Constants {
+        static let topPadding: CGFloat = 10
+        static let bottomPadding: CGFloat = -5
+        static let leadingPadding: CGFloat = 20
+        static let trailingPadding: CGFloat = -20
+    }
+    
+    func setUpConstraints() {
+        
+        detailLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
+        detailLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingPadding).isActive = true
+        detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
+        detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomPadding).isActive = true
+        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
 }

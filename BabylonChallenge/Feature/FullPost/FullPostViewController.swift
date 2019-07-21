@@ -53,11 +53,11 @@ class FullPostViewController: UIViewController {
         
         setUpTableView()
         disposeBag = DisposeBag()
-
+        
         bindToRx()
         
     }
-        
+    
 }
 
 // MARK: - Methods
@@ -82,6 +82,12 @@ extension FullPostViewController {
                 .bind(to: relatedPostsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
             },
+            
+            relatedPostsTableView.rx
+                .itemSelected
+                .asDriver()
+                .throttle(.seconds(1))
+                .drive(relatedPostsTableView.rx.unHighlightAtIndexPathAfterSelection),
             
             relatedPostsTableView.rx.modelSelected(PostObject.self).subscribe(onNext: { [didTapToViewFullPost] post in
                 didTapToViewFullPost?(post)

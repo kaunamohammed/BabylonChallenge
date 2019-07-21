@@ -23,10 +23,12 @@ class FullPostViewModel: ViewModelType {
     // MARK: - Subjects
     public let post = BehaviorRelay<PostObject>(value: PostObject())
     
+    // MARK: - Properties (Private)
     private let realm = try! Realm()
     private let disposeBag = DisposeBag()
-    
     private let domainModelGetter: DomainModelGettable
+    
+    // MARK: - Init
     init(domainModelGetter: DomainModelGettable) {
         self.domainModelGetter = domainModelGetter
     }

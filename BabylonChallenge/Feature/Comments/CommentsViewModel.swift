@@ -24,6 +24,7 @@ struct CommentsViewModel: ViewModelType {
     // MARK: - Subjects
     public let postId = BehaviorRelay<Int>(value: 0)
     
+    // MARK: - Properties (Private)
     private let realm = try! Realm()
         
     func transform(_ input: Input) -> Output {

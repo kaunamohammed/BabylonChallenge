@@ -10,13 +10,7 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    private struct Constants {
-        static let topPadding: CGFloat = 10
-        static let bottomPadding: CGFloat = -5
-        static let leadingPadding: CGFloat = 20
-        static let trailingPadding: CGFloat = -10
-    }
-    
+    // MARK: - UI
     private lazy var label: UILabel = {
         let l = UILabel()
         l.textAlignment = .left
@@ -25,20 +19,20 @@ class PostTableViewCell: UITableViewCell {
         return l
     }()
     
+    // MARK: - Init
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.add(label)
+        
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        contentView.add(label)
+        setUpConstraints()
+        
         accessoryType = .disclosureIndicator
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         selectedBackgroundView = backgroundView
         
-        label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
-        label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingPadding).isActive = true
-        label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
-        label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomPadding).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,3 +51,21 @@ class PostTableViewCell: UITableViewCell {
     
 }
 
+// MARK: - Constraints
+private extension PostTableViewCell {
+    
+    struct Constants {
+        static let topPadding: CGFloat = 10
+        static let bottomPadding: CGFloat = -5
+        static let leadingPadding: CGFloat = 20
+        static let trailingPadding: CGFloat = -10
+    }
+    
+    func setUpConstraints() {
+        label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
+        label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingPadding).isActive = true
+        label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
+        label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomPadding).isActive = true
+    }
+    
+}

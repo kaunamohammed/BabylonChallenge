@@ -20,7 +20,6 @@ class PostsViewModel: ViewModelType {
     struct Output {
         let posts: Observable<Results<PostObject>>
         let noPostsToDisplay: Observable<Bool>
-        let postsLoadedForFirstTime: Observable<Bool>
         let loadingState: Observable<LoadingState>
     }
     
@@ -31,7 +30,6 @@ class PostsViewModel: ViewModelType {
     }
     
     // MARK: - Subjects
-    private let forceRefresh = BehaviorRelay<Bool>(value: false)
     private let loadingState = BehaviorRelay<LoadingState>(value: .loading)
     
     // MARK: - Properties (Private)
@@ -46,18 +44,17 @@ class PostsViewModel: ViewModelType {
         self.domainModelGetter = domainModelGetter
         #if DEBUG
         print(realm.configuration.fileURL?.absoluteString ?? "")
-//        try! realm.write {
-//            realm.delete(persistedPosts)
-//        }
+        try! realm.write {
+            realm.delete(persistedPosts)
+        }
         #endif
-        //requestPosts()
-    } 
+    }
     
     func transform(_ input: Input) -> Output {
         
         input.isRefreshing
             .filter { $0 == true }
-            .subscribe(onNext: { [requestPosts] _ in requestPosts(true) })
+            .subscribe(onNext: { [requestPosts] _ in requestPosts() })
             .disposed(by: disposeBag)
         
         let posts = Observable
@@ -70,16 +67,14 @@ class PostsViewModel: ViewModelType {
         
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
-                      postsLoadedForFirstTime: forceRefresh.asObservable(),
                       loadingState: loadingState.asObservable())
     }
     
 }
 
 extension PostsViewModel {
-    func requestPosts(forced: Bool = false) {
+    func requestPosts() {
         loadingState.accept(.loading)
-        forceRefresh.accept(!forced)
         
         domainModelGetter.rx_getModels(from: EndPointFactory.endPoint(for: .posts), convertTo: PostObject.self)
             .subscribe(onSuccess: { [realm, loadingState] posts in

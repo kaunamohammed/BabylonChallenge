@@ -23,7 +23,8 @@ struct AuthorViewModel: ViewModelType {
     
     // MARK: - Subjects
     public let userId = BehaviorRelay<Int>(value: 0)
-        
+    
+    // MARK: - Properties (Private)
     private let realm = try! Realm()
     
     func transform(_ input: Input) -> Output {

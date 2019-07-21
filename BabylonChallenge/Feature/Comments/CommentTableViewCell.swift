@@ -10,6 +10,7 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell {
     
+    // MARK: - UI
     private let commentLabel: UILabel = {
         let l = UILabel()
         l.numberOfLines = 0
@@ -18,11 +19,14 @@ class CommentTableViewCell: UITableViewCell {
         return l
     }()
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.add(commentLabel)
+        
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        contentView.add(commentLabel)
         setUpConstraints()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,20 +41,24 @@ class CommentTableViewCell: UITableViewCell {
             .build()
     }
     
-    private struct Constants {
+}
+
+private extension CommentTableViewCell {
+    
+    struct Constants {
         static let topPadding: CGFloat = 20
         static let leadingPadding: CGFloat = 20
         static let trailingPadding: CGFloat = -20
         static let bottomPadding: CGFloat = -10
     }
     
-    private func setUpConstraints() {
+    func setUpConstraints() {
         
         commentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topPadding).isActive = true
         commentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingPadding).isActive = true
         commentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingPadding).isActive = true
         commentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomPadding).isActive = true
-
+        
     }
     
 }

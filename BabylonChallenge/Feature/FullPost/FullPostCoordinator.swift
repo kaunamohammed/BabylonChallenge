@@ -12,6 +12,7 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
     
     var post: PostObject!
     
+    // MARK: - Child Coordinators
     private var fullPostViewCoordinator: FullPostCoordinator? = nil
     private var commentsViewCoordinator: CommentsViewCoordinator? = nil
     private var authorViewCoordinator: AuthorViewCoordinator? = nil
@@ -37,6 +38,10 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
         
     }
     
+}
+
+private extension FullPostCoordinator {
+    
     func startFullPostViewCoordinator(with post: PostObject) {
         fullPostViewCoordinator = .init(presenter: presenter,
                                         removeCoordinator: remove)
@@ -49,7 +54,7 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
         commentsViewCoordinator = .init(presenter: presenter,
                                         removeCoordinator: remove)
         commentsViewCoordinator!.postId = postId
-        add(child: commentsViewCoordinator!) 
+        add(child: commentsViewCoordinator!)
         commentsViewCoordinator!.start()
     }
     
