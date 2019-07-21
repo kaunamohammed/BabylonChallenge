@@ -47,7 +47,12 @@ Together, I was able to achieve a good level of separation between different lay
 
 # Downloading data at once
 
-Generally, I prefer to lazy load data as opposed to downloading all at once, this can lead to performance issues as well as having an impact on the users mobile/wifi data and battery life, harming the UX. This also enables us as developers to only request the data we need to prevent cases like rate limiting from REST APIs
+Generally, lazy loading data is always my prefered course of action for a few reasons:
+
+- better app performance 
+- reduced impact on users mobile/wifi data
+- reduced impact on users battery life
+- Avoid bumping into rate limits set for REST APIs
 
 # Third-Party
 
