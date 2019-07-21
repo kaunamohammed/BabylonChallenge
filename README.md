@@ -8,6 +8,12 @@
 - View author's profile ✅
 - Offline mode ✅
 
+# Requirements
+
+- Xcode 10.2+
+- iOS 11+
+- Swift 5+
+
 # Summary 
 
 The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. 
