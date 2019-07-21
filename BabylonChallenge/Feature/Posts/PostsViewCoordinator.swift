@@ -29,11 +29,11 @@ final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
 extension PostsViewCoordinator {
     
     func startFullPostCoordinator(with post: PostObject) {
-        fullPostViewCoordinator = FullPostCoordinator(presenter: presenter,
-                                                      removeCoordinator: remove)
+        fullPostViewCoordinator = .init(presenter: presenter,
+                                        removeCoordinator: remove)
         fullPostViewCoordinator!.post = post
         add(child: fullPostViewCoordinator!)
         fullPostViewCoordinator!.start()
     }
-        
+    
 }

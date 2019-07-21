@@ -30,6 +30,7 @@
 		FC20C2AE22E3271B00A1C540 /* OpenSans-Regular.ttf in Sources */ = {isa = PBXBuildFile; fileRef = FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */; };
 		FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E222DC083600583C0F /* ModelLoader.swift */; };
 		FC7D639822E41CE100051365 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = FC7D639722E41CE100051365 /* .swiftlint.yml */; };
+		FC7D639A22E4285A00051365 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D639922E4285A00051365 /* BaseViewController.swift */; };
 		FC8199D122DDBEBE004EB431 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D022DDBEBE004EB431 /* User.swift */; };
 		FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D222DDBFA6004EB431 /* Comment.swift */; };
 		FC81CF1222DEF23D007534EF /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81CF1122DEF23D007534EF /* AppNavigationController.swift */; };
@@ -100,6 +101,7 @@
 		FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		FC4E68E222DC083600583C0F /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 		FC7D639722E41CE100051365 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .swiftlint.yml; path = ../../../../../../System/Volumes/Data/Users/kaunamohammed/Downloads/GitHub/BabylonChallenge/BabylonChallenge/.swiftlint.yml; sourceTree = "<group>"; };
+		FC7D639922E4285A00051365 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = ../../../../../../../System/Volumes/Data/Users/kaunamohammed/Downloads/GitHub/BabylonChallenge/BabylonChallenge/Utilities/BaseViewController.swift; sourceTree = "<group>"; };
 		FC8199D022DDBEBE004EB431 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC8199D222DDBFA6004EB431 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FC81CF1122DEF23D007534EF /* AppNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */,
 				FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */,
 				FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */,
+				FC7D639922E4285A00051365 /* BaseViewController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -381,7 +384,6 @@
 				FCAD935B22D896A200D1573D /* Frameworks */,
 				FCAD935C22D896A200D1573D /* Resources */,
 				E87EE4659DF83F88FB9025E9 /* [CP] Embed Pods Frameworks */,
-				FC7D639622E41BF000051365 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -533,24 +535,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BabylonChallenge/Pods-BabylonChallenge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FC7D639622E41BF000051365 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "
-";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -587,6 +571,7 @@
 				FC20C28D22E3268F00A1C540 /* AuthorViewController.swift in Sources */,
 				FCA74FBC22DF738A00A98CB2 /* UITableView+Rx.swift in Sources */,
 				FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */,
+				FC7D639A22E4285A00051365 /* BaseViewController.swift in Sources */,
 				FC81CF1222DEF23D007534EF /* AppNavigationController.swift in Sources */,
 				FCAD936222D896A200D1573D /* AppDelegate.swift in Sources */,
 				FCAD93AA22D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift in Sources */,
