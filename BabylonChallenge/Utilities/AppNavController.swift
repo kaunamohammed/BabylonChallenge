@@ -9,7 +9,7 @@
 import UIKit
 
 public class AppdNavController: UINavigationController {
-  
+
   override public func viewDidLoad() {
     super.viewDidLoad()
     navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -18,10 +18,9 @@ public class AppdNavController: UINavigationController {
     navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
   }
-  
+
   override public var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
 
-  
 }

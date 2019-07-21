@@ -10,7 +10,7 @@ import RealmSwift
 
 // MARK: - AuthorObject
 final class AuthorObject: Object, Decodable {
-    
+
     @objc dynamic var id: Int = 0
     @objc dynamic var name: String = ""
     @objc dynamic var username: String = ""
@@ -19,7 +19,7 @@ final class AuthorObject: Object, Decodable {
     @objc dynamic var phone: String = ""
     @objc dynamic var website: String = ""
     @objc dynamic var company: CompanyObject? = .init()
-    
+
     override static func primaryKey() -> String? {
         return "id"
     }
@@ -31,13 +31,12 @@ class AddressObject: Object, Decodable {
     @objc dynamic var suite: String = ""
     @objc dynamic var city: String = ""
     @objc dynamic var zipcode: String = ""
-    
+
     override static func primaryKey() -> String? {
         return "city"
     }
-    
-}
 
+}
 
 // MARK: - CompanyObject
 class CompanyObject: Object, Decodable {

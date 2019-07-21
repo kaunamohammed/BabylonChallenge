@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class CommentsViewController: UIViewController {
-    
+
     // MARK: UI
     private lazy var commentsTableView: UITableView = {
         let table = UITableView()
@@ -22,25 +22,25 @@ class CommentsViewController: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
-    
+
     // MARK: - Properties (Private)
     private var disposeBag: DisposeBag?
     private let viewModel: CommentsViewModel
-    
+
     // MARK: - Init
     init(viewModel: CommentsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         disposeBag = nil
     }
-    
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,30 +50,30 @@ class CommentsViewController: UIViewController {
         disposeBag = DisposeBag()
         bindToRx()
     }
-    
+
 }
 
 private extension CommentsViewController {
-    
+
     func setUpTableView() {
         view.add(commentsTableView)
         commentsTableView.pin(to: self)
         commentsTableView.removeEmptyCells()
         commentsTableView.register(CommentTableViewCell.self)
     }
-    
+
     func bindToRx() {
-        
+
         let input = CommentsViewModel.Input()
         let output = viewModel.transform(input)
-        
+
         disposeBag?.insert (
             output.comments
-                .bind(to: commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { row, comment, cell in
+                .bind(to: commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { _, comment, cell in
                     cell.configure(with: comment)
             }
-            
+
         )
     }
-    
+
 }

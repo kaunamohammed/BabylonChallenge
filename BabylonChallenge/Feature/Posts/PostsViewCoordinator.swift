@@ -9,25 +9,25 @@
 import CoordinatorLibrary
 
 final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
-    
+
     // MARK: - Child Coordinators
-    private var fullPostViewCoordinator: FullPostCoordinator? = nil
-    
+    private var fullPostViewCoordinator: FullPostCoordinator?
+
     override func start() {
 
         viewController = .init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router())))
         navigate(to: viewController, with: .set, animated: false)
-        
+
         viewController.goToFullPost = { [startFullPostCoordinator] post in
             startFullPostCoordinator(post)
         }
-        
+
     }
-    
+
 }
 
 extension PostsViewCoordinator {
-    
+
     func startFullPostCoordinator(with post: PostObject) {
         fullPostViewCoordinator = .init(presenter: presenter,
                                         removeCoordinator: remove)
@@ -35,5 +35,5 @@ extension PostsViewCoordinator {
         add(child: fullPostViewCoordinator!)
         fullPostViewCoordinator!.start()
     }
-    
+
 }

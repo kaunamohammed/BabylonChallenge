@@ -9,13 +9,13 @@
 import Foundation
 
 final class Router: NetworkRouter {
-    
+
     private var task: URLSessionTask?
     public init() {}
     func request(endPoint: EndPoint, completion: @escaping ((Result<Data, NetworkError>) -> Void)) {
         let session = URLSession.shared
         guard let request = buildRequest(from: endPoint) else { return }
-        task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+        task = session.dataTask(with: request, completionHandler: { (data, _, error) in
             DispatchQueue.main.async {
                 guard error == nil else { completion(.failure(.unknown)); return }
                 if let responseData = data {

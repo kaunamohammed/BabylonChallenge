@@ -22,5 +22,3 @@ public extension Array where Element == Coordinatable {
     return filter { ($0 is TabFlowCoordinator) }.map { $0 as! TabFlowCoordinator }
   }
 }
-
-

@@ -13,7 +13,7 @@ import CoordinatorLibrary
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+
     // keeping a reference so that it lasts the entirety of the app lifecycle
     // Although I have initialized it from here, it is still possible to just keep a reference and then inherit from `AppCoordinator`
     // and start different flows based oon business logic i.e a notification or deeplink
@@ -23,14 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+
         window = UIWindow(frame: UIScreen.main.bounds)
 
         // start the navigation
         appCoordinator.start()
-        
+
         return true
     }
 
 }
-

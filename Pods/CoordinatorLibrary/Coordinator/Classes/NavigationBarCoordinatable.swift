@@ -8,17 +8,17 @@
 import UIKit
 
 public protocol NavigationBarCoordinatable: class {
-  
+
   /// the presenter of the next viewcontroller
   var presenter: UINavigationController { get }
-  
+
   /// pops the view controller from the navigator hierachy
   func popViewController(animated: Bool)
 }
 
 // MARK: - PresentationStyle
 public extension NavigationBarCoordinatable {
-  
+
   /// navigates to a `UIViewController` with a particular presentation style
   func navigate(to viewController: UIViewController, with presentationStyle: PresentationStyle, animated: Bool) {
     switch presentationStyle {
@@ -30,11 +30,11 @@ public extension NavigationBarCoordinatable {
       presenter.setViewControllers([viewController], animated: animated)
     }
   }
-  
+
   func popViewController(animated: Bool) {
     presenter.popViewController(animated: animated)
   }
-  
+
 }
 
 public enum PresentationStyle {

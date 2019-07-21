@@ -13,19 +13,19 @@ import CoordinatorLibrary
  
  */
 public class MainAppCoordinator: AppCoordinator {
-    
+
     // MARK: - Child Coordinators
-    private var postsViewCoordinator: PostsViewCoordinator? = nil
-    
+    private var postsViewCoordinator: PostsViewCoordinator?
+
     override public func start() {
-        
+
         startPostsViewCoordinator()
-        
+
     }
 }
 
 private extension MainAppCoordinator {
-    
+
     func startPostsViewCoordinator() {
         postsViewCoordinator = .init(presenter: presenter,
                                      removeCoordinator: remove)

@@ -9,7 +9,7 @@
 import UIKit
 
 public class AppNavigationController: UINavigationController {
-  
+
   override public func viewDidLoad() {
     super.viewDidLoad()
 
@@ -18,13 +18,11 @@ public class AppNavigationController: UINavigationController {
     navigationBar.isTranslucent = false
     navigationBar.shadowImage = .init()
     navigationBar.addTitleTextAttributes(attributes: [.foregroundColor: UIColor.white, .font: UIFont.font(size: 20, textStyle: .title1)])
-    
+
   }
-  
+
   override public var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
-  
+
 }
-
-

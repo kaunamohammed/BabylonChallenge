@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class PostsViewController: UIViewController, AlertDisplayable {
-    
+
     // MARK: - UI
     private lazy var postsTableView: UITableView = {
         let table = UITableView()
@@ -22,67 +22,67 @@ class PostsViewController: UIViewController, AlertDisplayable {
         return table
     }()
 
-    var goToFullPost: ((PostObject) -> ())?
-    
+    var goToFullPost: ((PostObject) -> Void)?
+
     // MARK: - Properties (Private)
     private var disposeBag: DisposeBag?
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
-    
+
     // MARK: - Init
     init(viewModel: PostsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         disposeBag = nil
     }
-    
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = NSLocalizedString("Posts", comment: "title")
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         definesPresentationContext = true
-        
+
         refreshControl.startRefreshing()
         viewModel.requestPosts()
-        
+
         setUpTableView()
         disposeBag = DisposeBag()
         bindToRx()
     }
-    
+
 }
 
 // MARK: - Methods
 private extension PostsViewController {
-    
+
     func setUpTableView() {
         view.addSubview(postsTableView)
         postsTableView.pin(to: self)
         postsTableView.removeEmptyCells()
         postsTableView.register(PostTableViewCell.self)
     }
-    
+
     func bindToRx() {
-        
+
         let input = PostsViewModel.Input(isRefreshing: refreshControl.isRefreshing.asObservable())
         let output = viewModel.transform(input)
-                
+
         disposeBag?.insert (
-            
+
             output.posts
-                .bind(to: postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
+                .bind(to: postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
                     cell.configure(with: post)
             },
-            
+
             output.loadingState
                 .subscribe(onNext: { [refreshControl, displayAlert] state in
                     switch state {
@@ -95,19 +95,18 @@ private extension PostsViewController {
                         displayAlert(title, message)
                     }
                 }),
-            
+
             postsTableView.rx
                 .itemSelected
                 .asDriver()
                 .throttle(.seconds(1))
                 .drive(postsTableView.rx.unHighlightAtIndexPathAfterSelection),
-            
+
             postsTableView.rx.modelSelected(PostObject.self).subscribe(onNext: { [goToFullPost] post in
                 goToFullPost?(post)
             })
         )
-        
-    }
-    
-}
 
+    }
+
+}

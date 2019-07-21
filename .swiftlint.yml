@@ -1,0 +1,32 @@
+disabled_rules:
+- force_try
+- nesting
+
+line_length: 200
+
+type_body_length:
+- 300
+- 400
+
+file_length:
+    warning: 500
+    error: 1200
+    ignore_comment_only_lines: true
+
+cyclomatic_complexity:
+    warning: 15
+    error: 25
+
+type_name:
+    min_length: 4
+    max_length:
+    warning: 40
+    error: 50
+
+excluded:
+- Pods
+
+identifier_name:
+    min_length: 2
+
+reporter: "xcode"

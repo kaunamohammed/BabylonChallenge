@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E7565E146E52D40FD9C701C /* Pods_BabylonChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C945D1441AEB7711AEFF3B23 /* Pods_BabylonChallengeTests.framework */; };
 		77AEFB6DDEAE4919116AC906 /* Pods_BabylonChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEF8BFF6AF90C6948399D291 /* Pods_BabylonChallenge.framework */; };
+		F8138FF822E4A83B00AA0B88 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F8138FF722E4A83B00AA0B88 /* .swiftlint.yml */; };
 		FC20C28C22E3268F00A1C540 /* AuthorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C28822E3268F00A1C540 /* AuthorViewModel.swift */; };
 		FC20C28D22E3268F00A1C540 /* AuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C28922E3268F00A1C540 /* AuthorViewController.swift */; };
 		FC20C28E22E3268F00A1C540 /* AuthorDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C28A22E3268F00A1C540 /* AuthorDetailTableViewCell.swift */; };
@@ -79,6 +80,7 @@
 		A5277FDBBF9E95C13177DB59 /* Pods-BabylonChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabylonChallenge.release.xcconfig"; path = "Target Support Files/Pods-BabylonChallenge/Pods-BabylonChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		C945D1441AEB7711AEFF3B23 /* Pods_BabylonChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BabylonChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEF8BFF6AF90C6948399D291 /* Pods_BabylonChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BabylonChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8138FF722E4A83B00AA0B88 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		FC20C28822E3268F00A1C540 /* AuthorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorViewModel.swift; sourceTree = "<group>"; };
 		FC20C28922E3268F00A1C540 /* AuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorViewController.swift; sourceTree = "<group>"; };
 		FC20C28A22E3268F00A1C540 /* AuthorDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		FCAD935522D896A200D1573D = {
 			isa = PBXGroup;
 			children = (
+				F8138FF722E4A83B00AA0B88 /* .swiftlint.yml */,
 				FCAD936022D896A200D1573D /* BabylonChallenge */,
 				FCAD937522D896B000D1573D /* BabylonChallengeTests */,
 				FCAD935F22D896A200D1573D /* Products */,
@@ -383,6 +386,7 @@
 				FCAD935B22D896A200D1573D /* Frameworks */,
 				FCAD935C22D896A200D1573D /* Resources */,
 				E87EE4659DF83F88FB9025E9 /* [CP] Embed Pods Frameworks */,
+				F8138FF322E4A1CA00AA0B88 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -455,6 +459,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8138FF822E4A83B00AA0B88 /* .swiftlint.yml in Resources */,
 				FCAD936C22D896B000D1573D /* LaunchScreen.storyboard in Resources */,
 				FCAD936922D896B000D1573D /* Assets.xcassets in Resources */,
 				FC20C2AC22E326C400A1C540 /* OpenSans-Regular.ttf in Resources */,
@@ -532,6 +537,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BabylonChallenge/Pods-BabylonChallenge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F8138FF322E4A1CA00AA0B88 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nexit 1\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -742,7 +764,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CG9RTC2HJD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BabylonChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -764,7 +786,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CG9RTC2HJD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BabylonChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

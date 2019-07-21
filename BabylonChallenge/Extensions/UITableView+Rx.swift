@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: UITableView {
-    var unHighlightAtIndexPathAfterSelection: Binder<IndexPath> { 
+    var unHighlightAtIndexPathAfterSelection: Binder<IndexPath> {
         return Binder(base) { list, indexPath in
             list.deselectRow(at: indexPath, animated: true)
         }

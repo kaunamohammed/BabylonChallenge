@@ -9,13 +9,13 @@
 import Foundation
 
 class ModelLoader: DomainModelGettable {
-    
+
     private let networkRouter: NetworkRouter
     init(networkRouter: NetworkRouter) {
         self.networkRouter = networkRouter
     }
-    
-    func getModels<T>(endPoint: EndPoint, convertTo type: T.Type, completion: @escaping (Result<[T], NetworkError>) -> ()) where T : Decodable {
+
+    func getModels<T>(endPoint: EndPoint, convertTo type: T.Type, completion: @escaping (Result<[T], NetworkError>) -> Void) where T: Decodable {
         networkRouter.request(endPoint: endPoint) { (result) in
             switch result {
             case .success(let data):
@@ -30,20 +30,5 @@ class ModelLoader: DomainModelGettable {
             }
         }
     }
-    func getModel<T>(endPoint: EndPoint, convertTo: T.Type, completion: @escaping (Result<T, NetworkError>) -> ()) where T : Decodable {
-        networkRouter.request(endPoint: endPoint) { (result) in
-            switch result {
-            case .success(let data):
-                do {
-                    let model: T = try data.decoded()
-                    completion(.success(model))
-                } catch _ {
-                    completion(.failure(.unknown))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
+
 }

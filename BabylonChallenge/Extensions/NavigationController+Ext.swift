@@ -9,7 +9,7 @@
 import UIKit
 
 extension UINavigationBar {
-    
+
     func addTitleTextAttributes(attributes: [NSAttributedString.Key: Any]) {
         if #available(iOS 11.0, *) {
             largeTitleTextAttributes = attributes
@@ -18,11 +18,11 @@ extension UINavigationBar {
         }
         titleTextAttributes = attributes
     }
-    
+
 }
 
 extension UINavigationItem {
-    
+
     func add(_ searchController: UISearchController) {
         if #available(iOS 11.0, *) {
             self.searchController = searchController
@@ -30,5 +30,5 @@ extension UINavigationItem {
             titleView = searchController.searchBar
         }
     }
-    
+
 }

@@ -12,28 +12,28 @@ import RxRealm
 import RealmSwift
 
 struct CommentsViewModel: ViewModelType {
-    
+
     struct Input {
-        
+
     }
-    
+
     struct Output {
         let comments: Observable<Results<CommentObject>>
     }
-    
+
     // MARK: - Subjects
     public let postId = BehaviorRelay<Int>(value: 0)
-    
+
     // MARK: - Properties (Private)
     private let realm = try! Realm()
-        
+
     func transform(_ input: Input) -> Output {
-        
+
         let commentsFilter = realm.objects(CommentObject.self).filter("postId == %@", postId.value)
 
         let comments = Observable.collection(from: commentsFilter)
-        
+
         return Output(comments: comments)
     }
-    
+
 }

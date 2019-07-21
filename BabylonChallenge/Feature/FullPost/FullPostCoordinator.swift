@@ -9,39 +9,39 @@
 import CoordinatorLibrary
 
 final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
-    
+
     var post: PostObject!
-    
+
     // MARK: - Child Coordinators
-    private var fullPostViewCoordinator: FullPostCoordinator? = nil
-    private var commentsViewCoordinator: CommentsViewCoordinator? = nil
-    private var authorViewCoordinator: AuthorViewCoordinator? = nil
-    
+    private var fullPostViewCoordinator: FullPostCoordinator?
+    private var commentsViewCoordinator: CommentsViewCoordinator?
+    private var authorViewCoordinator: AuthorViewCoordinator?
+
     override func start() {
-        
+
         let viewModel = FullPostViewModel(domainModelGetter: ModelLoader(networkRouter: Router()))
         viewModel.post.accept(post)
         viewController = .init(viewModel: viewModel)
         navigate(to: viewController, with: .push, animated: true)
-        
-        viewController.didTapViewComments = { [startCommentsViewCoordinator] id in
-            startCommentsViewCoordinator(id)
+
+        viewController.didTapViewComments = { [startCommentsViewCoordinator] postId in
+            startCommentsViewCoordinator(postId)
         }
-        
-        viewController.didTapViewAuthor = { [startAuthorViewCoordinator] id in
-            startAuthorViewCoordinator(id)
+
+        viewController.didTapViewAuthor = { [startAuthorViewCoordinator] postId in
+            startAuthorViewCoordinator(postId)
         }
-        
+
         viewController.didTapToViewFullPost = { [startFullPostViewCoordinator] post in
             startFullPostViewCoordinator(post)
         }
-        
+
     }
-    
+
 }
 
 private extension FullPostCoordinator {
-    
+
     func startFullPostViewCoordinator(with post: PostObject) {
         fullPostViewCoordinator = .init(presenter: presenter,
                                         removeCoordinator: remove)
@@ -49,7 +49,7 @@ private extension FullPostCoordinator {
         add(child: fullPostViewCoordinator!)
         fullPostViewCoordinator!.start()
     }
-    
+
     func startCommentsViewCoordinator(with postId: Int) {
         commentsViewCoordinator = .init(presenter: presenter,
                                         removeCoordinator: remove)
@@ -57,7 +57,7 @@ private extension FullPostCoordinator {
         add(child: commentsViewCoordinator!)
         commentsViewCoordinator!.start()
     }
-    
+
     func startAuthorViewCoordinator(with userId: Int) {
         authorViewCoordinator = .init(presenter: presenter,
                                       removeCoordinator: remove)
@@ -65,5 +65,5 @@ private extension FullPostCoordinator {
         add(child: authorViewCoordinator!)
         authorViewCoordinator!.start()
     }
-    
+
 }

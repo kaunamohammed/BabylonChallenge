@@ -26,16 +26,16 @@ public enum RxRealmError: Error {
  */
 public protocol NotificationEmitter {
     associatedtype ElementType: RealmCollectionValue
-    
+
     /**
      Returns a `NotificationToken`, which while retained enables change notifications for the current collection.
      
      - returns: `NotificationToken` - retain this value to keep notifications being emitted for the current collection.
      */
     func observe(_ block: @escaping (RealmCollectionChange<Self>) -> Void) -> NotificationToken
-    
+
     func toArray() -> [ElementType]
-    
+
     func toAnyCollection() -> AnyRealmCollection<ElementType>
 }
 
@@ -43,7 +43,7 @@ extension List: NotificationEmitter {
     public func toAnyCollection() -> AnyRealmCollection<Element> {
         return AnyRealmCollection<Element>(self)
     }
-    
+
     public typealias ElementType = Element
     public func toArray() -> [Element] {
         return Array(self)
@@ -54,7 +54,7 @@ extension AnyRealmCollection: NotificationEmitter {
     public func toAnyCollection() -> AnyRealmCollection<Element> {
         return AnyRealmCollection<ElementType>(self)
     }
-    
+
     public typealias ElementType = Element
     public func toArray() -> [Element] {
         return Array(self)
@@ -65,7 +65,7 @@ extension Results: NotificationEmitter {
     public func toAnyCollection() -> AnyRealmCollection<Element> {
         return AnyRealmCollection<ElementType>(self)
     }
-    
+
     public typealias ElementType = Element
     public func toArray() -> [Element] {
         return Array(self)
@@ -76,7 +76,7 @@ extension LinkingObjects: NotificationEmitter {
     public func toAnyCollection() -> AnyRealmCollection<Element> {
         return AnyRealmCollection<ElementType>(self)
     }
-    
+
     public typealias ElementType = Element
     public func toArray() -> [Element] {
         return Array(self)
@@ -91,10 +91,10 @@ extension LinkingObjects: NotificationEmitter {
 public struct RealmChangeset {
     /// the indexes in the collection that were deleted
     public let deleted: [Int]
-    
+
     /// the indexes in the collection that were inserted
     public let inserted: [Int]
-    
+
     /// the indexes in the collection that were modified
     public let updated: [Int]
 }
@@ -104,7 +104,7 @@ public extension ObservableType where Element: NotificationEmitter {
     static func from(_ collection: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<Element> {
         return self.collection(from: collection)
     }
-    
+
     /**
      Returns an `Observable<Element>` that emits each time the collection data changes.
      The observable emits an initial value upon subscription.
@@ -120,38 +120,38 @@ public extension ObservableType where Element: NotificationEmitter {
                 if synchronousStart {
                     observer.onNext(collection)
                 }
-                
+
                 let token = collection.observe { changeset in
-                    
+
                     let value: Element
-                    
+
                     switch changeset {
                     case let .initial(latestValue):
                         guard !synchronousStart else { return }
                         value = latestValue
-                        
+
                     case .update(let latestValue, _, _, _):
                         value = latestValue
-                        
+
                     case let .error(error):
                         observer.onError(error)
                         return
                     }
-                    
+
                     observer.onNext(value)
                 }
-                
+
                 return Disposables.create {
                     token.invalidate()
                 }
             }
     }
-    
+
     @available(*, deprecated, renamed: "array(from:synchronousStart:)")
     static func arrayFrom(_ collection: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<[Element.ElementType]> {
         return array(from: collection)
     }
-    
+
     /**
      Returns an `Observable<Array<Element.Element>>` that emits each time the collection data changes. The observable emits an initial value upon subscription.
      The result emits an array containing all objects from the source collection.
@@ -166,12 +166,12 @@ public extension ObservableType where Element: NotificationEmitter {
             return Observable.collection(from: collection, synchronousStart: synchronousStart)
                 .map { $0.toArray() }
     }
-    
+
     @available(*, deprecated, renamed: "changeset(from:synchronousStart:)")
     static func changesetFrom(_ collection: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<(AnyRealmCollection<Element.ElementType>, RealmChangeset?)> {
         return changeset(from: collection)
     }
-    
+
     /**
      Returns an `Observable<(Element, RealmChangeset?)>` that emits each time the collection data changes. The observable emits an initial value upon subscription.
      
@@ -190,9 +190,9 @@ public extension ObservableType where Element: NotificationEmitter {
                 if synchronousStart {
                     observer.onNext((collection.toAnyCollection(), nil))
                 }
-                
+
                 let token = collection.toAnyCollection().observe { changeset in
-                    
+
                     switch changeset {
                     case let .initial(value):
                         guard !synchronousStart else { return }
@@ -204,18 +204,18 @@ public extension ObservableType where Element: NotificationEmitter {
                         return
                     }
                 }
-                
+
                 return Disposables.create {
                     token.invalidate()
                 }
             }
     }
-    
+
     @available(*, deprecated, renamed: "arrayWithChangeset(from:synchronousStart:)")
     static func changesetArrayFrom(_ collection: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<([Element.ElementType], RealmChangeset?)> {
         return arrayWithChangeset(from: collection)
     }
-    
+
     /**
      Returns an `Observable<(Array<Element.Element>, RealmChangeset?)>` that emits each time the collection data changes. The observable emits an initial value upon subscription.
      
@@ -242,7 +242,7 @@ public extension Observable {
     static func from(_ realm: Realm, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<(Realm, Realm.Notification)> {
         return from(realm: realm)
     }
-    
+
     /**
      Returns an `Observable<(Realm, Realm.Notification)>` that emits each time the Realm emits a notification.
      
@@ -262,7 +262,7 @@ public extension Observable {
             let token = realm.observe { (notification: Realm.Notification, realm: Realm) in
                 observer.onNext((realm, notification))
             }
-            
+
             return Disposables.create {
                 token.invalidate()
             }
@@ -289,7 +289,7 @@ extension Reactive where Base: Realm {
                     onError?(nil, error ?? RxRealmError.unknown)
                     return
                 }
-                
+
                 do {
                     try realm.write {
                         realm.add(elements, update: update)
@@ -300,7 +300,7 @@ extension Reactive where Base: Realm {
                 }
                 .asObserver()
     }
-    
+
     /**
      Returns bindable sink wich adds an object to Realm
      
@@ -315,7 +315,7 @@ extension Reactive where Base: Realm {
                 onError?(nil, error ?? RxRealmError.unknown)
                 return
             }
-            
+
             do {
                 try realm.write {
                     realm.add(element, update: update)
@@ -325,7 +325,7 @@ extension Reactive where Base: Realm {
             }
             }.asObserver()
     }
-    
+
     /**
      Returns bindable sink wich deletes objects in sequence from Realm.
      
@@ -339,7 +339,7 @@ extension Reactive where Base: Realm {
                     onError?(nil, error ?? RxRealmError.unknown)
                     return
                 }
-                
+
                 do {
                     try realm.write {
                         realm.delete(elements)
@@ -349,7 +349,7 @@ extension Reactive where Base: Realm {
                 }
             }).asObserver()
     }
-    
+
     /**
      Returns bindable sink wich deletes objects in sequence from Realm.
      
@@ -362,7 +362,7 @@ extension Reactive where Base: Realm {
                 onError?(nil, error ?? RxRealmError.unknown)
                 return
             }
-            
+
             do {
                 try realm.write {
                     realm.delete(element)
@@ -392,7 +392,7 @@ extension Reactive where Base: Realm {
                 onError?(nil, error ?? RxRealmError.unknown)
                 return
             }
-            
+
             do {
                 try realm.write {
                     realm.add(elements, update: update)
@@ -402,7 +402,7 @@ extension Reactive where Base: Realm {
             }
             }.asObserver()
     }
-    
+
     /**
      Returns bindable sink which adds an object to a Realm
      
@@ -420,7 +420,7 @@ extension Reactive where Base: Realm {
                 onError?(nil, error ?? RxRealmError.unknown)
                 return
             }
-            
+
             do {
                 try realm.write {
                     realm.add(element, update: update)
@@ -430,7 +430,7 @@ extension Reactive where Base: Realm {
             }
             }.asObserver()
     }
-    
+
     /**
      Returns bindable sink, which deletes objects in sequence from Realm.
      
@@ -440,7 +440,7 @@ extension Reactive where Base: Realm {
     public static func delete<S: Sequence>(onError: ((S?, Error) -> Void)? = nil)
         -> AnyObserver<S> where S.Iterator.Element: Object {
             return AnyObserver { event in
-                
+
                 guard let elements = event.element,
                     var generator = elements.makeIterator() as S.Iterator?,
                     let first = generator.next(),
@@ -448,7 +448,7 @@ extension Reactive where Base: Realm {
                         onError?(nil, RxRealmError.unknown)
                         return
                 }
-                
+
                 do {
                     try realm.write {
                         realm.delete(elements)
@@ -458,7 +458,7 @@ extension Reactive where Base: Realm {
                 }
             }
     }
-    
+
     /**
      Returns bindable sink, which deletes object from Realm
      
@@ -467,12 +467,12 @@ extension Reactive where Base: Realm {
      */
     public static func delete<O: Object>(onError: ((O?, Error) -> Void)? = nil) -> AnyObserver<O> {
         return AnyObserver { event in
-            
+
             guard let element = event.element, let realm = element.realm else {
                 onError?(nil, RxRealmError.unknown)
                 return
             }
-            
+
             do {
                 try realm.write {
                     realm.delete(element)
@@ -491,7 +491,7 @@ public extension Observable where Element: Object {
     static func from(_ object: Element) -> Observable<Element> {
         return from(object: object)
     }
-    
+
     /**
      Returns an `Observable<Object>` that emits each time the object changes. The observable emits an initial value upon subscription.
      
@@ -500,14 +500,14 @@ public extension Observable where Element: Object {
      - parameter properties: changes to which properties would triger emitting a .next event
      - returns: `Observable<Object>` will emit any time the observed object changes + one initial emit upon subscription
      */
-    
+
     static func from(object: Element, emitInitialValue: Bool = true,
                      properties: [String]? = nil) -> Observable<Element> {
         return Observable<Element>.create { observer in
             if emitInitialValue {
                 observer.onNext(object)
             }
-            
+
             let token = object.observe { change in
                 switch change {
                 case let .change(changedProperties):
@@ -522,20 +522,20 @@ public extension Observable where Element: Object {
                     observer.onError(error)
                 }
             }
-            
+
             return Disposables.create {
                 token.invalidate()
             }
         }
     }
-    
+
     /**
      Returns an `Observable<PropertyChange>` that emits the object `PropertyChange`s.
      
      - parameter object: A Realm Object to observe
      - returns: `Observable<PropertyChange>` will emit any time a change is detected on the object
      */
-    
+
     static func propertyChanges(object: Element) -> Observable<PropertyChange> {
         return Observable<PropertyChange>.create { observer in
             let token = object.observe { change in
@@ -550,11 +550,10 @@ public extension Observable where Element: Object {
                     observer.onError(error)
                 }
             }
-            
+
             return Disposables.create {
                 token.invalidate()
             }
         }
     }
 }
-
