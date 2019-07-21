@@ -78,7 +78,7 @@ private extension FullPostViewModel {
     var totalComments: Driver<String> {
         return Observable
             .collection(from: realm.objects(CommentObject.self))
-            .map { [post] in Array($0).filter { $0.postId == post.value.id }.count }
+            .map { [post] in $0.filter(NSPredicate(format: "postId == %@", post.value.id)).count }
             .map { "view \($0) comments" }
             .asDriver(onErrorJustReturn: "")
     }
