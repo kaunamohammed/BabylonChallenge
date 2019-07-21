@@ -18,7 +18,7 @@ final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
         viewController = .init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router())))
         navigate(to: viewController, with: .set, animated: false)
         
-        viewController.goToPostDetail = { [startFullPostCoordinator] post in
+        viewController.goToFullPost = { [startFullPostCoordinator] post in
             startFullPostCoordinator(post)
         }
         

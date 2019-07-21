@@ -21,11 +21,8 @@ class PostsViewController: UIViewController, AlertDisplayable {
         return table
     }()
 
-    // MARK: - Child
-    private lazy var loadingViewController: LoadingViewController = .init()
-    
     private var disposeBag: DisposeBag?
-    var goToPostDetail: ((PostObject) -> ())?
+    var goToFullPost: ((PostObject) -> ())?
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
     
@@ -50,7 +47,7 @@ class PostsViewController: UIViewController, AlertDisplayable {
         definesPresentationContext = true
         
         refreshControl.startRefreshing()
-            
+        viewModel.requestPosts()
         setUpTableView()
         disposeBag = DisposeBag()
         bindToRx()
@@ -75,29 +72,21 @@ private extension PostsViewController {
         disposeBag?.insert (
             
             output.posts
-                .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
                 .bind(to: postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
             },
             
             output.loadingState
-                .subscribe(onNext: { [add, remove, loadingViewController, refreshControl, displayAlert] state in
+                .subscribe(onNext: { [refreshControl, displayAlert] state in
                     switch state {
                     case .loading:
-                        add(loadingViewController)
+                        print("Loading")
                     case .loaded:
-                        remove(loadingViewController)
-                        //refreshControl.endRefreshing()
+                        refreshControl.endRefreshing()
                     case .failed(title: let title, message: let message):
-                        remove(loadingViewController)
                         refreshControl.endRefreshing()
                         displayAlert(title, message)
                     }
-                }),
-            
-            output.postsLoadedForFirstTime
-                .subscribe(onNext: { [add, remove, loadingViewController] isFirstTime in
-                    isFirstTime ? add(loadingViewController) : remove(loadingViewController)
                 }),
             
             postsTableView.rx
@@ -106,8 +95,8 @@ private extension PostsViewController {
                 .throttle(.seconds(1))
                 .drive(postsTableView.rx.unHighlightAtIndexPathAfterSelection),
             
-            postsTableView.rx.modelSelected(PostObject.self).subscribe(onNext: { [goToPostDetail] post in
-                goToPostDetail?(post)
+            postsTableView.rx.modelSelected(PostObject.self).subscribe(onNext: { [goToFullPost] post in
+                goToFullPost?(post)
             })
         )
         

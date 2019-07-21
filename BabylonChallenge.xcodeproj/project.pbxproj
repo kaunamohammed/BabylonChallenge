@@ -28,7 +28,6 @@
 		FC20C2AC22E326C400A1C540 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */; };
 		FC20C2AD22E3271B00A1C540 /* OpenSans-Bold.ttf in Sources */ = {isa = PBXBuildFile; fileRef = FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */; };
 		FC20C2AE22E3271B00A1C540 /* OpenSans-Regular.ttf in Sources */ = {isa = PBXBuildFile; fileRef = FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */; };
-		FC4E68E122DBED0300583C0F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E022DBED0300583C0F /* LoadingViewController.swift */; };
 		FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E222DC083600583C0F /* ModelLoader.swift */; };
 		FC8199D122DDBEBE004EB431 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D022DDBEBE004EB431 /* User.swift */; };
 		FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D222DDBFA6004EB431 /* Comment.swift */; };
@@ -98,7 +97,6 @@
 		FC20C29D22E3269E00A1C540 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		FC4E68E022DBED0300583C0F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		FC4E68E222DC083600583C0F /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 		FC8199D022DDBEBE004EB431 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC8199D222DDBFA6004EB431 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -313,7 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				FC836A4622D9360100363018 /* RefreshControl.swift */,
-				FC4E68E022DBED0300583C0F /* LoadingViewController.swift */,
 				FC81CF1122DEF23D007534EF /* AppNavigationController.swift */,
 				FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */,
 				FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */,
@@ -573,7 +570,6 @@
 				FC20C2A022E3269F00A1C540 /* FullPostViewModel.swift in Sources */,
 				FCAD939522D8979600D1573D /* NetworkError.swift in Sources */,
 				FC836A4822D9360200363018 /* RefreshControl.swift in Sources */,
-				FC4E68E122DBED0300583C0F /* LoadingViewController.swift in Sources */,
 				FC20C2A522E3269F00A1C540 /* CommentsViewModel.swift in Sources */,
 				FC20C2A622E3269F00A1C540 /* CommentsViewCoordinator.swift in Sources */,
 				FC836A4922D9360200363018 /* RefreshControlHoldable.swift in Sources */,

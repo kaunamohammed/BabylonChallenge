@@ -31,23 +31,26 @@ class PostsViewModel: ViewModelType {
     }
     
     // MARK: - Subjects
-    private let forcedReloadSubject = BehaviorRelay<Bool>(value: false)
-    private let loadingStateSubject = BehaviorRelay<LoadingState>(value: .loading)
+    private let forceRefresh = BehaviorRelay<Bool>(value: false)
+    private let loadingState = BehaviorRelay<LoadingState>(value: .loading)
     
+    // MARK: - Properties (Private)
     private let disposeBag = DisposeBag()
     private let realm = try! Realm()
     private lazy var persistedPosts = realm.objects(PostObject.self)
 
     private let domainModelGetter: DomainModelGettable
+    
+    // MARK: - Init
     init(domainModelGetter: DomainModelGettable) {
         self.domainModelGetter = domainModelGetter
         #if DEBUG
         print(realm.configuration.fileURL?.absoluteString ?? "")
-        try! realm.write {
-            realm.delete(persistedPosts)
-        }
+//        try! realm.write {
+//            realm.delete(persistedPosts)
+//        }
         #endif
-        requestPosts()
+        //requestPosts()
     } 
     
     func transform(_ input: Input) -> Output {
@@ -67,26 +70,26 @@ class PostsViewModel: ViewModelType {
         
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
-                      postsLoadedForFirstTime: forcedReloadSubject.asObservable(),
-                      loadingState: loadingStateSubject.asObservable())
+                      postsLoadedForFirstTime: forceRefresh.asObservable(),
+                      loadingState: loadingState.asObservable())
     }
     
 }
 
-private extension PostsViewModel {
+extension PostsViewModel {
     func requestPosts(forced: Bool = false) {
-        loadingStateSubject.accept(.loading)
-        forcedReloadSubject.accept(!forced)
+        loadingState.accept(.loading)
+        forceRefresh.accept(!forced)
         
         domainModelGetter.rx_getModels(from: EndPointFactory.endPoint(for: .posts), convertTo: PostObject.self)
-            .subscribe(onSuccess: { [realm, loadingStateSubject] posts in
-                loadingStateSubject.accept(.loaded)
+            .subscribe(onSuccess: { [realm, loadingState] posts in
+                loadingState.accept(.loaded)
                 try! realm.write {
                     realm.add(posts, update: .modified)
                 }
                 },
-                       onError: { [loadingStateSubject] in
-                        loadingStateSubject.accept(.failed(title: "", message: $0.localizedDescription))
+                       onError: { [loadingState] in
+                        loadingState.accept(.failed(title: "", message: $0.localizedDescription))
             })
             .disposed(by: disposeBag)
     }

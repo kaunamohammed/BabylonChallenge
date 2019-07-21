@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 
 class FullPostHeaderView: UIView {
-
+    
+    // MARK: - UI
     private let titleLabel: UILabel = {
         let l = UILabel()
         l.numberOfLines = 0
@@ -45,7 +46,7 @@ class FullPostHeaderView: UIView {
         l.numberOfLines = 0
         l.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         l.textAlignment = .left
-        l.font = .font(size: 15, textStyle: .body)
+        l.font = .font(size: 18, textStyle: .body)
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
@@ -62,7 +63,7 @@ class FullPostHeaderView: UIView {
     }()
     
     private lazy var containerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, viewAuthorButton, bodyLabel, viewCommentsButton, relatedPostsLabel])
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, bodyLabel, viewAuthorButton, viewCommentsButton, relatedPostsLabel])
         stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -72,9 +73,11 @@ class FullPostHeaderView: UIView {
         return stackView
     }()
     
+    // MARK: - Callbacks
     public var didTapViewComments: (() -> ())?
     public var didTapViewAuthor: (() -> ())?
     
+    // MARK: - Properties (Private)
     private var disposeBag: DisposeBag?
     
     private let author: Driver<String>
@@ -82,6 +85,7 @@ class FullPostHeaderView: UIView {
     private let title: Driver<String>
     private let body: Driver<String>
     
+    // MARK: - Init
     init(author: Driver<String>, numberOfComments: Driver<String>, title: Driver<String>, body: Driver<String>) {
         self.author = author
         self.numberOfComments = numberOfComments
@@ -97,20 +101,16 @@ class FullPostHeaderView: UIView {
         bindToRx()
         
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+private extension FullPostHeaderView {
     
-    private func setUpConstraints() {
-        containerStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.topPadding).isActive = true
-        containerStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.leadingPadding).isActive = true
-        containerStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.trailingPadding).isActive = true
-        containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    }
-    
-    private func bindToRx() {
+    func bindToRx() {
         
         disposeBag?.insert(
             author
@@ -125,18 +125,34 @@ class FullPostHeaderView: UIView {
         
     }
     
-    private struct Constants {
-            static let topPadding: CGFloat = 20
-            static let leadingPadding: CGFloat = 20
-            static let trailingPadding: CGFloat = -20
-            static let bottomPadding: CGFloat = -20
-        }
-    
-    @objc private func didTapViewAuthorButton() {
+}
+
+// MARK: - Target/Action
+private extension FullPostHeaderView {
+    @objc func didTapViewAuthorButton() {
         didTapViewAuthor?()
     }
     
-    @objc private func didTapViewCommentsButton() {
+    @objc func didTapViewCommentsButton() {
         didTapViewComments?()
     }
+}
+
+// MARK: - Constraints
+private extension FullPostHeaderView {
+    
+    struct Constants {
+        static let topPadding: CGFloat = 20
+        static let leadingPadding: CGFloat = 20
+        static let trailingPadding: CGFloat = -20
+    }
+    
+    func setUpConstraints() {
+        containerStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.topPadding).isActive = true
+        containerStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.leadingPadding).isActive = true
+        containerStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.trailingPadding).isActive = true
+        containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
+    
 }

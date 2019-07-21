@@ -12,6 +12,7 @@ import RxCocoa
 
 class FullPostViewController: UIViewController {
     
+    // MARK: - UI 
     private lazy var relatedPostsTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -20,14 +21,18 @@ class FullPostViewController: UIViewController {
         return table
     }()
     
+    private var headerView: FullPostHeaderView!
+    
+    // MARK: - Callbacks
     public var didTapViewComments: ((Int) -> ())?
     public var didTapViewAuthor: ((Int) -> ())?
     public var didTapToViewFullPost: ((PostObject) -> ())?
     
-    private var headerView: FullPostHeaderView!
-    
+    // MARK: - Properties (Private)
     private var disposeBag: DisposeBag?
     private let viewModel: FullPostViewModel
+    
+    // MARK: - Init
     init(viewModel: FullPostViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -40,23 +45,39 @@ class FullPostViewController: UIViewController {
     deinit {
         disposeBag = nil
     }
-        
+    
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
+        setUpTableView()
+        disposeBag = DisposeBag()
+
+        bindToRx()
+        
+    }
+        
+}
+
+// MARK: - Methods
+extension FullPostViewController {
+    
+    private func setUpTableView() {
         view.add(relatedPostsTableView)
         relatedPostsTableView.pin(to: view)
         relatedPostsTableView.register(PostTableViewCell.self)
-        disposeBag = DisposeBag()
-
+    }
+    
+    private func bindToRx() {
+        
         let input = FullPostViewModel.Input()
         let output = viewModel.transform(input)
         
         setUpHeaderView(output)
         
         disposeBag?.insert(
-        
+            
             output.relatedComments
                 .bind(to: relatedPostsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
@@ -84,9 +105,9 @@ class FullPostViewController: UIViewController {
             didTapViewAuthor?(viewModel.post.value.userId)
         }
     }
-
 }
 
+// MARK: - UITableViewDelegate
 extension FullPostViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -104,7 +125,7 @@ extension FullPostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-        
+    
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 100
     }
