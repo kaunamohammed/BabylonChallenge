@@ -47,6 +47,10 @@ Together, I was able to achieve a good level of separation between different lay
 - The major issue would be that what happens when someone unfamiliar with the subject of MVVM-C but understands another architecture looks at the code. It may be confusing and they may not know where to get started.
 - There is no clear standard for Coordinators and so when reading about it, there are variants of how to actually implement it
 
+# Downloading data at once
+
+Generally, I prefer to lazy load data as opposed to downloading all at once, this can lead to performance issues as well as having an impact on the users mobile/wifi data and battery life, harming the UX. This also enables us as developers to only request the data we need to prevent cases like rate limiting from REST APIs
+
 # Third-Party
 
 I did not want to hit ``` pod install ``` too much in this project as I wanted to showcase my skills. However, I introduced;
