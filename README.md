@@ -52,7 +52,7 @@ Generally, lazy loading data is always my prefered course of action for a few re
 - better app performance 
 - reduced impact on users mobile/wifi data
 - reduced impact on users battery life
-- Avoid bumping into rate limits set for REST APIs
+- Avoid bumping into rate limits set by REST APIs
 
 # Third-Party
 
