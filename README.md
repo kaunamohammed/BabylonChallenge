@@ -60,8 +60,6 @@ I did not want to hit ``` pod install ``` too much in this project as I wanted t
 
 ## [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary)
 
-**Justification**
-
 CoordinatorLibrary was heavily inspired by the "Coordinator Pattern" and was built for a few reasons:
 
 - absract away navigation logic from the UIViewController
@@ -69,19 +67,13 @@ CoordinatorLibrary was heavily inspired by the "Coordinator Pattern" and was bui
 
 ## [RxSwift](https://github.com/ReactiveX/RxSwift)
 
-**Justification**
-
 RxSwift solves the problem of streaming values over time. Nowadays, a lot of apps we make as iOS developers handle user interaction, asyncronous operations i.e. network requests and similar events. RxSwift solves a lot of the problem around reacting to these events and simplifies non-trivial use cases such as syncronizing network requests or retry mechanisms, allowing us as developers to focus on just observing these events and reacting to them accordingly.
 
 ## [RxRealm](https://github.com/RxSwiftCommunity/RxRealm)
 
-**Justification**
-
 RxRealm provides a thin wrapper around Realm. It allowed me to expose Realm objects as an observable stream and bind directly to UI such as UITableView.
 
 ## [SwiftLint](https://github.com/realm/SwiftLint)
-
-**Justification**
 
 SwiftLint is a powerful tool that really serves to make us as developers adhere to certain standards when coding in Swift. If I was to assemble a team to build v2 of this app and they all came with slightly different coding styles and conventions, SwiftLint gives the power to limit deviations from coding standards I would set out for the app, it also comes equipped with the ability to autocorrct issues such as line length or trailing white spaces, saving a lot of development time on formatting code.
 
