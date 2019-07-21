@@ -13,7 +13,7 @@ import RxCocoa
 class FullPostViewController: UIViewController {
     
     private lazy var relatedPostsTableView: UITableView = {
-        let table = UITableView()
+        let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         table.delegate = self
         table.translatesAutoresizingMaskIntoConstraints = false

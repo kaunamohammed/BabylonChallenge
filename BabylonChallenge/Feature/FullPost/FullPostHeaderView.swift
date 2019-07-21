@@ -54,9 +54,9 @@ class FullPostHeaderView: UIView {
         let l = UILabel()
         l.numberOfLines = 1
         l.text = "Related Posts"
-        l.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        l.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         l.textAlignment = .left
-        l.font = .font(size: 15, textStyle: .headline)
+        l.font = .font(size: 20, textStyle: .title1)
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
@@ -66,7 +66,7 @@ class FullPostHeaderView: UIView {
         stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.spacing = 20
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.setCustomSpacing(10, after: viewAuthorButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
