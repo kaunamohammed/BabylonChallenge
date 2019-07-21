@@ -29,12 +29,10 @@
 		FC20C2AD22E3271B00A1C540 /* OpenSans-Bold.ttf in Sources */ = {isa = PBXBuildFile; fileRef = FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */; };
 		FC20C2AE22E3271B00A1C540 /* OpenSans-Regular.ttf in Sources */ = {isa = PBXBuildFile; fileRef = FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */; };
 		FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E222DC083600583C0F /* ModelLoader.swift */; };
-		FC7D639822E41CE100051365 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = FC7D639722E41CE100051365 /* .swiftlint.yml */; };
-		FC7D639A22E4285A00051365 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D639922E4285A00051365 /* BaseViewController.swift */; };
+		FC7D639F22E48BC300051365 /* DomainModelGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D639E22E48BC300051365 /* DomainModelGettable.swift */; };
 		FC8199D122DDBEBE004EB431 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D022DDBEBE004EB431 /* User.swift */; };
 		FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D222DDBFA6004EB431 /* Comment.swift */; };
 		FC81CF1222DEF23D007534EF /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81CF1122DEF23D007534EF /* AppNavigationController.swift */; };
-		FC81CF1422DEFF76007534EF /* DomainModelGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */; };
 		FC836A4822D9360200363018 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4622D9360100363018 /* RefreshControl.swift */; };
 		FC836A4922D9360200363018 /* RefreshControlHoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC836A4722D9360200363018 /* RefreshControlHoldable.swift */; };
 		FCA74FBA22DF703500A98CB2 /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */; };
@@ -54,7 +52,6 @@
 		FCAD93AC22D89D1A00D1573D /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939B22D89D1A00D1573D /* UITableView+Ext.swift */; };
 		FCAD93AD22D89D1A00D1573D /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939C22D89D1A00D1573D /* UIView+Constraints.swift */; };
 		FCAD93AF22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */; };
-		FCAD93B022D89D1A00D1573D /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */; };
 		FCAD93B222D89D1A00D1573D /* AttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */; };
 		FCAD93B722D89D1A00D1573D /* NavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */; };
 		FCAD93BB22D89D6900D1573D /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93B922D89D6900D1573D /* extensions.swift */; };
@@ -100,12 +97,10 @@
 		FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		FC4E68E222DC083600583C0F /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
-		FC7D639722E41CE100051365 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .swiftlint.yml; path = ../../../../../../System/Volumes/Data/Users/kaunamohammed/Downloads/GitHub/BabylonChallenge/BabylonChallenge/.swiftlint.yml; sourceTree = "<group>"; };
-		FC7D639922E4285A00051365 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = ../../../../../../../System/Volumes/Data/Users/kaunamohammed/Downloads/GitHub/BabylonChallenge/BabylonChallenge/Utilities/BaseViewController.swift; sourceTree = "<group>"; };
+		FC7D639E22E48BC300051365 /* DomainModelGettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainModelGettable.swift; sourceTree = "<group>"; };
 		FC8199D022DDBEBE004EB431 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC8199D222DDBFA6004EB431 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FC81CF1122DEF23D007534EF /* AppNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
-		FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DomainModelGettable.swift; path = ../../Utilities/DomainModelGettable.swift; sourceTree = "<group>"; };
 		FC836A4622D9360100363018 /* RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		FC836A4722D9360200363018 /* RefreshControlHoldable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshControlHoldable.swift; sourceTree = "<group>"; };
 		FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
@@ -129,7 +124,6 @@
 		FCAD939B22D89D1A00D1573D /* UITableView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		FCAD939C22D89D1A00D1573D /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecodableModel+JSONDecoder.swift"; sourceTree = "<group>"; };
-		FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilder.swift; sourceTree = "<group>"; };
 		FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NavigationController+Ext.swift"; sourceTree = "<group>"; };
 		FCAD93B922D89D6900D1573D /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -224,12 +218,19 @@
 			path = Comments;
 			sourceTree = "<group>";
 		};
+		FC7D639B22E486F400051365 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		FC8199CF22DDBE9E004EB431 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FCAD93BE22D89E3400D1573D /* Post.swift */,
 				FC8199D222DDBFA6004EB431 /* Comment.swift */,
 				FC8199D022DDBEBE004EB431 /* User.swift */,
+				FCAD93BE22D89E3400D1573D /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,14 +261,14 @@
 				FCAD936122D896A200D1573D /* AppDelegate.swift */,
 				FCAD93C222D89FC400D1573D /* MainAppCoordinator.swift */,
 				FCCB226D22E37492007C8F4F /* Feature */,
+				FC7D639B22E486F400051365 /* Database */,
 				FCAD938522D8979600D1573D /* Networking */,
 				FC8199CF22DDBE9E004EB431 /* Models */,
-				FCAD936D22D896B000D1573D /* Info.plist */,
 				FCCB226A22E373CE007C8F4F /* Resource */,
-				FCCB226B22E3740F007C8F4F /* Extensions */,
 				FCCB226C22E37435007C8F4F /* Protocols */,
 				FCAD939622D89D1A00D1573D /* Utilities */,
-				FC7D639722E41CE100051365 /* .swiftlint.yml */,
+				FCCB226B22E3740F007C8F4F /* Extensions */,
+				FCAD936D22D896B000D1573D /* Info.plist */,
 			);
 			path = BabylonChallenge;
 			sourceTree = "<group>";
@@ -307,7 +308,6 @@
 				FCAD938C22D8979600D1573D /* NetworkRouter.swift */,
 				FCAD938D22D8979600D1573D /* Router.swift */,
 				FCAD938E22D8979600D1573D /* NetworkError.swift */,
-				FC81CF1322DEFF76007534EF /* DomainModelGettable.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -315,12 +315,10 @@
 		FCAD939622D89D1A00D1573D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				FC836A4622D9360100363018 /* RefreshControl.swift */,
 				FC81CF1122DEF23D007534EF /* AppNavigationController.swift */,
-				FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */,
-				FCAD939F22D89D1A00D1573D /* GlobalConstants.swift */,
 				FCAD93A122D89D1A00D1573D /* AttributedStringBuilder.swift */,
-				FC7D639922E4285A00051365 /* BaseViewController.swift */,
+				FCAD939E22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift */,
+				FC836A4622D9360100363018 /* RefreshControl.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -339,11 +337,11 @@
 		FCCB226B22E3740F007C8F4F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */,
 				FCAD93B922D89D6900D1573D /* extensions.swift */,
+				FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */,
+				FCAD939922D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift */,
 				FCAD939B22D89D1A00D1573D /* UITableView+Ext.swift */,
 				FCAD939C22D89D1A00D1573D /* UIView+Constraints.swift */,
-				FCAD93A622D89D1A00D1573D /* NavigationController+Ext.swift */,
 				FCA74FBB22DF738A00A98CB2 /* UITableView+Rx.swift */,
 			);
 			path = Extensions;
@@ -352,11 +350,12 @@
 		FCCB226C22E37435007C8F4F /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				FCAD93BA22D89D6900D1573D /* AddableAndRemovable.swift */,
+				FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */,
+				FC7D639E22E48BC300051365 /* DomainModelGettable.swift */,
 				FC836A4722D9360200363018 /* RefreshControlHoldable.swift */,
 				FCAD939A22D89D1A00D1573D /* Reusable.swift */,
-				FCAD93BA22D89D6900D1573D /* AddableAndRemovable.swift */,
 				FCAD93C622D8A11800D1573D /* ViewModelType.swift */,
-				FCA74FB922DF703500A98CB2 /* AlertDisplayable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -456,7 +455,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC7D639822E41CE100051365 /* .swiftlint.yml in Resources */,
 				FCAD936C22D896B000D1573D /* LaunchScreen.storyboard in Resources */,
 				FCAD936922D896B000D1573D /* Assets.xcassets in Resources */,
 				FC20C2AC22E326C400A1C540 /* OpenSans-Regular.ttf in Resources */,
@@ -552,7 +550,6 @@
 				FC20C28E22E3268F00A1C540 /* AuthorDetailTableViewCell.swift in Sources */,
 				FCAD93AD22D89D1A00D1573D /* UIView+Constraints.swift in Sources */,
 				FC8199D322DDBFA6004EB431 /* Comment.swift in Sources */,
-				FCAD93B022D89D1A00D1573D /* GlobalConstants.swift in Sources */,
 				FC20C2A722E3269F00A1C540 /* CommentsViewController.swift in Sources */,
 				FCAD93AF22D89D1A00D1573D /* DecodableModel+JSONDecoder.swift in Sources */,
 				FC20C2A322E3269F00A1C540 /* PostsViewCoordinator.swift in Sources */,
@@ -571,13 +568,13 @@
 				FC20C28D22E3268F00A1C540 /* AuthorViewController.swift in Sources */,
 				FCA74FBC22DF738A00A98CB2 /* UITableView+Rx.swift in Sources */,
 				FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */,
-				FC7D639A22E4285A00051365 /* BaseViewController.swift in Sources */,
 				FC81CF1222DEF23D007534EF /* AppNavigationController.swift in Sources */,
 				FCAD936222D896A200D1573D /* AppDelegate.swift in Sources */,
 				FCAD93AA22D89D1A00D1573D /* UIViewController+SafeAreaConstraints.swift in Sources */,
 				FC20C2A022E3269F00A1C540 /* FullPostViewModel.swift in Sources */,
 				FCAD939522D8979600D1573D /* NetworkError.swift in Sources */,
 				FC836A4822D9360200363018 /* RefreshControl.swift in Sources */,
+				FC7D639F22E48BC300051365 /* DomainModelGettable.swift in Sources */,
 				FC20C2A522E3269F00A1C540 /* CommentsViewModel.swift in Sources */,
 				FC20C2A622E3269F00A1C540 /* CommentsViewCoordinator.swift in Sources */,
 				FC836A4922D9360200363018 /* RefreshControlHoldable.swift in Sources */,
@@ -588,7 +585,6 @@
 				FC20C28F22E3268F00A1C540 /* AuthorViewCoordinator.swift in Sources */,
 				FC20C2A222E3269F00A1C540 /* PostsViewModel.swift in Sources */,
 				FCAD939322D8979600D1573D /* NetworkRouter.swift in Sources */,
-				FC81CF1422DEFF76007534EF /* DomainModelGettable.swift in Sources */,
 				FC8199D122DDBEBE004EB431 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

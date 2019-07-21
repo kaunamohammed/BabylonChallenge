@@ -17,7 +17,7 @@ class FullPostViewModel: ViewModelType {
     
     struct Output {
         let authorName, postTitle, postBody, numberOfComments: Driver<String>
-        let relatedComments: Observable<[PostObject]>
+        let relatedPosts: Observable<[PostObject]>
     }
     
     // MARK: - Subjects
@@ -44,12 +44,11 @@ class FullPostViewModel: ViewModelType {
                 }
             }).disposed(by: disposeBag)
         
-        
         return Output(authorName: authorName,
                       postTitle: postTitle,
                       postBody: postBody,
                       numberOfComments: totalComments,
-                      relatedComments: relatedPosts)
+                      relatedPosts: relatedPosts)
     }
     
 }

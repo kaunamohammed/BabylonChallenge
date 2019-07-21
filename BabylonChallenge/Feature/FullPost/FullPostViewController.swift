@@ -78,7 +78,7 @@ extension FullPostViewController {
         
         disposeBag?.insert(
             
-            output.relatedComments
+            output.relatedPosts
                 .bind(to: relatedPostsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { row, post, cell in
                     cell.configure(with: post)
             },

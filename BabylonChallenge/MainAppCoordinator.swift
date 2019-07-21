@@ -11,14 +11,12 @@ import CoordinatorLibrary
 /**
  'MainAppCoordinator' is similar to the 'AppDelegate' class in the sense that it starts all other coordinators used in the app. It is also used to pass dependencies down the hierachies
  
- It inherits from the `ChildCoordinator` base class which encapsulates the implementation details having to do with navigation and child coordinator management i.e adding/removing a child coordinator
- 
- I could mark this class as `final` but incase I want to kick of a different navigation flow based on business logic I'll like to inherit from this class
  */
 public class MainAppCoordinator: AppCoordinator {
     
     // MARK: - Child Coordinators
     private var postsViewCoordinator: PostsViewCoordinator? = nil
+    
     override public func start() {
         
         startPostsViewCoordinator()

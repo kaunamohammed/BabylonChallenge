@@ -31,11 +31,6 @@ class PostsEndPoint: EndPoint {
     override var path: String {
         return  "/posts"
     }
-    static func post(by identifier: Int) -> PostsEndPoint {
-        return PostsEndPoint(queryItems: [
-            URLQueryItem(name: "id", value: identifier.asString)
-            ])
-    }
 }
 
 class UsersEndPoint: EndPoint {
@@ -54,7 +49,6 @@ class CommentsEndPoint: EndPoint {
     override var path: String {
         return "/comments"
     }
-
     static func comments(by identifier: Int) -> CommentsEndPoint {
         return CommentsEndPoint(queryItems: [
             URLQueryItem(name: "postId", value: identifier.asString)
