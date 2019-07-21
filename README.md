@@ -1,7 +1,7 @@
 # BabylonChallenge
 My Babylon Health Coding Challenge
 
-## Features
+# Features
 
 - View list of posts ✅
 - View list of comments ✅
@@ -9,7 +9,7 @@ My Babylon Health Coding Challenge
 - View author's profile ✅
 - Offline mode ✅
 
-## Summary 
+# Summary 
 
 The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. 
 
