@@ -46,13 +46,14 @@ class PostsViewController: UIViewController, AlertDisplayable {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = NSLocalizedString("Posts", comment: "title")
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
         definesPresentationContext = true
         
         refreshControl.startRefreshing()
         viewModel.requestPosts()
+        
         setUpTableView()
         disposeBag = DisposeBag()
         bindToRx()

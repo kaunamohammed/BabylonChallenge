@@ -13,9 +13,7 @@ final class CommentsViewCoordinator: NavigationCoordinator<CommentsViewControlle
     var postId: Int!
     
     override func start() {
-        
-        // TODO: - Possibly reuse router
-        
+                
         let viewModel = CommentsViewModel()
         viewModel.postId.accept(postId)
         viewController = .init(viewModel: viewModel)
