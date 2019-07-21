@@ -60,6 +60,7 @@
 		FCAD93BF22D89E3400D1573D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93BE22D89E3400D1573D /* Post.swift */; };
 		FCAD93C322D89FC400D1573D /* MainAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93C222D89FC400D1573D /* MainAppCoordinator.swift */; };
 		FCAD93C722D8A11800D1573D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93C622D8A11800D1573D /* ViewModelType.swift */; };
+		FCC8D10922E5036100B6D816 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FCC8D10822E5036100B6D816 /* .gitignore */; };
 		FCCB227322E37D91007C8F4F /* FullPostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB227222E37D91007C8F4F /* FullPostHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,7 @@
 		FCAD93BE22D89E3400D1573D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FCAD93C222D89FC400D1573D /* MainAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppCoordinator.swift; sourceTree = "<group>"; };
 		FCAD93C622D8A11800D1573D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		FCC8D10822E5036100B6D816 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../../../../System/Volumes/Data/Users/kaunamohammed/GitHub/BabylonChallenge/.gitignore; sourceTree = "<group>"; };
 		FCCB227222E37D91007C8F4F /* FullPostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPostHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,6 +242,7 @@
 		FCAD935522D896A200D1573D = {
 			isa = PBXGroup;
 			children = (
+				FCC8D10822E5036100B6D816 /* .gitignore */,
 				F8138FF722E4A83B00AA0B88 /* .swiftlint.yml */,
 				FCAD936022D896A200D1573D /* BabylonChallenge */,
 				FCAD937522D896B000D1573D /* BabylonChallengeTests */,
@@ -463,6 +466,7 @@
 				FCAD936C22D896B000D1573D /* LaunchScreen.storyboard in Resources */,
 				FCAD936922D896B000D1573D /* Assets.xcassets in Resources */,
 				FC20C2AC22E326C400A1C540 /* OpenSans-Regular.ttf in Resources */,
+				FCC8D10922E5036100B6D816 /* .gitignore in Resources */,
 				FC20C2AB22E326C400A1C540 /* OpenSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
