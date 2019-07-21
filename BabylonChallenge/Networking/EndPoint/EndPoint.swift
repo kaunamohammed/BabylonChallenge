@@ -9,7 +9,6 @@
 import Foundation
 
 class EndPoint: RESTComponent, URLProducer {
-        
     var path: String {
         return ""
     }
@@ -22,43 +21,33 @@ class EndPoint: RESTComponent, URLProducer {
         components.queryItems = queryItems
         return components.url
     }
-    
     var queryItems: [URLQueryItem]
-    
     init(queryItems: [URLQueryItem] = []) {
         self.queryItems = queryItems
     }
-    
 }
 
 class PostsEndPoint: EndPoint {
-    
     override var path: String {
         return  "/posts"
     }
-    
-    static func post(by id: Int) -> PostsEndPoint {
+    static func post(by identifier: Int) -> PostsEndPoint {
         return PostsEndPoint(queryItems: [
-            URLQueryItem(name: "id", value: id.asString)
+            URLQueryItem(name: "id", value: identifier.asString)
             ])
     }
-    
 }
 
 class UsersEndPoint: EndPoint {
-    
     override var path: String {
         return "/users"
     }
-    
-    static func user(by id: Int) -> UsersEndPoint {
+    static func user(by identifier: Int) -> UsersEndPoint {
         return UsersEndPoint(queryItems: [
-            URLQueryItem(name: "id", value: id.asString)
+            URLQueryItem(name: "id", value: identifier.asString)
             ])
     }
-    
 }
-
 
 class CommentsEndPoint: EndPoint {
 
@@ -66,12 +55,11 @@ class CommentsEndPoint: EndPoint {
         return "/comments"
     }
 
-    static func comments(by id: Int) -> CommentsEndPoint {
+    static func comments(by identifier: Int) -> CommentsEndPoint {
         return CommentsEndPoint(queryItems: [
-            URLQueryItem(name: "postId", value: id.asString)
+            URLQueryItem(name: "postId", value: identifier.asString)
             ])
     }
-    
 }
 
 class EndPointFactory {
@@ -81,7 +69,6 @@ class EndPointFactory {
         case users
         case comments
     }
-    
     static func endPoint(for type: EndPointType) -> EndPoint {
         switch type {
         case .posts:
@@ -92,5 +79,4 @@ class EndPointFactory {
             return CommentsEndPoint()
         }
     }
-    
 }

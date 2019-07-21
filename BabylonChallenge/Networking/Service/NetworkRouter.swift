@@ -13,4 +13,3 @@ protocol NetworkRouter: class {
     func request(endPoint: EndPoint, completion: @escaping ((Result<Data, NetworkError>) -> Void))
     func cancel()
 }
-

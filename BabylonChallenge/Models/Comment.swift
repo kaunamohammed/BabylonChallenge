@@ -15,9 +15,7 @@ class CommentObject: Object, Decodable {
     @objc dynamic var email: String = ""
     @objc dynamic var postId: Int = 0
     @objc dynamic var body: String = ""
-    
     override static func primaryKey() -> String? {
         return "id"
     }
-    
 }

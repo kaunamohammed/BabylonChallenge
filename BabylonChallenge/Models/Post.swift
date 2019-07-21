@@ -14,10 +14,7 @@ class PostObject: Object, Decodable {
     @objc dynamic var id: Int = 0
     @objc dynamic var title: String = ""
     @objc dynamic var body: String = ""
-    
     override static func primaryKey() -> String? {
         return "id"
     }
-    
 }
-

@@ -23,7 +23,6 @@ final class AuthorObject: Object, Decodable {
     override static func primaryKey() -> String? {
         return "id"
     }
-    
 }
 
 // MARK: - AddressObject
@@ -45,9 +44,7 @@ class CompanyObject: Object, Decodable {
     @objc dynamic var name: String = ""
     @objc dynamic var catchPhrase: String = ""
     @objc dynamic var bs: String = ""
-    
     override static func primaryKey() -> String? {
         return "name"
     }
-    
 }

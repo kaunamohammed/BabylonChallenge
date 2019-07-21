@@ -8,7 +8,6 @@
 
 import CoordinatorLibrary
 
-
 /**
  'MainAppCoordinator' is similar to the 'AppDelegate' class in the sense that it starts all other coordinators used in the app. It is also used to pass dependencies down the hierachies
  
@@ -20,13 +19,11 @@ public class MainAppCoordinator: AppCoordinator {
     
     // MARK: - Child Coordinators
     private var postsViewCoordinator: PostsViewCoordinator? = nil
-    
     override public func start() {
         
         startPostsViewCoordinator()
         
     }
-    
 }
 
 private extension MainAppCoordinator {
@@ -37,5 +34,4 @@ private extension MainAppCoordinator {
         add(child: postsViewCoordinator!)
         postsViewCoordinator?.start()
     }
-    
 }

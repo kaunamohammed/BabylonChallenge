@@ -14,7 +14,6 @@ protocol DomainModelGettable {
 }
 
 extension DomainModelGettable {
-    
     func rx_getModels<T: Decodable>(from endPoint: EndPoint, convertTo type: T.Type) -> Single<[T]> {
         return .create(subscribe: { (single) -> Disposable in
             self.getModels(endPoint: endPoint, convertTo: type, completion: { (result) in

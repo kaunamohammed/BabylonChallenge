@@ -30,7 +30,6 @@ class ModelLoader: DomainModelGettable {
             }
         }
     }
-    
     func getModel<T>(endPoint: EndPoint, convertTo: T.Type, completion: @escaping (Result<T, NetworkError>) -> ()) where T : Decodable {
         networkRouter.request(endPoint: endPoint) { (result) in
             switch result {

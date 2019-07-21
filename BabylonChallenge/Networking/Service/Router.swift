@@ -11,13 +11,10 @@ import Foundation
 final class Router: NetworkRouter {
     
     private var task: URLSessionTask?
-    
     public init() {}
-    
     func request(endPoint: EndPoint, completion: @escaping ((Result<Data, NetworkError>) -> Void)) {
         let session = URLSession.shared
         guard let request = buildRequest(from: endPoint) else { return }
-        
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 guard error == nil else { completion(.failure(.unknown)); return }
@@ -30,12 +27,9 @@ final class Router: NetworkRouter {
         })
         task?.resume()
     }
-
-    
     func cancel() {
         task?.cancel()
     }
-    
     private func buildRequest(from endPoint: EndPoint) -> URLRequest? {
         guard let url = endPoint.url else { return nil }
         var request =  URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 20)
@@ -45,5 +39,3 @@ final class Router: NetworkRouter {
         return request
     }
 }
-
-
