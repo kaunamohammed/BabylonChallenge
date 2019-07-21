@@ -10,7 +10,6 @@ target 'BabylonChallenge' do
 	pod 'RxSwift', '~> 5.0.0'
 	pod 'RxCocoa', '~> 5.0.0'
   pod 'RxRealm', '1.0.0'
-  pod 'SwiftLint'
 	pod 'CoordinatorLibrary', '1.0.6'
 
   target 'BabylonChallengeTests' do
