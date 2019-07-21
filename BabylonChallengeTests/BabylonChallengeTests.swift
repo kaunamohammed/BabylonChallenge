@@ -11,11 +11,11 @@ import XCTest
 
 class BabylonChallengeTests: XCTestCase {
 
-    func test_posts_by_id_endpoint() {
+    func test_endpoint_properly_constructed() {
 
-        let expectedEndpoint = URL(string: "https://jsonplaceholder.typicode.com/posts?id=1")
+        let expectedEndpoint = URL(string: "https://jsonplaceholder.typicode.com/users?id=1")
 
-        let endpoint = PostsEndPoint.post(by: 1).url
+        let endpoint = UsersEndPoint.user(by: 1).url
         XCTAssertTrue(endpoint == expectedEndpoint)
 
     }
