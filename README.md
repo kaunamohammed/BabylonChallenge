@@ -55,7 +55,7 @@ Generally, I prefer to lazy load data as opposed to downloading all at once, thi
 
 I did not want to hit ``` pod install ``` too much in this project as I wanted to showcase my skills. However, I introduced;
 
-- [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary)
+## [CoordinatorLibrary](https://github.com/kaunamohammed/CoordinatorLibrary)
 
 **Justification**
 
@@ -64,19 +64,19 @@ CoordinatorLibrary was heavily inspired by the "Coordinator Pattern" and was bui
 - absract away navigation logic from the UIViewController
 - remove some boilerplate in implementing the pattern
 
-- [RxSwift](https://github.com/ReactiveX/RxSwift)
+## [RxSwift](https://github.com/ReactiveX/RxSwift)
 
 **Justification**
 
 RxSwift solves the problem of streaming values over time. Nowadays, a lot of apps we make as iOS developers handle user interaction, asyncronous operations i.e. network requests and similar events. RxSwift solves a lot of the problem around reacting to these events and simplifies non-trivial use cases such as syncronizing network requests or retry mechanisms, allowing us as developers to focus on just observing these events and reacting to them accordingly.
 
-- [RxRealm](https://github.com/RxSwiftCommunity/RxRealm)
+## [RxRealm](https://github.com/RxSwiftCommunity/RxRealm)
 
 **Justification**
 
 RxRealm provides a thin wrapper around Realm. It allowed me to expose Realm objects as an observable stream and bind directly to UI such as UITableView.
 
-- [SwiftLint](https://github.com/realm/SwiftLint)
+## [SwiftLint](https://github.com/realm/SwiftLint)
 
 **Justification**
 
