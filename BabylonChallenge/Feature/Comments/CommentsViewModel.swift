@@ -18,7 +18,7 @@ struct CommentsViewModel: ViewModelType {
     }
 
     struct Output {
-        let comments: Observable<Results<CommentObject>>
+        let comments: Driver<[CommentObject]>
     }
 
     // MARK: - Subjects
@@ -31,7 +31,10 @@ struct CommentsViewModel: ViewModelType {
 
         let commentsFilter = realm.objects(CommentObject.self).filter("postId == %@", postId.value)
 
-        let comments = Observable.collection(from: commentsFilter)
+        let comments = Observable
+            .collection(from: commentsFilter)
+            .map { Array($0) }
+            .asDriver(onErrorJustReturn: [])
 
         return Output(comments: comments)
     }

@@ -1,6 +1,8 @@
 disabled_rules:
 - force_try
 - nesting
+- identifier_name
+- empty_enum_arguments
 
 line_length: 200
 
@@ -25,8 +27,5 @@ type_name:
 
 excluded:
 - Pods
-
-identifier_name:
-    min_length: 2
 
 reporter: "xcode"

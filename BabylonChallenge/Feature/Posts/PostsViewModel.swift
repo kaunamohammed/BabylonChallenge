@@ -18,9 +18,9 @@ class PostsViewModel: ViewModelType {
     }
 
     struct Output {
-        let posts: Observable<Results<PostObject>>
-        let noPostsToDisplay: Observable<Bool>
-        let loadingState: Observable<LoadingState>
+        let posts: Driver<[PostObject]>
+        let noPostsToDisplay: Driver<Bool>
+        let loadingState: Driver<LoadingState>
     }
 
     enum LoadingState {
@@ -33,7 +33,7 @@ class PostsViewModel: ViewModelType {
     private let loadingState = BehaviorRelay<LoadingState>(value: .loading)
 
     // MARK: - Properties (Private)
-    private let disposeBag = DisposeBag()
+    private lazy var disposeBag = DisposeBag()
     private let realm = try! Realm()
     private lazy var persistedPosts = realm.objects(PostObject.self)
 
@@ -42,32 +42,23 @@ class PostsViewModel: ViewModelType {
     // MARK: - Init
     init(domainModelGetter: DomainModelGettable) {
         self.domainModelGetter = domainModelGetter
-        #if DEBUG
-        print(realm.configuration.fileURL?.absoluteString ?? "")
-        try! realm.write {
-            realm.delete(persistedPosts)
-        }
-        #endif
     }
 
     func transform(_ input: Input) -> Output {
 
         input.isRefreshing
-            .filter { $0 == true }
+            .filter { $0 }
             .subscribe(onNext: { [requestPosts] _ in requestPosts() })
             .disposed(by: disposeBag)
-
         let posts = Observable
             .collection(from: persistedPosts)
-            .map { $0.sorted(byKeyPath: "id") }
-            //.asDriver(onErrorJustReturn: PostObject())
-            //.map { $0 as! Results<PostObject> }
-
+            .map { Array($0) }
+            .asDriver(onErrorJustReturn: [])
         let noPostsToDisplay = posts.map { $0.isEmpty }
 
         return Output(posts: posts,
                       noPostsToDisplay: noPostsToDisplay,
-                      loadingState: loadingState.asObservable())
+                      loadingState: loadingState.asDriver(onErrorJustReturn: .failed(title: "", message: "could not load posts")))
     }
 
 }

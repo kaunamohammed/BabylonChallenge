@@ -24,7 +24,7 @@ class CommentsViewController: UIViewController {
     }()
 
     // MARK: - Properties (Private)
-    private var disposeBag: DisposeBag?
+    private lazy var disposeBag = DisposeBag()
     private let viewModel: CommentsViewModel
 
     // MARK: - Init
@@ -37,17 +37,13 @@ class CommentsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        disposeBag = nil
-    }
-
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Comments", comment: "title")
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+
         setUpTableView()
-        disposeBag = DisposeBag()
         bindToRx()
     }
 
@@ -67,9 +63,9 @@ private extension CommentsViewController {
         let input = CommentsViewModel.Input()
         let output = viewModel.transform(input)
 
-        disposeBag?.insert (
+        disposeBag.insert (
             output.comments
-                .bind(to: commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { _, comment, cell in
+                .drive(commentsTableView.rx.items(cellIdentifier: "CommentTableViewCell", cellType: CommentTableViewCell.self)) { _, comment, cell in
                     cell.configure(with: comment)
             }
 

@@ -17,7 +17,7 @@ class FullPostViewModel: ViewModelType {
 
     struct Output {
         let authorName, postTitle, postBody, numberOfComments: Driver<String>
-        let relatedPosts: Observable<[PostObject]>
+        let relatedPosts: Driver<[PostObject]>
     }
 
     // MARK: - Subjects
@@ -25,7 +25,7 @@ class FullPostViewModel: ViewModelType {
 
     // MARK: - Properties (Private)
     private let realm = try! Realm()
-    private let disposeBag = DisposeBag()
+    private lazy var disposeBag = DisposeBag()
     private let domainModelGetter: DomainModelGettable
 
     // MARK: - Init
@@ -70,29 +70,24 @@ private extension FullPostViewModel {
     var authorName: Driver<String> {
         return Observable
             .collection(from: realm.objects(AuthorObject.self))
-            .map { [post] in $0.first(where: { $0.id == post.value.userId})?.name }
-            .map { "by \($0.orEmpty)" }
+            .map { [post] in $0.first(where: { $0.id == post.value.userId })?.name }
+            .map { $0.orEmpty }
             .asDriver(onErrorJustReturn: "")
     }
 
-    var commentsSource: Observable<Results<CommentObject>> {
+    var totalComments: Driver<String> {
         return Observable
             .collection(from: realm.objects(CommentObject.self))
-            .share()
-    }
-
-    var totalComments: Driver<String> {
-        return commentsSource
-            .map { [post] in $0.filter("postId == %@", post.value.id).count }
+            .map { [post] in Array($0).filter { $0.postId == post.value.id }.count }
             .map { "view \($0) comments" }
             .asDriver(onErrorJustReturn: "")
     }
 
-    var relatedPosts: Observable<[PostObject]> {
+    var relatedPosts: Driver<[PostObject]> {
         return Observable
             .collection(from: realm.objects(PostObject.self))
             .map { Array($0.shuffled().prefix(5)) }
-            .share()
+            .asDriver(onErrorJustReturn: [])
     }
 
     var author: Observable<AuthorObject> {

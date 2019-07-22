@@ -8,18 +8,26 @@
 
 import Foundation
 
-enum NetworkError: LocalizedError {
+enum NetworkError {
     case unknown
+    case outdated
+    case badRequest
+    case failed
+    case authError
+    case noData
+    case unableToDecode
 }
 
-enum NoDataError {
-  case underlying
-}
-
-extension NoDataError: LocalizedError {
+extension NetworkError: LocalizedError {
   var errorDescription: String? {
     switch self {
-    case .underlying: return "We couldn't fulfil this request"
+    case .unknown: return "We couldn't fulfil this request"
+    case .outdated: return "The url you requested is outdated"
+    case .badRequest: return "Bad Request"
+    case .authError: return "You need to be authenticated first"
+    case .failed: return "Network request failed"
+    case .noData: return "Nothing to display at the moment"
+    case .unableToDecode: return "unable to show posts"
     }
   }
 }

@@ -18,7 +18,7 @@ struct AuthorViewModel: ViewModelType {
     }
 
     struct Output {
-        let author: Observable<AuthorObject>
+        let author: Driver<AuthorObject>
     }
 
     // MARK: - Subjects
@@ -31,7 +31,9 @@ struct AuthorViewModel: ViewModelType {
 
         let auhorFilter = realm.object(ofType: AuthorObject.self, forPrimaryKey: userId.value)
 
-        let author = Observable.from(object: auhorFilter!)
+        let author = Observable
+            .from(object: auhorFilter!)
+            .asDriver(onErrorJustReturn: .init())
 
         return Output(author: author)
     }

@@ -30,7 +30,7 @@ class AuthorViewController: UIViewController {
     private let companyCell: AuthorDetailTableViewCell = .init(style: .default, reuseIdentifier: nil)
 
     // MARK: - Properties (Private)
-    private var disposeBag: DisposeBag?
+    private lazy var disposeBag = DisposeBag()
 
     private let viewModel: AuthorViewModel
 
@@ -51,7 +51,6 @@ class AuthorViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 
         setUpTableView()
-        disposeBag = DisposeBag()
         configureCells()
 
     }
@@ -70,7 +69,7 @@ extension AuthorViewController: UITableViewDataSource {
         return sec.numberOfRowsInSections
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let section = AuthorDetailSection(rawValue: indexPath.section) else { return .init() }
 
@@ -140,9 +139,9 @@ private extension AuthorViewController {
         let input = AuthorViewModel.Input()
         let output = viewModel.transform(input)
 
-        disposeBag?.insert(
+        disposeBag.insert(
 
-            output.author.subscribe(onNext: { [nameCell, usernameCell, emailCell, phoneNumberCell, websiteCell, companyCell] author in
+            output.author.drive(onNext: { [nameCell, usernameCell, emailCell, phoneNumberCell, websiteCell, companyCell] author in
                 nameCell.configure(topText: NSLocalizedString("name", comment: "title"), bottomText: author.name)
 
                 usernameCell.configure(topText: NSLocalizedString("username", comment: "username"), bottomText: author.username)

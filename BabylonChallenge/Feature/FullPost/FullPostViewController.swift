@@ -29,7 +29,7 @@ class FullPostViewController: UIViewController {
     public var didTapToViewFullPost: ((PostObject) -> Void)?
 
     // MARK: - Properties (Private)
-    private var disposeBag: DisposeBag?
+    private lazy var disposeBag = DisposeBag()
     private let viewModel: FullPostViewModel
 
     // MARK: - Init
@@ -42,18 +42,13 @@ class FullPostViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        disposeBag = nil
-    }
-
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 
         setUpTableView()
-        disposeBag = DisposeBag()
-
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         bindToRx()
 
     }
@@ -76,10 +71,12 @@ extension FullPostViewController {
 
         setUpHeaderView(output)
 
-        disposeBag?.insert(
+        disposeBag.insert(
+            output.authorName
+                .drive(navigationItem.backBarButtonItem!.rx.title),
 
             output.relatedPosts
-                .bind(to: relatedPostsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
+                .drive(relatedPostsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
                     cell.configure(with: post)
             },
 

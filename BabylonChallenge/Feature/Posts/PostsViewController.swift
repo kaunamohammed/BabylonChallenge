@@ -25,7 +25,7 @@ class PostsViewController: UIViewController, AlertDisplayable {
     var goToFullPost: ((PostObject) -> Void)?
 
     // MARK: - Properties (Private)
-    private var disposeBag: DisposeBag?
+    private lazy var disposeBag = DisposeBag()
     private lazy var refreshControl = RefreshControl(holder: postsTableView)
     private let viewModel: PostsViewModel
 
@@ -37,10 +37,6 @@ class PostsViewController: UIViewController, AlertDisplayable {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        disposeBag = nil
     }
 
     // MARK: - View Lifecycle
@@ -55,7 +51,6 @@ class PostsViewController: UIViewController, AlertDisplayable {
         viewModel.requestPosts()
 
         setUpTableView()
-        disposeBag = DisposeBag()
         bindToRx()
     }
 
@@ -76,23 +71,26 @@ private extension PostsViewController {
         let input = PostsViewModel.Input(isRefreshing: refreshControl.isRefreshing.asObservable())
         let output = viewModel.transform(input)
 
-        disposeBag?.insert (
+        disposeBag.insert (
 
             output.posts
-                .bind(to: postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
+                .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
+                .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
                     cell.configure(with: post)
             },
 
             output.loadingState
-                .subscribe(onNext: { [refreshControl, displayAlert] state in
+                .drive(onNext: { [refreshControl, displayAlert] state in
                     switch state {
                     case .loading:
+                        // do something interesting when loading
                         print("Loading")
                     case .loaded:
                         refreshControl.endRefreshing()
                     case .failed(title: let title, message: let message):
-                        refreshControl.endRefreshing()
-                        displayAlert(title, message)
+                        displayAlert(title, message) {
+                            refreshControl.endRefreshing()
+                        }
                     }
                 }),
 

@@ -23,7 +23,7 @@ class ModelLoader: DomainModelGettable {
                     let models: [T] = try data.decoded()
                     completion(.success(models))
                 } catch _ {
-                    completion(.failure(.unknown))
+                    completion(.failure(.unableToDecode))
                 }
             case .failure(let error):
                 completion(.failure(error))

@@ -78,7 +78,7 @@ class FullPostHeaderView: UIView {
     public var didTapViewAuthor: (() -> Void)?
 
     // MARK: - Properties (Private)
-    private var disposeBag: DisposeBag?
+    private lazy var disposeBag = DisposeBag()
 
     private let author: Driver<String>
     private let numberOfComments: Driver<String>
@@ -112,7 +112,7 @@ private extension FullPostHeaderView {
 
     func bindToRx() {
 
-        disposeBag?.insert(
+        disposeBag.insert(
             author
                 .drive(viewAuthorButton.rx.title()),
             title
