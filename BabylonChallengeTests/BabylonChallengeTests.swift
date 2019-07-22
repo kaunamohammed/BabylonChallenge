@@ -26,5 +26,29 @@ class BabylonChallengeTests: XCTestCase {
         XCTAssertTrue(str == "What Is Dead May Never Die")
 
     }
+    func test_mock_api_request() {
+        let successExpectation = expectation(description: "Successfully made Network Request")
 
+        let router: NetworkRouter = MockAPIRequest()
+        router.request(endPoint: EndPoint()) { (result) in
+            switch result {
+            case .success(_):
+                successExpectation.fulfill()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        waitForExpectations(timeout: 2, handler: nil)
+    }
+
+}
+
+class MockAPIRequest: NetworkRouter {
+    func request(endPoint: EndPoint, completion: @escaping ((Result<Data, NetworkError>) -> Void)) {
+        delay(seconds: 1) {
+            completion(.success(.init()))
+        }
+    }
+    func cancel() {
+    }
 }

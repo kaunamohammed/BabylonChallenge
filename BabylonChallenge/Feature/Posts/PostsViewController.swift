@@ -74,6 +74,7 @@ private extension PostsViewController {
         disposeBag.insert (
 
             output.posts
+                .do(onNext: { [refreshControl] _ in refreshControl.endRefreshing() })
                 .drive(postsTableView.rx.items(cellIdentifier: "PostTableViewCell", cellType: PostTableViewCell.self)) { _, post, cell in
                     cell.configure(with: post)
             },
@@ -82,12 +83,14 @@ private extension PostsViewController {
                 .drive(onNext: { [refreshControl, displayAlert] state in
                     switch state {
                     case .loading:
+                        // do something interesting when loading
                         print("Loading")
                     case .loaded:
                         refreshControl.endRefreshing()
                     case .failed(title: let title, message: let message):
-                        refreshControl.endRefreshing()
-                        displayAlert(title, message)
+                        displayAlert(title, message) {
+                            refreshControl.endRefreshing()
+                        }
                     }
                 }),
 

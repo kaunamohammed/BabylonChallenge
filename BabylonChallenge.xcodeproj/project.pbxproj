@@ -220,13 +220,6 @@
 			path = Comments;
 			sourceTree = "<group>";
 		};
-		FC7D639B22E486F400051365 /* Database */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
 		FC8199CF22DDBE9E004EB431 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,7 +258,6 @@
 				FCAD936122D896A200D1573D /* AppDelegate.swift */,
 				FCAD93C222D89FC400D1573D /* MainAppCoordinator.swift */,
 				FCCB226D22E37492007C8F4F /* Feature */,
-				FC7D639B22E486F400051365 /* Database */,
 				FCAD938522D8979600D1573D /* Networking */,
 				FC8199CF22DDBE9E004EB431 /* Models */,
 				FCCB226A22E373CE007C8F4F /* Resource */,

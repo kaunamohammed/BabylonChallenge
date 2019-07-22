@@ -18,14 +18,16 @@ import UIKit
  - To give us access to properties/methods/functions available to `UIViewController`
  */
 public protocol AlertDisplayable: UIViewController {
-    func displayAlert(title: String?, message: String?)
+    func displayAlert(title: String?, message: String?, action: (() -> ())?)
 }
 
 public extension AlertDisplayable {
-    func displayAlert(title: String? = nil, message: String?) {
+    func displayAlert(title: String? = nil, message: String?, action: (() -> ())?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
+        if presentedViewController == nil {
+            navigationController?.present(alertController, animated: true, completion: action)
+        }
     }
 }
