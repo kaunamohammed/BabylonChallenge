@@ -42,18 +42,12 @@ class PostsViewModel: ViewModelType {
     // MARK: - Init
     init(domainModelGetter: DomainModelGettable) {
         self.domainModelGetter = domainModelGetter
-        #if DEBUG
-        print(realm.configuration.fileURL?.absoluteString ?? "")
-        try! realm.write {
-            realm.delete(persistedPosts)
-        }
-        #endif
     }
 
     func transform(_ input: Input) -> Output {
 
         input.isRefreshing
-            .filter { $0 == true }
+            .filter { $0 }
             .subscribe(onNext: { [requestPosts] _ in requestPosts() })
             .disposed(by: disposeBag)
         let posts = Observable
