@@ -16,7 +16,7 @@
 
 # Summary 
 
-The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. In completing the challenge, my time was mostly spent on design, and achieving clean, maintainable and documented code.
+The mobile challenge has been a very rewarding experience, I found the requirements for the challenge very clear, but with enough flexibility to enable me to express myself and showcase my skills. In completing the challenge, my time was mostly spent on design, and achieving clean and maintainable code.
 
 The key challenge I encountered was in deciding and implementing the right architecture that will allow me to achieve a good level of code separation, scalability and testability. I have detailed the challenges and solutions below.
 
