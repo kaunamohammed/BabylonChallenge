@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3E7565E146E52D40FD9C701C /* Pods_BabylonChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C945D1441AEB7711AEFF3B23 /* Pods_BabylonChallengeTests.framework */; };
 		77AEFB6DDEAE4919116AC906 /* Pods_BabylonChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEF8BFF6AF90C6948399D291 /* Pods_BabylonChallenge.framework */; };
-		F8138FF822E4A83B00AA0B88 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F8138FF722E4A83B00AA0B88 /* .swiftlint.yml */; };
 		FC20C28C22E3268F00A1C540 /* AuthorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C28822E3268F00A1C540 /* AuthorViewModel.swift */; };
 		FC20C28D22E3268F00A1C540 /* AuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C28922E3268F00A1C540 /* AuthorViewController.swift */; };
 		FC20C28E22E3268F00A1C540 /* AuthorDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C28A22E3268F00A1C540 /* AuthorDetailTableViewCell.swift */; };
@@ -58,7 +57,6 @@
 		FCAD93BF22D89E3400D1573D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93BE22D89E3400D1573D /* Post.swift */; };
 		FCAD93C322D89FC400D1573D /* MainAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93C222D89FC400D1573D /* MainAppCoordinator.swift */; };
 		FCAD93C722D8A11800D1573D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD93C622D8A11800D1573D /* ViewModelType.swift */; };
-		FCC8D10922E5036100B6D816 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FCC8D10822E5036100B6D816 /* .gitignore */; };
 		FCCB227322E37D91007C8F4F /* FullPostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB227222E37D91007C8F4F /* FullPostHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -452,11 +450,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8138FF822E4A83B00AA0B88 /* .swiftlint.yml in Resources */,
 				FCAD936C22D896B000D1573D /* LaunchScreen.storyboard in Resources */,
 				FCAD936922D896B000D1573D /* Assets.xcassets in Resources */,
 				FC20C2AC22E326C400A1C540 /* OpenSans-Regular.ttf in Resources */,
-				FCC8D10922E5036100B6D816 /* .gitignore in Resources */,
 				FC20C2AB22E326C400A1C540 /* OpenSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
