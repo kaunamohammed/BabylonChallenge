@@ -13,14 +13,14 @@ final class CommentsViewCoordinator: NavigationCoordinator<CommentsViewControlle
     var postId: Int!
 
     private let persistenceManager: Persistable
-
+    
     init(persistenceManager: Persistable,
-        presenter: UINavigationController,
-        removeCoordinator: @escaping ((Coordinatable) -> Void)) {
+         presenter: UINavigationController,
+         removeCoordinator: @escaping ((Coordinatable) -> Void)) {
         self.persistenceManager = persistenceManager
         super.init(presenter: presenter, removeCoordinator: removeCoordinator)
     }
-
+    
     override func start() {
 
         let viewModel = CommentsViewModel(persistenceManager: persistenceManager)

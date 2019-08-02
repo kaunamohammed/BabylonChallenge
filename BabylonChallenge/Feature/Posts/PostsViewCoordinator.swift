@@ -26,7 +26,6 @@ final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
         viewController = .init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router()),
                                                 persistenceManager: persistenceManager))
 
-            //.init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router())))
         navigate(to: viewController, with: .set, animated: false)
 
         viewController.goToFullPost = { [startFullPostCoordinator] post in
