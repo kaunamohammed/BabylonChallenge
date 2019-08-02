@@ -26,6 +26,9 @@
 		FC20C2A822E3269F00A1C540 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C29D22E3269E00A1C540 /* CommentTableViewCell.swift */; };
 		FC20C2AB22E326C400A1C540 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */; };
 		FC20C2AC22E326C400A1C540 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */; };
+		FC28FF3E22F482AB000EBD06 /* RealmPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC28FF3D22F482AB000EBD06 /* RealmPersistenceStorage.swift */; };
+		FC45331622F4A4860064B8A8 /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC45331522F4A4860064B8A8 /* Persistable.swift */; };
+		FC45331822F4A4CF0064B8A8 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC45331722F4A4CF0064B8A8 /* Storable.swift */; };
 		FC4E68E322DC083600583C0F /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4E68E222DC083600583C0F /* ModelLoader.swift */; };
 		FC7D639F22E48BC300051365 /* DomainModelGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D639E22E48BC300051365 /* DomainModelGettable.swift */; };
 		FC8199D122DDBEBE004EB431 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8199D022DDBEBE004EB431 /* User.swift */; };
@@ -95,6 +98,9 @@
 		FC20C29D22E3269E00A1C540 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		FC20C2A922E326C300A1C540 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		FC20C2AA22E326C400A1C540 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		FC28FF3D22F482AB000EBD06 /* RealmPersistenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmPersistenceStorage.swift; path = ../../../../../../System/Volumes/Data/Users/kaunamohammed/GitHub/BabylonChallenge/BabylonChallenge/Persistence/RealmPersistenceStorage.swift; sourceTree = "<group>"; };
+		FC45331522F4A4860064B8A8 /* Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Persistable.swift; path = ../../../../../../System/Volumes/Data/Users/kaunamohammed/GitHub/BabylonChallenge/BabylonChallenge/Persistence/Persistable.swift; sourceTree = "<group>"; };
+		FC45331722F4A4CF0064B8A8 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Storable.swift; path = ../../../../../../System/Volumes/Data/Users/kaunamohammed/GitHub/BabylonChallenge/BabylonChallenge/Persistence/Storable.swift; sourceTree = "<group>"; };
 		FC4E68E222DC083600583C0F /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 		FC7D639E22E48BC300051365 /* DomainModelGettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainModelGettable.swift; sourceTree = "<group>"; };
 		FC8199D022DDBEBE004EB431 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -218,6 +224,16 @@
 			path = Comments;
 			sourceTree = "<group>";
 		};
+		FC28FF3C22F48280000EBD06 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				FC28FF3D22F482AB000EBD06 /* RealmPersistenceStorage.swift */,
+				FC45331522F4A4860064B8A8 /* Persistable.swift */,
+				FC45331722F4A4CF0064B8A8 /* Storable.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		FC8199CF22DDBE9E004EB431 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +272,7 @@
 				FCAD936122D896A200D1573D /* AppDelegate.swift */,
 				FCAD93C222D89FC400D1573D /* MainAppCoordinator.swift */,
 				FCCB226D22E37492007C8F4F /* Feature */,
+				FC28FF3C22F48280000EBD06 /* Persistence */,
 				FCAD938522D8979600D1573D /* Networking */,
 				FC8199CF22DDBE9E004EB431 /* Models */,
 				FCCB226A22E373CE007C8F4F /* Resource */,
@@ -556,6 +573,7 @@
 				FCAD93AB22D89D1A00D1573D /* Reusable.swift in Sources */,
 				FCAD93B722D89D1A00D1573D /* NavigationController+Ext.swift in Sources */,
 				FCAD939422D8979600D1573D /* Router.swift in Sources */,
+				FC45331622F4A4860064B8A8 /* Persistable.swift in Sources */,
 				FC20C2A822E3269F00A1C540 /* CommentTableViewCell.swift in Sources */,
 				FC20C28E22E3268F00A1C540 /* AuthorDetailTableViewCell.swift in Sources */,
 				FCAD93AD22D89D1A00D1573D /* UIView+Constraints.swift in Sources */,
@@ -567,6 +585,7 @@
 				FC20C29E22E3269F00A1C540 /* FullPostCoordinator.swift in Sources */,
 				FCAD93B222D89D1A00D1573D /* AttributedStringBuilder.swift in Sources */,
 				FCAD938F22D8979600D1573D /* RESTComponent.swift in Sources */,
+				FC45331822F4A4CF0064B8A8 /* Storable.swift in Sources */,
 				FCAD93BB22D89D6900D1573D /* extensions.swift in Sources */,
 				FCAD93BC22D89D6900D1573D /* AddableAndRemovable.swift in Sources */,
 				FCAD939122D8979600D1573D /* EndPoint.swift in Sources */,
@@ -594,6 +613,7 @@
 				FCA74FBA22DF703500A98CB2 /* AlertDisplayable.swift in Sources */,
 				FC20C28F22E3268F00A1C540 /* AuthorViewCoordinator.swift in Sources */,
 				FC20C2A222E3269F00A1C540 /* PostsViewModel.swift in Sources */,
+				FC28FF3E22F482AB000EBD06 /* RealmPersistenceStorage.swift in Sources */,
 				FCAD939322D8979600D1573D /* NetworkRouter.swift in Sources */,
 				FC8199D122DDBEBE004EB431 /* User.swift in Sources */,
 			);

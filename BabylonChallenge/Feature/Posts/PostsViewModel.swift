@@ -38,10 +38,11 @@ class PostsViewModel: ViewModelType {
     private lazy var persistedPosts = realm.objects(PostObject.self)
 
     private let domainModelGetter: DomainModelGettable
-
+    private let persistenceManager: Persistable
     // MARK: - Init
-    init(domainModelGetter: DomainModelGettable) {
+    init(domainModelGetter: DomainModelGettable, persistenceManager: Persistable) {
         self.domainModelGetter = domainModelGetter
+        self.persistenceManager = persistenceManager
     }
 
     func transform(_ input: Input) -> Output {
@@ -50,10 +51,11 @@ class PostsViewModel: ViewModelType {
             .filter { $0 }
             .subscribe(onNext: { [requestPosts] _ in requestPosts() })
             .disposed(by: disposeBag)
-        let posts = Observable
-            .collection(from: persistedPosts)
-            .map { Array($0) }
+
+        let posts = persistenceManager
+            .fetch(PostObject.self)
             .asDriver(onErrorJustReturn: [])
+
         let noPostsToDisplay = posts.map { $0.isEmpty }
 
         return Output(posts: posts,
@@ -66,13 +68,10 @@ class PostsViewModel: ViewModelType {
 extension PostsViewModel {
     func requestPosts() {
         loadingState.accept(.loading)
-
         domainModelGetter.rx_getModels(from: EndPointFactory.endPoint(for: .posts), convertTo: PostObject.self)
-            .subscribe(onSuccess: { [realm, loadingState] posts in
+            .subscribe(onSuccess: { [persistenceManager, loadingState] posts in
                 loadingState.accept(.loaded)
-                try! realm.write {
-                    realm.add(posts, update: .modified)
-                }
+                persistenceManager.insert(posts)
                 },
                        onError: { [loadingState] in
                         loadingState.accept(.failed(title: "", message: $0.localizedDescription))

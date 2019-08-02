@@ -12,10 +12,21 @@ final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
 
     // MARK: - Child Coordinators
     private var fullPostViewCoordinator: FullPostCoordinator?
+    private let persistenceManager: Persistable
+    init(persistenceManager: Persistable,
+         presenter: UINavigationController,
+         removeCoordinator: @escaping ((Coordinatable) -> Void)) {
+        self.persistenceManager = persistenceManager
+        super.init(presenter: presenter, removeCoordinator: removeCoordinator)
+
+    }
 
     override func start() {
 
-        viewController = .init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router())))
+        viewController = .init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router()),
+                                                persistenceManager: persistenceManager))
+
+            //.init(viewModel: .init(domainModelGetter: ModelLoader(networkRouter: Router())))
         navigate(to: viewController, with: .set, animated: false)
 
         viewController.goToFullPost = { [startFullPostCoordinator] post in
@@ -29,7 +40,8 @@ final class PostsViewCoordinator: ChildCoordinator<PostsViewController> {
 extension PostsViewCoordinator {
 
     func startFullPostCoordinator(with post: PostObject) {
-        fullPostViewCoordinator = .init(presenter: presenter,
+        fullPostViewCoordinator = .init(persistenceManager: persistenceManager,
+                                        presenter: presenter,
                                         removeCoordinator: remove)
         fullPostViewCoordinator!.post = post
         add(child: fullPostViewCoordinator!)

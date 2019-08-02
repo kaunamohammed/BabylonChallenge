@@ -8,14 +8,10 @@
 
 import RxSwift
 import RxCocoa
-import RxRealm
-import RealmSwift
 
 struct AuthorViewModel: ViewModelType {
 
-    struct Input {
-
-    }
+    struct Input {}
 
     struct Output {
         let author: Driver<AuthorObject>
@@ -24,16 +20,20 @@ struct AuthorViewModel: ViewModelType {
     // MARK: - Subjects
     public let userId = BehaviorRelay<Int>(value: 0)
 
-    // MARK: - Properties (Private)
-    private let realm = try! Realm()
+    private let persistenceManager: Persistable
+    // MARK: - Init
+    init(persistenceManager: Persistable) {
+        self.persistenceManager = persistenceManager
+    }
 
     func transform(_ input: Input) -> Output {
 
-        let auhorFilter = realm.object(ofType: AuthorObject.self, forPrimaryKey: userId.value)
+        //let auhorFilter = realm.object(ofType: AuthorObject.self, forPrimaryKey: userId.value)
 
-        let author = Observable
-            .from(object: auhorFilter!)
-            .asDriver(onErrorJustReturn: .init())
+        let author =  persistenceManager
+            .fetch(AuthorObject.self)
+            .map { [userId] in $0.first(where: { $0.id == userId.value }) ?? AuthorObject() }
+            .asDriver(onErrorJustReturn: AuthorObject())
 
         return Output(author: author)
     }

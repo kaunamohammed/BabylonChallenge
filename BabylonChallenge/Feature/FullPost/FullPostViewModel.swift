@@ -26,22 +26,22 @@ class FullPostViewModel: ViewModelType {
     // MARK: - Properties (Private)
     private let realm = try! Realm()
     private lazy var disposeBag = DisposeBag()
-    private let domainModelGetter: DomainModelGettable
 
+    private let domainModelGetter: DomainModelGettable
+    private let persistenceManager: Persistable
     // MARK: - Init
-    init(domainModelGetter: DomainModelGettable) {
+    init(domainModelGetter: DomainModelGettable, persistenceManager: Persistable) {
         self.domainModelGetter = domainModelGetter
+        self.persistenceManager = persistenceManager
     }
 
     func transform(_ input: Input) -> Output {
 
         Observable
             .zip(author, comments) { (author: $0, comments: $1) }
-            .subscribe(onNext: { [realm ] author, comments in
-                try! realm.write {
-                    realm.add(author, update: .modified)
-                    realm.add(comments, update: .modified)
-                }
+            .subscribe(onNext: { [persistenceManager] author, comments in
+                    persistenceManager.insert([author])
+                    persistenceManager.insert(comments)
             }).disposed(by: disposeBag)
 
         return Output(authorName: authorName,
@@ -68,24 +68,24 @@ private extension FullPostViewModel {
     }
 
     var authorName: Driver<String> {
-        return Observable
-            .collection(from: realm.objects(AuthorObject.self))
+        return persistenceManager
+            .fetch(AuthorObject.self)
             .map { [post] in $0.first(where: { $0.id == post.value.userId })?.name }
             .map { $0.orEmpty }
             .asDriver(onErrorJustReturn: "")
     }
 
     var totalComments: Driver<String> {
-        return Observable
-            .collection(from: realm.objects(CommentObject.self))
-            .map { [post] in Array($0).filter { $0.postId == post.value.id }.count }
+        return persistenceManager
+            .fetch(CommentObject.self)
+            .map { [post] in $0.filter { $0.postId == post.value.id }.count }
             .map { "view \($0) comments" }
             .asDriver(onErrorJustReturn: "")
     }
 
     var relatedPosts: Driver<[PostObject]> {
-        return Observable
-            .collection(from: realm.objects(PostObject.self))
+        return persistenceManager
+            .fetch(PostObject.self)
             .map { Array($0.shuffled().prefix(5)) }
             .asDriver(onErrorJustReturn: [])
     }

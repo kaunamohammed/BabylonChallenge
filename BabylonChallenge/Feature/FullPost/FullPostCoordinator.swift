@@ -17,9 +17,24 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
     private var commentsViewCoordinator: CommentsViewCoordinator?
     private var authorViewCoordinator: AuthorViewCoordinator?
 
+    deinit {
+        print("DEINIT")
+    }
+
+    private let persistenceManager: Persistable
+
+    init(persistenceManager: Persistable,
+         presenter: UINavigationController,
+         removeCoordinator: @escaping ((Coordinatable) -> Void)) {
+        self.persistenceManager = persistenceManager
+        super.init(presenter: presenter, removeCoordinator: removeCoordinator)
+
+    }
+
     override func start() {
 
-        let viewModel = FullPostViewModel(domainModelGetter: ModelLoader(networkRouter: Router()))
+        let viewModel = FullPostViewModel(domainModelGetter: ModelLoader(networkRouter: Router()),
+                                          persistenceManager: persistenceManager)
         viewModel.post.accept(post)
         viewController = .init(viewModel: viewModel)
         navigate(to: viewController, with: .push, animated: true)
@@ -43,7 +58,8 @@ final class FullPostCoordinator: ChildCoordinator<FullPostViewController> {
 private extension FullPostCoordinator {
 
     func startFullPostViewCoordinator(with post: PostObject) {
-        fullPostViewCoordinator = .init(presenter: presenter,
+        fullPostViewCoordinator = .init(persistenceManager: persistenceManager,
+                                        presenter: presenter,
                                         removeCoordinator: remove)
         fullPostViewCoordinator!.post = post
         add(child: fullPostViewCoordinator!)
@@ -51,7 +67,8 @@ private extension FullPostCoordinator {
     }
 
     func startCommentsViewCoordinator(with postId: Int) {
-        commentsViewCoordinator = .init(presenter: presenter,
+        commentsViewCoordinator = .init(persistenceManager: persistenceManager,
+                                        presenter: presenter,
                                         removeCoordinator: remove)
         commentsViewCoordinator!.postId = postId
         add(child: commentsViewCoordinator!)
@@ -59,7 +76,8 @@ private extension FullPostCoordinator {
     }
 
     func startAuthorViewCoordinator(with userId: Int) {
-        authorViewCoordinator = .init(presenter: presenter,
+        authorViewCoordinator = .init(persistenceManager: persistenceManager,
+                                      presenter: presenter,
                                       removeCoordinator: remove)
         authorViewCoordinator!.userId = userId
         add(child: authorViewCoordinator!)

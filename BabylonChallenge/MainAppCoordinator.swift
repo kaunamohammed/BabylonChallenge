@@ -27,7 +27,8 @@ public class MainAppCoordinator: AppCoordinator {
 private extension MainAppCoordinator {
 
     func startPostsViewCoordinator() {
-        postsViewCoordinator = .init(presenter: presenter,
+        postsViewCoordinator = .init(persistenceManager: RealmPersistenceStorage(),
+                                     presenter: presenter,
                                      removeCoordinator: remove)
         add(child: postsViewCoordinator!)
         postsViewCoordinator?.start()
